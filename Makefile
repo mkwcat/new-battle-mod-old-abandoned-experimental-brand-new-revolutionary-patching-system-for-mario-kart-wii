@@ -21,7 +21,7 @@ DEPS	:= $(OFILES:.o=.d)
 
 DUMMY != mkdir -p $(BUILD)/src
 
-CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O0 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -Isrc -Isrc/platform
+CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O3 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -Isrc -Isrc/platform
 
 
 default: $(BUILD)/$(TARGET).rel

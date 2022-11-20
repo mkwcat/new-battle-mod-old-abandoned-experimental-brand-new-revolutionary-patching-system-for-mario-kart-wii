@@ -9,9 +9,10 @@ class SaveManagerProxy;
 class SectionManager
 {
 public:
+    SectionManager();
     void Init();
 
-private:
+public:
     void* m_currentSection;
     int m_errorSection;
     int m_argsSection;

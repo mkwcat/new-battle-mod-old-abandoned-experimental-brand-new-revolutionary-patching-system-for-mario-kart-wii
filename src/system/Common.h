@@ -91,9 +91,9 @@ typedef struct {
 #define EXTERN_TEXT(addr, prototype)                                           \
   _Pragma("GCC diagnostic push")                                               \
     _Pragma("GCC diagnostic ignored \"-Wreturn-type\"")                        \
-      __attribute__((section(".external." #addr))) __attribute__((optnone))    \
-      __attribute__((used)) prototype                                          \
-  { /* Required otherwise this function will be ignored for some reason */     \
+      __attribute__((section(".external." #addr))) __attribute__((weak))       \
+      prototype                                                                \
+  {                                                                            \
   }                                                                            \
   _Pragma("GCC diagnostic pop")
 
@@ -101,9 +101,8 @@ typedef struct {
   _Pragma("GCC diagnostic push")                                               \
     _Pragma("GCC diagnostic ignored \"-Wreturn-type\"")                        \
       __attribute__((section(".external." #addr)))                             \
-      __attribute__((optnone)) extern "C" prototype                            \
+      __attribute__((weak)) extern "C" prototype                               \
   {                                                                            \
-    /* Required otherwise this function will be ignored for some reason */     \
   }                                                                            \
   _Pragma("GCC diagnostic pop")
 

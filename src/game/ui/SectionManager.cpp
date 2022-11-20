@@ -4,6 +4,8 @@
 #include <egg/core/eggHeap.h>
 #include <nw4r/lyt/lyt_init.h>
 
+u8* ext_80637998(u8*); // SystemMessageGroup::__ct
+
 REPLACE(0x80634E44, void ui::SectionManager::Init())
 {
     extern u32* UNDEF_809bd740;
@@ -14,8 +16,7 @@ REPLACE(0x80634E44, void ui::SectionManager::Init())
     // This is just replicating some general C++ stuff
     u8* obj = new (heap, 4) u8[0x14];
     if (obj != nullptr) {
-        extern u8* UNDEF_80637998(u8*); // SystemMessageGroup::__ct
-        obj = UNDEF_80637998(obj);
+        obj = ext_80637998(obj);
     }
     m_systemMessageGroup = obj;
 
