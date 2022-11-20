@@ -1,10 +1,13 @@
 #pragma once
 
+#include "RegisteredPadManager.h"
+
 namespace ui
 {
 
 class GlobalContext;
 class SaveManagerProxy;
+class SystemMessageGroup;
 
 class SectionManager
 {
@@ -21,11 +24,11 @@ public:
     int m_animDir;
     int m_nextAnimDir;
     u8 _1C[0x20 - 0x1C];
-    bool m_unk_0x20;
+    bool m_initialized;
     u8 _21[0x34 - 0x21];
-    u8 _34[0x90 - 0x34];
+    RegisteredPadManager m_registeredPadManager;
     SaveManagerProxy* m_saveManagerProxy;
-    u8* m_systemMessageGroup;
+    SystemMessageGroup* m_systemMessageGroup;
     GlobalContext* m_globalContext;
 };
 

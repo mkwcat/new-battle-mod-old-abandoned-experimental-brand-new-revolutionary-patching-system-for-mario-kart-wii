@@ -5,6 +5,8 @@
 #include "dwc/dwc_init.cpp"
 #include "dwc/dwc_memfunc.cpp"
 #include "egg/core/eggHeap.cpp"
+#include "game/sys/NandManager.cpp"
+#include "game/sys/RootScene.cpp"
 #include "game/ui/ExternTypeInfo.cpp"
 #include "game/ui/SectionManager.cpp"
 #include "nw4r/lyt/lyt_init.cpp"
