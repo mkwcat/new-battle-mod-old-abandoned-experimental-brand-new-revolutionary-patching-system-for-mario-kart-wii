@@ -28,7 +28,7 @@ default: $(BUILD)/$(TARGET).rel
 
 clean:
 	@echo cleaning...
-	@rm -rf $(BUILD)/src
+	@rm -rf $(BUILD)
 
 -include $(DEPS)
 
@@ -42,7 +42,7 @@ $(BUILD)/%_cpp.o: %.cpp
 
 $(BUILD)/$(TARGET).elf: $(OFILES)
 	@echo linking ... $(TARGET).elf
-	@$(LD) -T$(BUILD)/link.ld -r $(OFILES) -o $@
+	@$(LD) -Tlink.ld -r $(OFILES) -o $@
 
 $(BUILD)/$(TARGET).rel: $(BUILD)/$(TARGET).elf
 	@echo output ... $@
