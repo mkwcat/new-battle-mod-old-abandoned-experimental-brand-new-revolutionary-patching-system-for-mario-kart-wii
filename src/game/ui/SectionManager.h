@@ -3,6 +3,9 @@
 namespace ui
 {
 
+class GlobalContext;
+class SaveManagerProxy;
+
 class SectionManager
 {
 public:
@@ -20,9 +23,9 @@ private:
     bool m_unk_0x20;
     u8 _21[0x34 - 0x21];
     u8 _34[0x90 - 0x34];
-    u8* m_saveGhostManager;
+    SaveManagerProxy* m_saveManagerProxy;
     u8* m_systemMessageGroup;
-    u8* m_globalContext;
+    GlobalContext* m_globalContext;
 };
 
 static_assert(sizeof(SectionManager) == 0x9C);

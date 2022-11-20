@@ -7,6 +7,7 @@
 #include "egg/core/eggHeap.cpp"
 #include "game/ui/ExternTypeInfo.cpp"
 #include "game/ui/SectionManager.cpp"
+#include "nw4r/lyt/lyt_init.cpp"
 #include "platform/string.cpp"
 #include "rvl/cache.cpp"
 #include "rvl/nhttp.cpp"
