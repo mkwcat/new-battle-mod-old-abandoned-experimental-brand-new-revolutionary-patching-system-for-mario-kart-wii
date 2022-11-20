@@ -1,0 +1,3 @@
+#include "os.h"
+
+EXTERN_TEXT(0x801A0504, void OSRegisterVersion(const char* string));
