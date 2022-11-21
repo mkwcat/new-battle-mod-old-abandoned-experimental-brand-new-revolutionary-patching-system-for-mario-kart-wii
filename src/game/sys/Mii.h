@@ -139,19 +139,27 @@ static_assert(sizeof(MiiId) == 0x8);
 class Mii
 {
 public:
+    EXTERN_TEXT(0x80529034, virtual ~Mii());
+
     const wchar_t* GetName() const;
     const MiiId* GetID() const;
 
 private:
-    u8 _00[0x10 - 0x00];
+    u8 _04[0x10 - 0x04];
     MiiData m_data;
-    u8 _5c[0x68 - 0x5c];
+    u8 _5C[0x68 - 0x5C];
     wchar_t m_name[10];
-    u8 _7c[0x94 - 0x7c];
+    u8 _7C[0x94 - 0x7C];
     MiiId m_id;
-    u8 _9c[0xb8 - 0x9c];
+    u8 _9C[0xA4 - 0x9C];
+
+public:
+    bool m_unk_0xA4;
+
+private:
+    u8 _A5[0xB8 - 0xA5];
 };
 
-static_assert(sizeof(Mii) == 0xb8);
+static_assert(sizeof(Mii) == 0xB8);
 
 } // namespace sys

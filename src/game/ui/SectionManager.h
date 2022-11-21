@@ -13,7 +13,10 @@ class SectionManager
 {
 public:
     SectionManager();
-    void Init();
+    void Init(); // Replaced
+
+    bool SelectDebugLicense(); // Added
+    void DebugBootSetup(); // Added
 
 public:
     void* m_currentSection;

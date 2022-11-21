@@ -7,7 +7,7 @@ class ParamFile
 {
 public:
     virtual ~ParamFile();
-    u8 fill[0x18];
+    u8 _0[0x18 - 0x0];
 };
 
 namespace sys
@@ -31,56 +31,51 @@ struct MissionSetting {
         MODE_Slipstream = 13
     };
 
-    /* 0x00 */ u16 mrFile;
-    /* 0x02 */ u16 gameMode;
-    /* 0x04 */ u8 courseId;
-    /* 0x05 */ u8 characterId;
-    /* 0x06 */ u8 vehicleId;
-    /* 0x07 */ u8 engineClass;
-    /* 0x08 - 0x2C */ u8 fill_0x08[0x2C - 0x08];
+    /* 0x00 */ u16 m_mrFile;
+    /* 0x02 */ u16 m_gameMode;
+    /* 0x04 */ u8 m_courseId;
+    /* 0x05 */ u8 m_characterId;
+    /* 0x06 */ u8 m_vehicleId;
+    /* 0x07 */ u8 m_engineClass;
+    /* 0x08 - 0x2C */ u8 _0x08[0x2C - 0x08];
     // Time limit in seconds
-    /* 0x2C */ u16 timeLimit;
-    /* 0x2E */ u8 unk_0x2E;
-    /* 0x2F */ bool forceWiiWheel;
-    /* 0x30 */ u32 scoreRequired;
+    /* 0x2C */ u16 m_timeLimit;
+    /* 0x2E */ u8 m_unk_0x2E;
+    /* 0x2F */ bool m_forceWiiWheel;
+    /* 0x30 */ u32 m_scoreRequired;
     // Unused duplicates of scoreRequired???
-    /* 0x34 - 0x48 */ u8 fill_0x34[0x48 - 0x34];
-    /* 0x48 */ u16 cameraAngle;
-    /* 0x4A */ u16 minimapObject;
-    /* 0x4C */ u16 unk_0x4C;
-    /* 0x4E */ u16 unk_0x4E;
-    /* 0x50 */ u16 cannonFlag;
-    /* 0x52 */ u16 unk_0x52;
-    /* 0x54 */ u32 unk_0x54;
-    /* 0x58 */ u16 cpuCount;
-    /* 0x5A */ u8 cpu[22];
+    /* 0x34 - 0x48 */ u8 _0x34[0x48 - 0x34];
+    /* 0x48 */ u16 m_cameraAngle;
+    /* 0x4A */ u16 m_minimapObject;
+    /* 0x4C */ u16 m_unk_0x4C;
+    /* 0x4E */ u16 m_unk_0x4E;
+    /* 0x50 */ u16 m_cannonFlag;
+    /* 0x52 */ u16 m_unk_0x52;
+    /* 0x54 */ u32 m_unk_0x54;
+    /* 0x58 */ u16 m_cpuCount;
+    /* 0x5A */ u8 m_cpu[22];
 };
 
-static_assert(sizeof(MissionSetting) == 0x70, "sizeof(MissionSetting) != 0x70");
+static_assert(sizeof(MissionSetting) == 0x70);
 
 class RaceConfig : public ParamFile
 {
 public:
-    /* 0x809BD728 */
-    static RaceConfig* sInstance;
+    static RaceConfig* s_instance;
 
-    /* 0x80530038 */
-    virtual ~RaceConfig();
-    virtual int FUN_80009ddc();
-    virtual int FUN_80532078(); // just a blr
-    virtual int FUN_80532074(); // just a blr
-    virtual int FUN_80532070(); // just a blr
+    EXTERN_TEXT(0x80530038, virtual ~RaceConfig());
+    virtual int UNDEF_80009DDC();
+    virtual int UNDEF_80532078(); // just a blr
+    virtual int UNDEF_80532074(); // just a blr
+    virtual int UNDEF_80532070(); // just a blr
 
     class Player
     {
     public:
-        /* 0x8052DC68 */
-        virtual ~Player();
-        /* 0x8052D96C */
-        Player();
+        EXTERN_TEXT(0x8052D96C, Player());
+        EXTERN_TEXT(0x8052DC68, virtual ~Player());
 
-        /* 0x8052DAF0 */
-        u32 computeGpRank();
+        EXTERN_TEXT(0x8052DAF0, u32 ComputeGPRank());
 
         enum PlayerType {
             PLAYER_REAL_LOCAL,
@@ -96,37 +91,37 @@ public:
             TEAM_BLUE
         };
 
-        /* 0x04 */ u8 unk_0x4;
-        /* 0x05 */ u8 localPlayerId;
-        /* 0x06 */ u8 controllerId;
-        /* 0x08 */ u32 vehicleId;
-        /* 0x0C */ u32 characterId;
-        /* 0x10 */ u32 playerType;
-        /* 0x14 - 0xCC */ u8 fill_0x14[0xCC - 0x14];
-        /* 0xCC */ u32 team;
-        /* 0xD0 - 0xD8 */ u8 fill_0xD0[0xD8 - 0xD0];
-        /* 0xD8 */ u16 lastScore;
-        /* 0xDA */ u16 score;
-        /* 0xDC */ u16 unk_0xDC;
-        /* 0xDE */ u16 gpRankScore;
-        /* 0xE0 */ u8 unk_0xE0;
-        /* 0xE1 */ u8 lastFinishPos;
-        /* 0xE2 - 0xE8 */ u8 fill_0xE2[0xE8 - 0xE2];
-        /* 0xE8 */ u16 rating; // online VR/BR
-        /* 0xEA - 0xF0 */ u8 fill_0xEA[0xF0 - 0xEA];
+        /* 0x04 */ u8 m_unk_0x4;
+        /* 0x05 */ u8 m_localPlayerId;
+        /* 0x06 */ u8 m_controllerId;
+        /* 0x08 */ u32 m_vehicleId;
+        /* 0x0C */ u32 m_characterId;
+        /* 0x10 */ u32 m_playerType;
+        /* 0x14 - 0xCC */ u8 _0x14[0xCC - 0x14];
+        /* 0xCC */ u32 m_team;
+        /* 0xD0 - 0xD8 */ u8 _0xD0[0xD8 - 0xD0];
+        /* 0xD8 */ u16 m_lastScore;
+        /* 0xDA */ u16 m_score;
+        /* 0xDC */ u16 m_unk_0xDC;
+        /* 0xDE */ u16 m_gpRankScore;
+        /* 0xE0 */ u8 m_unk_0xE0;
+        /* 0xE1 */ u8 m_lastFinishPos;
+        /* 0xE2 - 0xE8 */ u8 _0xE2[0xE8 - 0xE2];
+        /* 0xE8 */ u16 m_rating; // online VR/BR
+        /* 0xEA - 0xF0 */ u8 _0xEA[0xF0 - 0xEA];
     };
 
-    static_assert(sizeof(Player) == 0xF0, "sizeof(Player) != 0xF0");
+    static_assert(sizeof(Player) == 0xF0);
 
     class RaceSetting
     {
     public:
+        EXTERN_TEXT(0x8052DBC8, RaceSetting());
         virtual ~RaceSetting();
-        /* 0x8052DBC8 */
-        RaceSetting();
 
-        /* 0x8052ED28 */
-        void setupNextRaceInput(const RaceSetting* lastRace);
+        EXTERN_TEXT(
+          0x8052ED28, void SetupNextRaceInput(const RaceSetting* lastRace)
+        );
 
         enum EngineClass {
             CC_50 = 0,
@@ -151,6 +146,22 @@ public:
             MODE_PRIVATE_BATTLE = 10,
             MODE_AWARD = 11,
             MODE_CREDITS = 12
+        };
+
+        enum CameraMode {
+            CAMERA_MODE_GAMEPLAY_NO_INTRO,
+            CAMERA_MODE_REPLAY,
+            CAMERA_MODE_TITLE_ONE_PLAYER,
+            CAMERA_MODE_TITLE_TWO_PLAYER,
+            CAMERA_MODE_TITLE_FOUR_PLAYER,
+            CAMERA_MODE_GAMEPLAY_INTRO,
+            CAMERA_MODE_LIVE_VIEW,
+            CAMERA_MODE_GRAND_PRIX_WIN,
+            CAMERA_MODE_SOLO_VS_WIN,
+            CAMERA_MODE_TEAM_VS_WIN,
+            CAMERA_MODE_BATTLE_WIN,
+            CAMERA_MODE_UNK_11,
+            CAMERA_MODE_LOSS,
         };
 
         enum BattleMode {
@@ -178,41 +189,39 @@ public:
             FLAG_TOURNAMENT = 1 << 2
         };
 
-        /* 0x004 */ u8 playerCount;
-        /* 0x005 */ u8 hudCount;
-        /* 0x006 */ u8 localPlayerCount;
-        /* 0x008 */ Player players[12];
-        /* 0xB48 */ u32 courseId;
-        /* 0xB4C */ u32 engineClass;
-        /* 0xB50 */ u32 gameMode;
-        // unsure, but 0 = player controlled, 1 = replay, 5 = opening camera
-        // pan?
-        /* 0xB54 */ u32 cameraType;
-        /* 0xB58 */ u32 battleMode;
-        /* 0xB5C */ u32 cpuSetting;
-        /* 0xB60 */ u32 itemSetting;
-        /* 0xB64 */ u8 hudPlayerIds[4];
-        /* 0xB68 */ u32 cupId;
-        /* 0xB6C */ u8 raceNum;
-        /* 0xB6D */ u8 lapCount;
-        /* 0xB70 */ u32 modeFlags;
+        /* 0x004 */ u8 m_playerCount;
+        /* 0x005 */ u8 m_hudCount;
+        /* 0x006 */ u8 m_localPlayerCount;
+        /* 0x008 */ Player m_players[12];
+        /* 0xB48 */ u32 m_courseId;
+        /* 0xB4C */ u32 m_engineClass;
+        /* 0xB50 */ u32 m_gameMode;
+        /* 0xB54 */ u32 m_cameraMode;
+        /* 0xB58 */ u32 m_battleMode;
+        /* 0xB5C */ u32 m_cpuSetting;
+        /* 0xB60 */ u32 m_itemSetting;
+        /* 0xB64 */ u8 m_hudPlayerIds[4];
+        /* 0xB68 */ u32 m_cupId;
+        /* 0xB6C */ u8 m_raceNum;
+        /* 0xB6D */ u8 m_lapCount;
+        /* 0xB70 */ u32 m_modeFlags;
         // Must be fixed for a specific race to replay properly
-        /* 0xB74 */ u32 seedFixed;
+        /* 0xB74 */ u32 m_seedFixed;
         // Can change between race and replay
-        /* 0xB78 */ u32 seedRandom;
-        /* 0xB7C */ MissionSetting mission;
-        /* 0xBEC */ GhostData* ghost;
+        /* 0xB78 */ u32 m_seedRandom;
+        /* 0xB7C */ MissionSetting m_mission;
+        /* 0xBEC */ GhostData* m_ghost;
     };
 
     static_assert(sizeof(RaceSetting) == 0xBF0);
 
-    /* 0x001C */ const u8* unk_0x1C;
+    /* 0x001C */ const u8* m_unk_0x1C;
 
-    /* 0x0020 */ RaceSetting currentRace;
-    /* 0x0C10 */ RaceSetting nextRace;
-    /* 0x1800 */ RaceSetting awardsRace;
+    /* 0x0020 */ RaceSetting m_currentRace;
+    /* 0x0C10 */ RaceSetting m_nextRace;
+    /* 0x1800 */ RaceSetting m_awardsRace;
 
-    /* 0x23F0 */ RawGhostData ghosts[2];
+    /* 0x23F0 */ RawGhostData m_ghosts[2];
 };
 
 static_assert(sizeof(RaceConfig) == 0x73F0);
