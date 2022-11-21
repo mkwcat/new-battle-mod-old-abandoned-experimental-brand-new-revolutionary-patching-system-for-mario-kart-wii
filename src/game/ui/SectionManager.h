@@ -12,13 +12,14 @@ class SystemMessageGroup;
 class SectionManager
 {
 public:
+    static SectionManager* s_instance;
+
     SectionManager();
     void Init(); // Replaced
 
     bool SelectDebugLicense(); // Added
     void DebugBootSetup(); // Added
 
-public:
     void* m_currentSection;
     int m_errorSection;
     int m_argsSection;
@@ -28,7 +29,9 @@ public:
     int m_nextAnimDir;
     u8 _1C[0x20 - 0x1C];
     bool m_initialized;
-    u8 _21[0x34 - 0x21];
+    u8 _21[0x23 - 0x21];
+    bool m_debugMode; // Added
+    u8 _24[0x34 - 0x24];
     RegisteredPadManager m_registeredPadManager;
     SaveManagerProxy* m_saveManagerProxy;
     SystemMessageGroup* m_systemMessageGroup;

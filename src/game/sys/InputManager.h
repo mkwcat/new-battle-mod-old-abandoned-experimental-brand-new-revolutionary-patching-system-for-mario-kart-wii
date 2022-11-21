@@ -57,7 +57,8 @@ public:
 private:
     u8 _0[0x4 - 0x0];
     PlayerInput m_playerInputs[4];
-    u8 _3B4[0x1720 - 0x3B4];
+    u8 _3B4[0x1690 - 0x3B4];
+    Pad m_dummyPad;
     WiiPad m_wiiPads[4];
     GCPad m_gcPads[4];
     u8 _3E60[0x415C - 0x3E60];

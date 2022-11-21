@@ -109,6 +109,19 @@ typedef struct {
 #define EXTERN_DATA(addr, prototype)                                           \
   __attribute__((section(".external." #addr))) prototype
 
+#define FILL(_START, _END) u8 _##_START[_END - _START]
+
+#define INCBIN(_FILE, _NAME)                                                   \
+  extern "C" u8 _NAME[];                                                       \
+  extern "C" u32 _NAME##_size;                                                 \
+  asm(".section .rodata\n"                                                     \
+      ".global " #_NAME "\n"                                                   \
+      "" #_NAME ":\n"                                                          \
+      ".incbin " #_FILE "\n"                                                   \
+      ".global " #_NAME "_size\n"                                              \
+      "" #_NAME "_size:\n"                                                     \
+      ".long . - " #_NAME "\n")
+
 enum class Region {
     P = 0x54A9,
     E = 0x5409,

@@ -11,6 +11,8 @@
 #include <host_sys/SystemManager.h>
 #include <nw4r/lyt/lyt_init.h>
 
+EXTERN_DATA(0x809C1E38, ui::SectionManager* ui::SectionManager::s_instance);
+
 constexpr int s_debugLicenseId = 0;
 
 bool ui::SectionManager::SelectDebugLicense()
@@ -53,27 +55,35 @@ void ui::SectionManager::DebugBootSetup()
     auto set = &sys::RaceConfig::s_instance->m_nextRace;
 
     set->m_courseId = 0x24;
-    set->m_playerCount = 1;
+    set->m_playerCount = 12;
     set->m_hudCount = 1;
     set->m_localPlayerCount = 1;
     set->m_gameMode = sys::RaceConfig::RaceSetting::MODE_BATTLE;
     set->m_players[0].m_characterId = 0x0A; // Yoshi
     set->m_players[0].m_vehicleId = 0x13; // Mach Bike
-    set->m_players[0].m_playerType = sys::RaceConfig::Player::PLAYER_CPU;
+    set->m_players[0].m_playerType = sys::RaceConfig::Player::PLAYER_REAL_LOCAL;
     set->m_players[0].m_team = sys::RaceConfig::Player::TEAM_RED;
     set->m_engineClass = sys::RaceConfig::RaceSetting::CC_150;
     set->m_hudPlayerIds[0] = 0;
     set->m_lapCount = 3;
     set->m_cameraMode =
       sys::RaceConfig::RaceSetting::CAMERA_MODE_GAMEPLAY_INTRO;
-    set->m_battleMode = sys::RaceConfig::RaceSetting::BATTLE_COIN;
+    set->m_legacyBattleMode = sys::RaceConfig::RaceSetting::BATTLE_BALLOON;
+    set->m_battleMode = sys::RaceConfig::RaceSetting::BATTLE_SHINE_THIEF;
 
-    for (u32 i = 1; i < 12; i++) {
-        set->m_players[i].m_playerType = sys::RaceConfig::Player::PLAYER_NONE;
+    for (u32 i = 1; i < 6; i++) {
+        set->m_players[i].m_characterId = 0x0A; // Yoshi
+        set->m_players[i].m_vehicleId = 0x13; // Mach Bike
+        set->m_players[i].m_team = sys::RaceConfig::Player::TEAM_RED;
+        set->m_players[i].m_playerType = sys::RaceConfig::Player::PLAYER_CPU;
     }
 
-    m_registeredPadManager.ForceRegisterGCN();
-    m_registeredPadManager.UNDEF_8061B5A4();
+    for (u32 i = 6; i < 12; i++) {
+        set->m_players[i].m_characterId = 0x0A; // Yoshi
+        set->m_players[i].m_vehicleId = 0x13; // Mach Bike
+        set->m_players[i].m_team = sys::RaceConfig::Player::TEAM_BLUE;
+        set->m_players[i].m_playerType = sys::RaceConfig::Player::PLAYER_CPU;
+    }
 }
 
 REPLACE(0x80634E44, void ui::SectionManager::Init())
@@ -104,7 +114,10 @@ REPLACE(0x80634E44, void ui::SectionManager::Init())
     m_nextSectionId = m_errorSection == -1 ? 0x3F : m_errorSection;
 
     if (m_errorSection == -1) {
+        m_debugMode = true;
         DebugBootSetup();
+    } else {
+        m_debugMode = false;
     }
 
     m_nextAnimDir = 0;

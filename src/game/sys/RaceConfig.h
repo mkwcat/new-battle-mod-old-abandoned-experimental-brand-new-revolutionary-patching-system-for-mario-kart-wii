@@ -123,6 +123,8 @@ public:
           0x8052ED28, void SetupNextRaceInput(const RaceSetting* lastRace)
         );
 
+        EXTERN_TEXT(0x8052FB90, void InitRace(RaceSetting* race));
+
         enum EngineClass {
             CC_50 = 0,
             CC_100 = 1,
@@ -166,7 +168,9 @@ public:
 
         enum BattleMode {
             BATTLE_BALLOON = 0,
-            BATTLE_COIN = 1
+            BATTLE_COIN = 1,
+
+            BATTLE_SHINE_THIEF = 2, // Added
         };
 
         enum CpuSetting {
@@ -197,13 +201,14 @@ public:
         /* 0xB4C */ u32 m_engineClass;
         /* 0xB50 */ u32 m_gameMode;
         /* 0xB54 */ u32 m_cameraMode;
-        /* 0xB58 */ u32 m_battleMode;
+        /* 0xB58 */ u32 m_legacyBattleMode;
         /* 0xB5C */ u32 m_cpuSetting;
         /* 0xB60 */ u32 m_itemSetting;
         /* 0xB64 */ u8 m_hudPlayerIds[4];
         /* 0xB68 */ u32 m_cupId;
         /* 0xB6C */ u8 m_raceNum;
         /* 0xB6D */ u8 m_lapCount;
+        /* 0xB6E (ADDED) */ u16 m_battleMode;
         /* 0xB70 */ u32 m_modeFlags;
         // Must be fixed for a specific race to replay properly
         /* 0xB74 */ u32 m_seedFixed;
@@ -214,6 +219,8 @@ public:
     };
 
     static_assert(sizeof(RaceSetting) == 0xBF0);
+
+    void InitRace(); // Replaced
 
     /* 0x001C */ const u8* m_unk_0x1C;
 
