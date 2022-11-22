@@ -13,6 +13,7 @@
 #include "game/sys/RootScene.cpp"
 #include "game/sys/SaveManager.cpp"
 #include "game/ui/ExternTypeInfo.cpp"
+#include "game/ui/Section.cpp"
 #include "game/ui/SectionManager.cpp"
 #include "game/ui/SystemMessageGroup.cpp"
 #include "host_sys/SystemManager.cpp"
