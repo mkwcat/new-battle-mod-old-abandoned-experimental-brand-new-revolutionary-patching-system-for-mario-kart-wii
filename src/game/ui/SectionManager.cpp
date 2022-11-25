@@ -113,12 +113,16 @@ REPLACE(0x80634E44, void ui::SectionManager::Init())
 
     m_nextSectionId = m_errorSection == -1 ? 0x3F : m_errorSection;
 
+#if 0
     if (m_errorSection == -1) {
         m_debugMode = true;
         DebugBootSetup();
     } else {
         m_debugMode = false;
     }
+#endif
+
+    m_debugMode = false;
 
     m_nextAnimDir = 0;
     m_initialized = true;
