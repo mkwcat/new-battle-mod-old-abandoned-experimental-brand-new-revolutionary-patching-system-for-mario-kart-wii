@@ -34,6 +34,10 @@ extern __replace_struct _replarray_end[];
 
 extern "C" void _prolog()
 {
+}
+
+extern "C" void _epilog()
+{
     // Do function patches
     for (auto repl = _replarray; repl != _replarray_end; ++repl) {
         *repl->addr =
@@ -46,12 +50,6 @@ extern "C" void _prolog()
     for (PFN_voidfunc* ctor = _ctors; ctor != _ctors_end && *ctor; ++ctor) {
         (*ctor)();
     }
-}
-
-extern "C" void _epilog()
-{
-    // Infinite loop
-    _epilog();
 }
 
 extern "C" void _unresolved()

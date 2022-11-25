@@ -3,28 +3,37 @@ SUFFIXES += .d
 
 # Project directory
 BUILD := build
-TARGET := mkwtm
+TARGET := BattleP
+LOADER := Loader
 
 # Compiler definitions
 CLANG := tool/win32/clang
 CC := $(CLANG)
 LD := $(DEVKITPPC)/bin/powerpc-eabi-ld
+OBJCOPY := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 ELF2REL := tool/win32/elf2rel.exe
 
 CFILES := $(wildcard src/*.c)
 CPPFILES := $(wildcard src/*.cpp)
-INCLUDE := include
-
 OFILES		:=	$(CPPFILES:.cpp=_cpp.o) $(CFILES:.c=_c.o)
 OFILES		:= $(addprefix $(BUILD)/, $(OFILES))
 DEPS	:= $(OFILES:.o=.d)
 
-DUMMY != mkdir -p $(BUILD)/src
+INCLUDE := include
 
-CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O3 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -Isrc -Isrc/platform
+LOADER_CPPFILES := loader/Loader.cpp
+LOADER_OFILES		:= $(LOADER_CPPFILES:.cpp=_cpp.o)
+LOADER_OFILES		:= $(addprefix $(BUILD)/, $(LOADER_OFILES))
+LOADER_DEPS	:= $(LOADER_OFILES:.o=.d)
 
 
-default: $(BUILD)/$(TARGET).rel
+
+DUMMY != mkdir -p $(BUILD)/src $(BUILD)/loader
+
+CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O3 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -ffunction-sections -fdata-sections -Isrc -Isrc/platform
+
+
+default: $(BUILD)/$(TARGET).rel $(BUILD)/$(LOADER).bin
 
 clean:
 	@echo cleaning...
@@ -45,5 +54,13 @@ $(BUILD)/$(TARGET).elf: $(OFILES)
 	@$(LD) -Tlink.ld -r $(OFILES) -o $@
 
 $(BUILD)/$(TARGET).rel: $(BUILD)/$(TARGET).elf
-	@echo output ... $@
-	$(ELF2REL) $(BUILD)/$(TARGET).elf $@
+	@echo output ... $(TARGET).rel
+	@$(ELF2REL) $(BUILD)/$(TARGET).elf $@
+
+$(BUILD)/$(LOADER).elf: $(LOADER_OFILES)
+	@echo linking ... $(LOADER).elf
+	@$(LD) -Tloader/Loader.ld --gc-sections -n -o $@ $<
+
+$(BUILD)/$(LOADER).bin: $(BUILD)/$(LOADER).elf
+	@echo output ... $(LOADER).bin
+	@$(OBJCOPY) $< $@ -O binary
