@@ -66,7 +66,7 @@ void  Save(char *filename, char *buffer, int length);
 char *Memory(int length, int size);
 
 void  LZX_Decode(char *filename);
-void  LZX_Encode(char *filename, int cmd, int vram);
+void  LZX_Encode(char *filename, char* outname, int cmd, int vram);
 char *LZX_Code(unsigned char *raw_buffer, int raw_len, int *new_len, int cmd);
 
 /*----------------------------------------------------------------------------*/
@@ -74,30 +74,23 @@ int main(int argc, char **argv) {
   int cmd, vram;
   int arg;
 
-  Title();
-
   if (argc < 2) Usage();
-  if      (!strcmpi(argv[1], "-d"))   { cmd = CMD_DECODE; }
-  else if (!strcmpi(argv[1], "-evb")) { cmd = CMD_CODE_11; vram = LZX_VRAM; }
+  if      (!strcmpi(argv[1], "-evb")) { cmd = CMD_CODE_11; vram = LZX_VRAM; }
   else if (!strcmpi(argv[1], "-ewb")) { cmd = CMD_CODE_11; vram = LZX_WRAM; }
   else if (!strcmpi(argv[1], "-evl")) { cmd = CMD_CODE_40; vram = LZX_VRAM; }
   else if (!strcmpi(argv[1], "-ewl")) { cmd = CMD_CODE_40; vram = LZX_WRAM; }
   else                                  EXIT("Command not supported\n");
   if (argc < 3) EXIT("Filename not specified\n");
+  if (argc < 4) EXIT("Out filename not specified\n");
 
   switch (cmd) {
-    case CMD_DECODE:
-      for (arg = 2; arg < argc; arg++) LZX_Decode(argv[arg]);
-      break;
     case CMD_CODE_11:
     case CMD_CODE_40:
-      for (arg = 2; arg < argc; arg++) LZX_Encode(argv[arg], cmd, vram);
+      LZX_Encode(argv[2], argv[3], cmd, vram);
       break;
     default:
       break;
   }
-
-  printf("\nDone\n");
 
   return(0);
 }
@@ -172,8 +165,6 @@ void LZX_Decode(char *filename) {
   unsigned char *pak_buffer, *raw_buffer, *pak, *raw, *pak_end, *raw_end;
   unsigned int   pak_len, raw_len, header, len, pos, threshold, tmp;
   unsigned char  flags, mask;
-
-  printf("- decoding '%s'", filename);
 
   pak_buffer = Load(filename, &pak_len, LZX_MINIM, LZX_MAXIM);
 
@@ -275,13 +266,11 @@ void LZX_Decode(char *filename) {
 }
 
 /*----------------------------------------------------------------------------*/
-void LZX_Encode(char *filename, int cmd, int vram) {
+void LZX_Encode(char *filename, char* outname, int cmd, int vram) {
   unsigned char *raw_buffer, *pak_buffer, *new_buffer;
   unsigned int   raw_len, pak_len, new_len;
 
   lzx_vram = vram;
-
-  printf("- encoding '%s'", filename);
 
   raw_buffer = Load(filename, &raw_len, RAW_MINIM, RAW_MAXIM);
 
@@ -295,12 +284,10 @@ void LZX_Encode(char *filename, int cmd, int vram) {
     pak_len = new_len;
   }
 
-  Save(filename, pak_buffer, pak_len);
+  Save(outname, pak_buffer, pak_len);
 
   free(pak_buffer);
   free(raw_buffer);
-
-  printf("\n");
 }
 
 /*----------------------------------------------------------------------------*/

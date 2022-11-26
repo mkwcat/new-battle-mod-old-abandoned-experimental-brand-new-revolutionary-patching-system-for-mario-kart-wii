@@ -32,12 +32,113 @@ extern PFN_voidfunc _ctors_end[];
 extern __replace_struct _replarray[];
 extern __replace_struct _replarray_end[];
 
-extern "C" void _prolog()
+u8 itembehaviordata[0x809C3614 - 0x809C2F48];
+u8 itembehavior2array[0x809C38B4 - 0x809C36A0];
+
+u32 SearchPatch(u32 offset)
 {
+    if (offset >= 0x809C2F48 && offset < 0x809C3614)
+        return u32(&itembehaviordata) + (offset - 0x809C2F48);
+
+    if (offset >= 0x809C36A0 && offset < 0x809C38B4)
+        return u32(&itembehavior2array) + (offset - 0x809C36A0);
+
+    return 0; // For now
 }
 
-extern "C" void _epilog()
+void PatchRelocations()
 {
+    auto staticRel = *(OSModuleHeader**) 0x800030C8;
+    auto modRel = *(OSModuleHeader**) 0x800030CC;
+
+    // Offsets are set to pointers by OSLink
+    auto imp = (OSModuleImp*) staticRel->impOffset;
+
+    auto sections = (OSModuleSectionInfo*) staticRel->info.sectionInfoOffset;
+    u32 sectionCount = staticRel->info.numSections;
+
+    for (u32 i = 0; i < staticRel->impSize; i += sizeof(OSModuleImp), imp++) {
+        if (imp->moduleId != staticRel->info.id)
+            continue;
+
+        u8* ptr = nullptr;
+
+        OSReport("[PALA] Starting rel patches from %08X\n", imp->offset);
+
+        for (auto reltab = (OSModuleRelInfo*) imp->offset;
+             reltab->type != R_RVL_STOP; reltab++) {
+            if (reltab->type == R_RVL_SECT) {
+                ptr = (u8*) (sections[reltab->section].offset & 0xFFFFFFFC);
+                OSReport("[PALA] Section start: %08X\n", ptr);
+            } else {
+                assert(ptr != nullptr);
+                ptr += reltab->offset;
+            }
+
+            u32 offset = reltab->section == 0
+                           ? 0
+                           : sections[reltab->section].offset & 0xFFFFFFFC;
+            offset += reltab->addend;
+            u32 oldOffset = offset;
+
+            switch (reltab->type) {
+            default:
+                break;
+
+            case R_PPC_ADDR32:
+                if ((offset = SearchPatch(offset)) != 0) {
+                    OSReport(
+                      "[PALA] Patched R_PPC_ADDR32 at %08X (%08X -> %08X)\n",
+                      ptr, oldOffset, offset
+                    );
+                    *(u32*) ptr = offset;
+                }
+                break;
+
+            case R_PPC_ADDR16_LO:
+                if ((offset = SearchPatch(offset)) != 0) {
+                    offset &= 0xFFFF;
+                    oldOffset &= 0xFFFF;
+                    OSReport(
+                      "[PALA] Patched R_PPC_ADDR16_LO at %08X (%04X -> %04X)\n",
+                      ptr, oldOffset, offset
+                    );
+                    *(u16*) ptr = offset;
+                }
+                break;
+
+            case R_PPC_ADDR16_HI:
+                if ((offset = SearchPatch(offset)) != 0) {
+                    offset >>= 16;
+                    oldOffset >>= 16;
+                    OSReport(
+                      "[PALA] Patched R_PPC_ADDR16_HI at %08X (%04X -> %04X)\n",
+                      ptr, oldOffset, offset
+                    );
+                    *(u16*) ptr = offset;
+                }
+                break;
+
+            case R_PPC_ADDR16_HA:
+                if ((offset = SearchPatch(offset)) != 0) {
+                    offset = (offset + 0x8000) >> 16;
+                    oldOffset = (oldOffset + 0x8000) >> 16;
+                    OSReport(
+                      "[PALA] Patched R_PPC_ADDR16_HA at %08X (%04X -> %04X)\n",
+                      ptr, oldOffset, offset
+                    );
+                    *(u16*) ptr = offset;
+                }
+                break;
+            }
+        }
+    }
+}
+
+extern "C" void _prolog()
+{
+    PatchRelocations();
+
     // Do function patches
     for (auto repl = _replarray; repl != _replarray_end; ++repl) {
         *repl->addr =
@@ -50,6 +151,10 @@ extern "C" void _epilog()
     for (PFN_voidfunc* ctor = _ctors; ctor != _ctors_end && *ctor; ++ctor) {
         (*ctor)();
     }
+}
+
+extern "C" void _epilog()
+{
 }
 
 extern "C" void _unresolved()

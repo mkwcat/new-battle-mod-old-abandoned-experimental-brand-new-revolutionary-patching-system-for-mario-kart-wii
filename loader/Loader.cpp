@@ -73,6 +73,8 @@ DEFINE_EXTERNAL_FUNCTION(
   0x801A4E24, 0x801A4dE4, 0x801A4EC4, 0x801A5220
 )
 
+#ifndef LOADER_REL_LZ
+
 DEFINE_EXTERNAL_FUNCTION(
   u8* EGG::DvdRipper::loadToMainRAM(
     const char* path, u8* dst, EGG::Heap* heap,
@@ -82,9 +84,49 @@ DEFINE_EXTERNAL_FUNCTION(
   0x80222638, 0x802225F8, 0x802226D8, 0x80222A4C
 );
 
+#else
+
+DEFINE_EXTERNAL_FUNCTION(
+  u8* EGG::DvdRipper::loadToMainRAMDecomp(
+    const char* path, EGG::StreamDecomp* streamDecomp, u8* dst, Heap* heap,
+    EAllocDirection allocDirection, u32 offset, u32 size, u32 maxChunkSize
+  ),
+  0x8022289C, 0x8022285C, 0x8022293C, 0x80222CB0
+);
+
+DEFINE_EXTERNAL_FUNCTION(
+  bool EGG::StreamDecompLZ::init(void* dst, u32 maxCompressedSize),
+  0x802415DC, 0x802423B8, 0x80242498, 0x8024280C
+);
+
+DEFINE_EXTERNAL_FUNCTION(
+  bool EGG::StreamDecompLZ::decomp(const void* src, u32 len),
+  0x8024160C, 0x802423E8, 0x802424C8, 0x8024283C
+);
+
+DEFINE_EXTERNAL_FUNCTION(
+  u32 EGG::StreamDecompLZ::getHeaderSize(),
+  0x80241638, 0x80242414, 0x802424F4, 0x80242868
+);
+
+DEFINE_EXTERNAL_FUNCTION(
+  u32 EGG::StreamDecompLZ::getUncompressedSize(const void* src),
+  0x80241640, 0x8024241C, 0x802424FC, 0x80242870
+);
+
+#endif
+
 // clang-format on
 
+#ifndef LOADER_REL_LZ
+
 char g_modulePath[] = "/rel/BattleE.rel";
+
+#else
+
+char g_modulePath[] = "/rel/BattleE.rel.LZ";
+
+#endif
 
 static bool GetPortByLR(u32 lr)
 {
@@ -113,7 +155,7 @@ static bool GetPortByLR(u32 lr)
     }
 }
 
-static bool GetPortByCheck()
+static bool GetPortByCode()
 {
     switch (GetCodeRegion()) {
     case Region::E: // RMCE
@@ -140,7 +182,7 @@ static bool GetPortByCheck()
     }
 }
 
-static bool GetPortByRegionChar()
+static bool GetPortByTitleID()
 {
     switch (*(u32*) 0x80000000) {
     case 0x524D4345: // RMCE
@@ -170,7 +212,7 @@ static bool GetPortByRegionChar()
 
 bool LoaderMain(OSModuleInfo* info, void* bss, EGG::Heap* heap, u32 lr)
 {
-    if (!GetPortByLR(lr) && !GetPortByCheck() && !GetPortByRegionChar()) {
+    if (!GetPortByLR(lr) && !GetPortByCode() && !GetPortByTitleID()) {
         // No valid region could be found! It's likely that this is not even
         // Mario Kart Wii, or at least not any released version of it. The
         // reason why there are so many backup region checks is because if the
@@ -184,11 +226,28 @@ bool LoaderMain(OSModuleInfo* info, void* bss, EGG::Heap* heap, u32 lr)
         }
     }
 
+    bool osLinkOk = OSLink(info, bss);
+    LOADER_ASSERT(osLinkOk);
+
+#ifndef LOADER_REL_LZ
+
     u8* moduleBlock = EGG::DvdRipper::loadToMainRAM(
       g_modulePath, nullptr, heap, EGG::DvdRipper::ALLOC_DIR_TOP, 0, nullptr,
       nullptr
     );
     LOADER_ASSERT(!!moduleBlock);
+
+#else
+
+    EGG::StreamDecompLZ lzStream;
+
+    u8* moduleBlock = EGG::DvdRipper::loadToMainRAMDecomp(
+      g_modulePath, &lzStream, nullptr, heap, EGG::DvdRipper::ALLOC_DIR_TOP, 0,
+      0, 0x1000
+    );
+    LOADER_ASSERT(!!moduleBlock);
+
+#endif
 
     auto header = reinterpret_cast<OSModuleHeader*>(moduleBlock);
 
@@ -198,16 +257,7 @@ bool LoaderMain(OSModuleInfo* info, void* bss, EGG::Heap* heap, u32 lr)
     bool osLinkModOk = OSLink(&header->info, bssBlock);
     LOADER_ASSERT(osLinkModOk);
 
-    // Call prolog to do the pre-link StaticR.rel patches. This is necessary for
-    // data relocation patches.
     (*(void (*)()) header->prolog)();
-
-    bool osLinkOk = OSLink(info, bss);
-    LOADER_ASSERT(osLinkOk);
-
-    // Call epilog to do the post-link patches. This function is normally
-    // reserved for unloading a rel file, but we repurpose it here.
-    (*(void (*)()) header->epilog)();
 
     return true;
 }

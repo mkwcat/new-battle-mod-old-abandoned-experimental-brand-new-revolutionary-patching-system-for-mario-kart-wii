@@ -133,3 +133,8 @@ static inline Region GetCodeRegion()
 {
     return Region(*(u16*) 0x8000620A);
 }
+
+void __AssertFail(const char* file, u32 line, const char* expression);
+
+#define assert(_EXPRESSION)                                                    \
+  ((_EXPRESSION) ? (void) 0 : __AssertFail(__FILE__, __LINE__, #_EXPRESSION))

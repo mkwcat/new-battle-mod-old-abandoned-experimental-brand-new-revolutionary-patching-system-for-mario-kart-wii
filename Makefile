@@ -12,6 +12,7 @@ CC := $(CLANG)
 LD := $(DEVKITPPC)/bin/powerpc-eabi-ld
 OBJCOPY := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 ELF2REL := tool/win32/elf2rel.exe
+LZX := tool/win32/lzx.exe
 
 CFILES := $(wildcard src/*.c)
 CPPFILES := $(wildcard src/*.cpp)
@@ -30,10 +31,10 @@ LOADER_DEPS	:= $(LOADER_OFILES:.o=.d)
 
 DUMMY != mkdir -p $(BUILD)/src $(BUILD)/loader
 
-CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O3 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -ffunction-sections -fdata-sections -Isrc -Isrc/platform
+CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O3 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -ffunction-sections -fdata-sections -Isrc -Isrc/platform -DLOADER_REL_LZ
 
 
-default: $(BUILD)/$(TARGET).rel $(BUILD)/$(LOADER).bin
+default: $(BUILD)/$(TARGET).rel.LZ $(BUILD)/$(LOADER).bin
 
 clean:
 	@echo cleaning...
@@ -56,6 +57,10 @@ $(BUILD)/$(TARGET).elf: $(OFILES)
 $(BUILD)/$(TARGET).rel: $(BUILD)/$(TARGET).elf
 	@echo output ... $(TARGET).rel
 	@$(ELF2REL) $(BUILD)/$(TARGET).elf $@
+
+$(BUILD)/$(TARGET).rel.LZ: $(BUILD)/$(TARGET).rel
+	@echo compress ... $(TARGET).rel.LZ
+	@$(LZX) -ewb $< $@
 
 $(BUILD)/$(LOADER).elf: $(LOADER_OFILES)
 	@echo linking ... $(LOADER).elf
