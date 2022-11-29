@@ -11,11 +11,14 @@ REPLACE(0x805302C4, void sys::RaceConfig::InitRace())
     switch (m_nextRace.m_battleMode) {
     case RaceSetting::BATTLE_BALLOON:
         m_currentRace.m_legacyBattleMode = RaceSetting::BATTLE_BALLOON;
+        break;
 
     case RaceSetting::BATTLE_COIN:
         m_currentRace.m_legacyBattleMode = RaceSetting::BATTLE_COIN;
+        break;
 
     case RaceSetting::BATTLE_SHINE_THIEF:
         m_currentRace.m_legacyBattleMode = RaceSetting::BATTLE_COIN;
+        break;
     }
 }

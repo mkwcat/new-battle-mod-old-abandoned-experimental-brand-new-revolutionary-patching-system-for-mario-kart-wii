@@ -62,7 +62,7 @@ void ui::SectionManager::DebugBootSetup()
     set->m_players[0].m_characterId = 0x0A; // Yoshi
     set->m_players[0].m_vehicleId = 0x13; // Mach Bike
     set->m_players[0].m_playerType = sys::RaceConfig::Player::PLAYER_REAL_LOCAL;
-    set->m_players[0].m_team = sys::RaceConfig::Player::TEAM_RED;
+    set->m_players[0].m_team = sys::RaceConfig::Player::TEAM_NONE;
     set->m_engineClass = sys::RaceConfig::RaceSetting::CC_150;
     set->m_hudPlayerIds[0] = 0;
     set->m_lapCount = 3;
@@ -74,7 +74,7 @@ void ui::SectionManager::DebugBootSetup()
     for (u32 i = 1; i < 6; i++) {
         set->m_players[i].m_characterId = 0x0A; // Yoshi
         set->m_players[i].m_vehicleId = 0x13; // Mach Bike
-        set->m_players[i].m_team = sys::RaceConfig::Player::TEAM_RED;
+        set->m_players[i].m_team = sys::RaceConfig::Player::TEAM_NONE;
         set->m_players[i].m_playerType = sys::RaceConfig::Player::PLAYER_CPU;
     }
 

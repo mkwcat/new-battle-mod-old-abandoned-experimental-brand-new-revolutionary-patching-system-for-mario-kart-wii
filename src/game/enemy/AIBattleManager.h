@@ -2,10 +2,10 @@
 
 // 0x94 in "AIHolder". This name is really just a complete guess.
 
-class AIBattleTeamManager
+class AIBattleManager
 {
 public:
-    EXTERN_TEXT(0x80727788, AIBattleTeamManager());
+    EXTERN_TEXT(0x80727788, AIBattleManager());
 
     class Team
     {
@@ -32,4 +32,4 @@ private:
     FILL(0xC8, 0xD0);
 };
 
-static_assert(sizeof(AIBattleTeamManager) == 0xD0);
+static_assert(sizeof(AIBattleManager) == 0xD0);

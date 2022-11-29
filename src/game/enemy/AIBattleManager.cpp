@@ -1,15 +1,14 @@
-#include "AIBattleTeamManager.h"
+#include "AIBattleManager.h"
 
 EXTERN_REPL(
-  0x80728CC8, void AIBattleTeamManager::Class_0xBC::__TeamPositionUpdate(
+  0x80728CC8, void AIBattleManager::Class_0xBC::__TeamPositionUpdate(
                 int param_2, Team* team
               )
 );
 
 REPLACE(
-  0x80728CC8, void AIBattleTeamManager::Class_0xBC::TeamPositionUpdate(
-                int param_2, Team* team
-              )
+  0x80728CC8,
+  void AIBattleManager::Class_0xBC::TeamPositionUpdate(int param_2, Team* team)
 )
 {
     if (param_2 == 0)
