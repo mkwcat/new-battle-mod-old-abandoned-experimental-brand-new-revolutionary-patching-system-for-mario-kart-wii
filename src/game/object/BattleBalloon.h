@@ -8,10 +8,22 @@ class BattleBalloon;
 class BattleBalloonMgr
 {
 public:
+    static BattleBalloonMgr* s_instance;
+
+    EXTERN_TEXT(0x808697BC, static void InitStatic());
+
     BattleBalloonMgr();
 
+    // Replaced 0x80869DF4
     void AddToPlayer(
-      u32 playerId, u8 team, int param_4, int param_5, int param_6, int param_7
+      u32 playerId, u8 team, int param_4, int param_5, u8 count, int param_7
+    );
+
+    EXTERN_TEXT(
+      0x80869FD0, void PopBalloons(
+                    u32 playerId, int param_3, int param_4, int param_5,
+                    u8 count, int param_7
+                  )
     );
 
     u8 m_playerCount;

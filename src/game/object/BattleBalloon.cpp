@@ -1,6 +1,10 @@
 #include "BattleBalloon.h"
 #include "game/sys/RaceConfig.h"
 
+EXTERN_DATA(
+  0x809C4748, object::BattleBalloonMgr* object::BattleBalloonMgr::s_instance
+);
+
 REPLACE(0x80869884, object::BattleBalloonMgr::BattleBalloonMgr())
 {
     auto config = &sys::RaceConfig::s_instance->m_currentRace;
@@ -44,7 +48,7 @@ REPLACE(0x80869884, object::BattleBalloonMgr::BattleBalloonMgr())
 
 REPLACE_ASM(0x80869DF4,
             void object::BattleBalloonMgr::AddToPlayer(
-              u32 playerId, u8 team, int param_4, int param_5, int param_6,
+              u32 playerId, u8 team, int param_4, int param_5, u8 count,
               int param_7
             ),
             // clang-format off
@@ -59,7 +63,6 @@ REPLACE_ASM(0x80869DF4,
 /* 80869E14 7D3B4B78 */  mr       r27, r9;
 /* 80869E18 41800008 */  // blt-     UNDEF_80869e20;
 /* 80869E1C 38A00000 */  // li       r5, 0;
-
                          // Check to see if it's team mode or not
                          lis      r11, s_instance__Q23sys10RaceConfig@ha;
                          lwz      r11, s_instance__Q23sys10RaceConfig@l(r11);
@@ -68,8 +71,6 @@ REPLACE_ASM(0x80869DF4,
                          bne-     UNDEF_80869e20;
                          // Use the player ID as the balloon color
                          mr       r5, r25;
-
-
 UNDEF_80869e20:;
 /* 80869E20 1C040018 */  mulli    r0, r4, 24;
 /* 80869E24 808304E4 */  lwz      r4, 1252(r3);
