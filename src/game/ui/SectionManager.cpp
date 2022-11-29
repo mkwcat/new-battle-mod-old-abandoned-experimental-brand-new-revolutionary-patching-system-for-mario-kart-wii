@@ -69,7 +69,7 @@ void ui::SectionManager::DebugBootSetup()
     set->m_cameraMode =
       sys::RaceConfig::RaceSetting::CAMERA_MODE_GAMEPLAY_INTRO;
     set->m_legacyBattleMode = sys::RaceConfig::RaceSetting::BATTLE_BALLOON;
-    set->m_battleMode = sys::RaceConfig::RaceSetting::BATTLE_SHINE_THIEF;
+    set->m_battleMode = sys::RaceConfig::RaceSetting::BATTLE_BALLOON;
 
     for (u32 i = 1; i < 6; i++) {
         set->m_players[i].m_characterId = 0x0A; // Yoshi
@@ -81,7 +81,7 @@ void ui::SectionManager::DebugBootSetup()
     for (u32 i = 6; i < 12; i++) {
         set->m_players[i].m_characterId = 0x0A; // Yoshi
         set->m_players[i].m_vehicleId = 0x13; // Mach Bike
-        set->m_players[i].m_team = sys::RaceConfig::Player::TEAM_BLUE;
+        set->m_players[i].m_team = sys::RaceConfig::Player::TEAM_NONE;
         set->m_players[i].m_playerType = sys::RaceConfig::Player::PLAYER_CPU;
     }
 }
@@ -113,16 +113,12 @@ REPLACE(0x80634E44, void ui::SectionManager::Init())
 
     m_nextSectionId = m_errorSection == -1 ? 0x3F : m_errorSection;
 
-#if 0
     if (m_errorSection == -1) {
         m_debugMode = true;
         DebugBootSetup();
     } else {
         m_debugMode = false;
     }
-#endif
-
-    m_debugMode = false;
 
     m_nextAnimDir = 0;
     m_initialized = true;

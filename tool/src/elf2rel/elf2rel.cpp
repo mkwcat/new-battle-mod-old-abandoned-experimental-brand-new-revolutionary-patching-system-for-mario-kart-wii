@@ -299,7 +299,7 @@ int main(int argc, char** argv)
 
                         rel.moduleID = 0;
                         rel.targetSection = 0;
-                        rel.addend = addr;
+                        rel.addend = static_cast<uint32_t>(addend + addr);
                     } else {
                         // Internal symbol
                         rel.moduleID = moduleID;
@@ -329,7 +329,7 @@ int main(int argc, char** argv)
 
                     rel.moduleID = 0;
                     rel.targetSection = 0;
-                    rel.addend = addr;
+                    rel.addend = static_cast<uint32_t>(addend + addr);
                 } else if (symbolName.substr(0, 6) == "UNDEF_") {
                     // External symbol
                     resolved = true;
@@ -339,7 +339,7 @@ int main(int argc, char** argv)
 
                     rel.moduleID = 0;
                     rel.targetSection = 0;
-                    rel.addend = addr;
+                    rel.addend = static_cast<uint32_t>(addend + addr);
                 } else if (symbolName == "_RegionType") {
                     // For now it's always 0, but in the future this will return
                     // a number based on the region

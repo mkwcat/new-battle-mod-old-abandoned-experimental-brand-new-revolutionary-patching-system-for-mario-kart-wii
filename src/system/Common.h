@@ -97,6 +97,24 @@ typedef struct {
   }                                                                            \
   _Pragma("GCC diagnostic pop")
 
+#define EXTERN_REPL(addr, prototype)                                           \
+  extern unsigned int ext_##addr;                                              \
+  extern unsigned int extern_func_##addr;                                      \
+  __attribute__((section(".externarray")))                                     \
+  __replace_struct externstruct_##addr = {&ext_##addr, &extern_func_##addr};   \
+  asm(".section .extern_repl." #addr "\n"                                      \
+      ".global extern_func_" #addr "\n"                                        \
+      ".p2align 2\n"                                                           \
+      "extern_func_" #addr ":\n");                                             \
+  _Pragma("GCC diagnostic push")                                               \
+    _Pragma("GCC diagnostic ignored \"-Wreturn-type\"")                        \
+      __attribute__((section(".extern_repl." #addr))) __attribute__((weak))    \
+      __attribute__((naked)) prototype                                         \
+  {                                                                            \
+    ASM(nop; b ext_##addr + 4;);                                               \
+  }                                                                            \
+  _Pragma("GCC diagnostic pop")
+
 #define EXTERN_TEXT_C(addr, prototype)                                         \
   _Pragma("GCC diagnostic push")                                               \
     _Pragma("GCC diagnostic ignored \"-Wreturn-type\"")                        \

@@ -1,6 +1,7 @@
 SECTIONS {
 	.text : {
 		*(.text*)
+		*(.extern_repl*)
 		KEEP(*(.replaced*))
 	}
 	.rodata : {
@@ -11,6 +12,13 @@ SECTIONS {
         _replarray = .;
         KEEP(*(.replarray))
         _replarray_end = .;
+
+        . = ALIGN(4);
+        _externarray = .;
+        KEEP(*(.externarray))
+        _externarray_end = .;
+
+        . = ALIGN(4);
 		*(.data)
 		*(.sdata)
 		*(.sdata2)

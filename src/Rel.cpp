@@ -5,6 +5,7 @@
 #include "dwc/dwc_init.cpp"
 #include "dwc/dwc_memfunc.cpp"
 #include "egg/core/eggHeap.cpp"
+#include "game/ai/AIBattleTeamManager.cpp"
 #include "game/sys/InputManager.cpp"
 #include "game/sys/MiiManager.cpp"
 #include "game/sys/NandManager.cpp"
@@ -32,16 +33,21 @@ extern PFN_voidfunc _ctors_end[];
 extern __replace_struct _replarray[];
 extern __replace_struct _replarray_end[];
 
+extern __replace_struct _externarray[];
+extern __replace_struct _externarray_end[];
+
 u8 itembehaviordata[0x809C3614 - 0x809C2F48];
 u8 itembehavior2array[0x809C38B4 - 0x809C36A0];
 
 u32 SearchPatch(u32 offset)
 {
+#if 0
     if (offset >= 0x809C2F48 && offset < 0x809C3614)
         return u32(&itembehaviordata) + (offset - 0x809C2F48);
 
     if (offset >= 0x809C36A0 && offset < 0x809C38B4)
         return u32(&itembehavior2array) + (offset - 0x809C36A0);
+#endif
 
     return 0; // For now
 }
@@ -138,6 +144,11 @@ void PatchRelocations()
 extern "C" void _prolog()
 {
     PatchRelocations();
+
+    // Do the external replaced array
+    for (auto repl = _externarray; repl != _externarray_end; ++repl) {
+        *repl->dest = *repl->addr;
+    }
 
     // Do function patches
     for (auto repl = _replarray; repl != _replarray_end; ++repl) {

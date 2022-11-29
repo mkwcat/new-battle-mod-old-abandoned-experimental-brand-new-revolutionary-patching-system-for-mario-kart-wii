@@ -88,7 +88,8 @@ public:
 
         enum Team {
             TEAM_RED,
-            TEAM_BLUE
+            TEAM_BLUE,
+            TEAM_NONE
         };
 
         /* 0x04 */ u8 m_unk_0x4;
