@@ -16,6 +16,7 @@ public:
 
     // Actually a virtual function
     void PlayerHitByPlayer(u32 attackerId, u32 targetId);
+    void PlayerFallOutOfBounds(u32 targetId);
     void PlayerHitByObject(u32 targetId);
 
     // At 0x80538E00, I don't know what else to call it

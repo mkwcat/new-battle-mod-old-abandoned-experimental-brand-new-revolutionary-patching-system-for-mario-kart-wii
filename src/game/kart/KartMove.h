@@ -9,7 +9,9 @@ class KartMove : public KartObjectProxy
 {
 public:
     EXTERN_TEXT(0x80581778, void BattleSideline());
-    void BattleFlagsUpdate(); // Replaced 80581824
+    void ActivateRespawn(); // External 0x805799AC
+    void Respawn(); // Replaced 0x805799AC
+    void BattleFlagsUpdate(); // Replaced 0x80581824
 
 private:
     FILL(0xC, 0x1A8);

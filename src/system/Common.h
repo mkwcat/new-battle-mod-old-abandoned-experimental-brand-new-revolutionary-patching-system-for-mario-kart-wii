@@ -185,6 +185,14 @@ static inline Region GetCodeRegion()
     return Region(*(u16*) 0x8000620A);
 }
 
+template <class T>
+constexpr T ToUncached(T addr)
+{
+    u32 addrVal = u32(addr);
+    addrVal |= 0xC0000000;
+    return (T) addrVal;
+}
+
 void __AssertFail(const char* file, u32 line, const char* expression);
 
 #define assert(_EXPRESSION)                                                    \

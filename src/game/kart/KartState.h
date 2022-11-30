@@ -128,7 +128,10 @@ public:
         FLAGS4_GHOST = (1 << 5), // 0x40
         FLAGS4_HAS_STOPPED = (1 << 12), // 0x1000
         FLAGS4_BATTLE_SIDELINE = (1 << 16), // 0x10000
-        FLAGS4_TRIGGET_RESPAWN = (1 << 17), // 0x20000
+        FLAGS4_TRIGGER_RESPAWN = (1 << 17), // 0x20000
+
+        // These flags are added:
+        FLAGS4_POST_BATTLE_SIDELINE = (1 << 31), // 0x80000000
     };
 
     u32 m_flags0;

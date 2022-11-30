@@ -22,17 +22,16 @@ bool ui::SectionManager::SelectDebugLicense()
 
     if (sys::SaveManager::IsInvalidMii(
           sys::SaveManager::s_instance->GetSelectedLicense(),
-          sys::RootScene::s_instance->heaps[1]
-        ))
+          sys::RootScene::s_instance->heaps[1]))
         return false;
 
     m_globalContext->m_licenseId = s_debugLicenseId;
 
     auto license = sys::SaveManager::s_instance->GetSelectedLicense();
     auto sysMgr = host_sys::SystemManager::s_instance;
-    if (license->m_unk_0x93E6[0] == sysMgr->m_unk_0xF0
-        && license->m_unk_0x93E6[1] == sysMgr->m_unk_0xF1
-        && license->m_unk_0x93E6[2] == sysMgr->m_unk_0xF2)
+    if (license->m_unk_0x93E6[0] == sysMgr->m_unk_0xF0 &&
+        license->m_unk_0x93E6[1] == sysMgr->m_unk_0xF1 &&
+        license->m_unk_0x93E6[2] == sysMgr->m_unk_0xF2)
         return false;
 
     license->m_unk_0x93E6[0] = sysMgr->m_unk_0xF0;
@@ -54,7 +53,7 @@ void ui::SectionManager::DebugBootSetup()
 
     auto set = &sys::RaceConfig::s_instance->m_nextRace;
 
-    set->m_courseId = 0x24;
+    set->m_courseId = 0x26;
     set->m_playerCount = 12;
     set->m_hudCount = 1;
     set->m_localPlayerCount = 1;
