@@ -1,6 +1,8 @@
 #include "RaceModeBattleBalloon.h"
 #include "RaceConfig.h"
 #include "RaceManager.h"
+#include "game/kart/KartMove.h"
+#include "game/kart/KartObjectManager.h"
 #include "game/object/BattleBalloon.h"
 
 REPLACE(
@@ -31,8 +33,9 @@ REPLACE(
     balloonMgr->PopBalloons(targetId, 0, 1, 0, 1, 0);
 
     if (balloonMgr->m_playerData[targetId].m_count == 0) {
-        RaceManager::s_instance->UNDEF_80533d84(targetId);
-        RaceManager::s_instance->m_players[targetId]->m_flags |= 0x10;
+        kart::KartObjectManager::s_instance->GetObject(targetId)
+          ->GetKartMove()
+          ->BattleSideline();
     }
 }
 
@@ -53,8 +56,9 @@ REPLACE(
     balloonMgr->PopBalloons(targetId, 0, 1, 0, 1, 0);
 
     if (balloonMgr->m_playerData[targetId].m_count == 0) {
-        RaceManager::s_instance->UNDEF_80533d84(targetId);
-        RaceManager::s_instance->m_players[targetId]->m_flags |= 0x10;
+        kart::KartObjectManager::s_instance->GetObject(targetId)
+          ->GetKartMove()
+          ->BattleSideline();
     }
 }
 
@@ -71,6 +75,9 @@ REPLACE(
     balloonMgr->PopBalloons(
       playerId, 0, 1, 0, balloonMgr->m_playerData[playerId].m_count, 0
     );
+
+    RaceManager::s_instance->UNDEF_80533d84(playerId);
+    RaceManager::s_instance->m_players[playerId]->m_flags |= 0x10;
 #if 0
     RaceManager::s_instance->EndPlayerRace(playerId);
     RaceManager::s_instance->UNDEF_80533d84(playerId);
