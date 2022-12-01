@@ -121,10 +121,21 @@ public:
         virtual ~RaceSetting();
 
         EXTERN_TEXT(
-          0x8052ED28, void SetupNextRaceInput(const RaceSetting* lastRace)
-        );
+          0x8052ED28, void SetupNextRaceInput(const RaceSetting* lastRace));
 
         EXTERN_TEXT(0x8052FB90, void InitRace(RaceSetting* race));
+
+        bool IsBattle()
+        {
+            return m_gameMode == MODE_BATTLE ||
+                   m_gameMode == MODE_PUBLIC_BATTLE ||
+                   m_gameMode == MODE_PRIVATE_BATTLE;
+        }
+
+        bool IsBalloonBattle()
+        {
+            return IsBattle() && m_battleMode == BATTLE_BALLOON;
+        }
 
         enum EngineClass {
             CC_50 = 0,

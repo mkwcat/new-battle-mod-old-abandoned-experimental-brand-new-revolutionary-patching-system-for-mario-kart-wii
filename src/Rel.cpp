@@ -6,6 +6,7 @@
 #include "dwc/dwc_memfunc.cpp"
 #include "egg/core/eggHeap.cpp"
 #include "game/enemy/AIBattleManager.cpp"
+#include "game/kart/KartCollide.cpp"
 #include "game/kart/KartMove.cpp"
 #include "game/kart/KartObjectManager.cpp"
 #include "game/object/BattleBalloon.cpp"
