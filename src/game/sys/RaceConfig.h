@@ -63,6 +63,8 @@ class RaceConfig : public ParamFile
 public:
     static RaceConfig* s_instance;
 
+    EXTERN_TEXT(0x8052FE58, static RaceConfig* CreateInstance());
+
     EXTERN_TEXT(0x80530038, virtual ~RaceConfig());
     virtual int UNDEF_80009DDC();
     virtual int UNDEF_80532078(); // just a blr

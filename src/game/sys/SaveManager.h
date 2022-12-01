@@ -11,6 +11,8 @@ class SaveManager
 public:
     static SaveManager* s_instance;
 
+    EXTERN_TEXT(0x80543DB0, static SaveManager* CreateInstance());
+
     class License
     {
         friend class SaveManager;

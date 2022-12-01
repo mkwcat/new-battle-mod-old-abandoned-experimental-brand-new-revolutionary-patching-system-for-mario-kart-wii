@@ -14,6 +14,8 @@ class SectionManager
 public:
     static SectionManager* s_instance;
 
+    EXTERN_TEXT(0x80634C90, static SectionManager* CreateInstance());
+
     SectionManager();
     void Init(); // Replaced
 

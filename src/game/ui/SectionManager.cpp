@@ -22,7 +22,7 @@ bool ui::SectionManager::SelectDebugLicense()
 
     if (sys::SaveManager::IsInvalidMii(
           sys::SaveManager::s_instance->GetSelectedLicense(),
-          sys::RootScene::s_instance->heaps[1]))
+          sys::RootScene::s_instance->m_heaps.m_heaps[1]))
         return false;
 
     m_globalContext->m_licenseId = s_debugLicenseId;
@@ -89,14 +89,14 @@ REPLACE(0x80634E44, void ui::SectionManager::Init())
 {
     m_currentSection = nullptr;
 
-    m_systemMessageGroup =
-      new (sys::RootScene::s_instance->heaps[1], 4) SystemMessageGroup();
+    m_systemMessageGroup = new (
+      sys::RootScene::s_instance->m_heaps.m_heaps[1], 4) SystemMessageGroup();
     m_systemMessageGroup->Load();
 
     sys::NandManager::s_instance->Init();
 
-    m_saveManagerProxy =
-      new (sys::RootScene::s_instance->heaps[1], 4) SaveManagerProxy();
+    m_saveManagerProxy = new (sys::RootScene::s_instance->m_heaps.m_heaps[1], 4)
+      SaveManagerProxy();
     m_saveManagerProxy->Init();
     m_errorSection = m_saveManagerProxy->GetErrorSection();
 
@@ -110,6 +110,7 @@ REPLACE(0x80634E44, void ui::SectionManager::Init())
         m_errorSection = 0x15;
     }
 
+    m_errorSection = 0x3F;
     m_nextSectionId = m_errorSection == -1 ? 0x3F : m_errorSection;
 
     if (m_errorSection == -1) {

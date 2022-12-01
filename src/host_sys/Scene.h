@@ -12,9 +12,17 @@ public:
     Scene();
     ~Scene() override;
 
-    EGG::Heap* heaps[3];
+    class HeapCollection
+    {
+    public:
+        EXTERN_TEXT(0x80009BC0, void SetGroupIDAll(u32 groupId));
 
-private:
+        EGG::Heap* m_heaps[3];
+    };
+
+public:
+    HeapCollection m_heaps;
+
     u8 _03C[0xC70 - 0x03C];
 };
 
