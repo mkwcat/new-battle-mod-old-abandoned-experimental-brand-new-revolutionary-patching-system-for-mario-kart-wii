@@ -110,7 +110,6 @@ REPLACE(0x80634E44, void ui::SectionManager::Init())
         m_errorSection = 0x15;
     }
 
-    m_errorSection = 0x3F;
     m_nextSectionId = m_errorSection == -1 ? 0x3F : m_errorSection;
 
     if (m_errorSection == -1) {

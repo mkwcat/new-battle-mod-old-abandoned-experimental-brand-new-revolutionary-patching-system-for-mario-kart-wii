@@ -16,7 +16,6 @@
 #include "game/sys/NandManager.cpp"
 #include "game/sys/RaceConfig.cpp"
 #include "game/sys/RaceManager.cpp"
-#include "game/sys/RaceModeBattleBalloon.cpp"
 #include "game/sys/RootScene.cpp"
 #include "game/sys/SaveManager.cpp"
 #include "game/ui/ExternTypeInfo.cpp"

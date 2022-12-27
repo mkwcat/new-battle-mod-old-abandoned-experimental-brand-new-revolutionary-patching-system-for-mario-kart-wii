@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mii.h"
+#include "Timer.h"
 
 namespace sys
 {
@@ -25,26 +26,12 @@ public:
     EXTERN_TEXT(0x8051CA80, void MakeFile(RawGhostData* out));
     EXTERN_TEXT(0x8051CB1C, void MakeGhostFromPlayer(int playerId));
 
-    class RaceTime
-    {
-    public:
-        EXTERN_TEXT(0x8051C374, RaceTime());
-        EXTERN_TEXT(0x8051C334, virtual ~RaceTime());
-
-        /* 0x4 */ u16 m_minutes;
-        /* 0x6 */ u8 m_seconds;
-        /* 0x8 */ u16 m_milliseconds;
-        /* 0xA */ bool m_valid;
-    };
-
-    static_assert(sizeof(RaceTime) == 0xC);
-
     /* 0x00 */ bool m_valid;
     /* 0x02 */ wchar_t m_userData[10];
     /* 0x18 */ MiiData m_mii;
     /* 0x64 */ u8 m_lapCount;
-    /* 0x68 */ RaceTime m_lapTimes[5];
-    /* 0xA4 */ RaceTime m_finishTime;
+    /* 0x68 */ Timer::Time m_lapTimes[5];
+    /* 0xA4 */ Timer::Time m_finishTime;
     /* 0xB0 */ int m_characterId;
     /* 0xB4 */ int m_vehicleId;
     /* 0xB8 */ int m_courseId;
