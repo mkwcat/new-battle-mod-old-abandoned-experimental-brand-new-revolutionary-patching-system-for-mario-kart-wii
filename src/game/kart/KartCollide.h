@@ -20,8 +20,13 @@ public:
     virtual void vt_C();
     virtual ~KartCollide();
 
-    EXTERN_TEXT(0x80573B00, void ActivateOutOfBounds(int param_1, int param_2,
-                              int param_3, int param_4));
+    EXTERN_TEXT(
+      0x80573B00, //
+      void ActivateOutOfBounds(
+        int param_1, int param_2, int param_3, int param_4
+      )
+    );
+
     void UpdateRespawn(); // External 0x80573ED4
     void UpdateRespawnCall(); // Replaced 0x80573ED4
 };

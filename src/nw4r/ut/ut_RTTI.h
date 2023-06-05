@@ -44,6 +44,7 @@ public:
 
 #define INSTANTIATE_TYPEINFO                                                   \
   virtual const nw4r::ut::detail::RuntimeTypeInfo* GetRuntimeTypeInfo()        \
+    override                                                                   \
   {                                                                            \
     return &typeInfo;                                                          \
   }                                                                            \

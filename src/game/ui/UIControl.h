@@ -3,6 +3,7 @@
 #include "ControlGroup.h"
 #include "MessageGroup.h"
 #include "Page.h"
+#include "PageID.h"
 #include "UIAnimator.h"
 #include <game/sys/Mii.h>
 #include <nw4r/ut/ut_RTTI.h>
@@ -11,22 +12,47 @@
 namespace ui
 {
 
-#define UI_INSTANTIATE_TYPEINFO(_NAME)                                         \
+#define UI_H_INSTANTIATE_TYPEINFO()                                            \
   public:                                                                      \
+  _Pragma("GCC diagnostic push");                                              \
+  _Pragma("GCC diagnostic ignored \"-Winconsistent-missing-override\"");       \
   INSTANTIATE_TYPEINFO;                                                        \
-  virtual const char* GetTypeName()                                            \
-  {                                                                            \
-    return #_NAME;                                                             \
-  }
+  virtual const char* RTTI_TypeName() const;                                   \
+  _Pragma("GCC diagnostic pop");
 
-#define UI_EXTERN_RTTI(_GETTYPEINFO, _GETTYPENAME)                             \
+// There is a limitation in the method we define external data in that it 1.
+// can't be defined in a header file, and 2. will need to rerun the static
+// constructor of the datatype. This is a little dirty, but this mod is not
+// intended to be a sophisticated techincal showcase.
+// We could always initialize the typeInfo as nullptr here, as StaticR.rel
+// initializes after this module, but this is not something I really want to
+// rely on.
+
+#define UI_H_EXTERN_TYPEINFO(_GETTYPEINFO)                                     \
   public:                                                                      \
+  _Pragma("GCC diagnostic push");                                              \
+  _Pragma("GCC diagnostic ignored \"-Winconsistent-missing-override\"");       \
   EXTERN_TEXT(                                                                 \
     _GETTYPEINFO,                                                              \
     virtual const nw4r::ut::detail::RuntimeTypeInfo* GetRuntimeTypeInfo()      \
   );                                                                           \
-  EXTERN_TEXT(_GETTYPENAME, virtual const char* GetTypeName());                \
+  virtual const char* RTTI_TypeName() const;                                   \
+  _Pragma("GCC diagnostic pop");                                               \
   static const nw4r::ut::detail::RuntimeTypeInfo typeInfo
+
+#define UI_CPP_EXTERN_TYPEINFO_DERIVED(_ADDR, _OBJ, _BASE)                     \
+  EXTERN_DATA(                                                                 \
+    _ADDR,                                                                     \
+    const nw4r::ut::detail::RuntimeTypeInfo _OBJ::typeInfo(&_BASE::typeInfo)   \
+  )
+
+#define UI_CPP_EXTERN_TYPEINFO_ROOT(_ADDR, _OBJ)                               \
+  EXTERN_DATA(                                                                 \
+    _ADDR, const nw4r::ut::detail::RuntimeTypeInfo _OBJ::typeInfo(nullptr)     \
+  )
+
+#define UI_CPP_EXTERN_TYPENAME(_ADDR, _OBJ)                                    \
+  EXTERN_TEXT(_ADDR, const char* _OBJ::RTTI_TypeName() const)
 
 struct ControlPosition {
     ControlPosition()
@@ -50,21 +76,67 @@ struct ControlPosition {
 class UIControl
 {
 public:
-    EXTERN_TEXT(0x8063607C, UIControl());
-    EXTERN_TEXT(0x8063CFA0, virtual ~UIControl());
+    UIControl();
+    /* VT+0x08 */ virtual ~UIControl();
 
-    EXTERN_TEXT(0x8063D004, virtual void Init()); // vt + 0xC
-    EXTERN_TEXT(0x8063D044, virtual void Calc()); // vt + 0x10
-    EXTERN_TEXT(0x8063D084, virtual void Draw()); // vt + 0x14
-    EXTERN_TEXT(0x805BE600, virtual void OnInit()); // vt + 0x18
-    EXTERN_TEXT(0x805BD2E0, virtual void OnCalc()); // vt + 0x1C
-    EXTERN_TEXT(0x8063D194, virtual void SolveAnim()); // vt + 0x20
-    EXTERN_TEXT(0x805BD2DC, virtual void OnPageEvent()); // vt + 0x24
+    void Debug();
 
-    UI_EXTERN_RTTI(0x80606BDC, 0x8063D3C0); // includes vt + 0x28, 0x2C
+    /* VT+0x0C */ virtual void Init();
+    /* VT+0x10 */ virtual void Calc();
+    /* VT+0x14 */ virtual void Draw();
 
-    EXTERN_TEXT(0x8063D608, virtual void _30());
-    EXTERN_TEXT(0x805BD2D8, virtual void _34());
+    void Solve();
+
+    EXTERN_TEXT(
+      0x805BE600, //
+      /* VT+0x18 */ virtual void OnInit()
+    );
+
+    EXTERN_TEXT(
+      0x805BD2E0, //
+      /* VT+0x1C */ virtual void OnCalc()
+    );
+
+    void PageEvent(Page::SlideDir dir, PageID page);
+
+    /* VT+0x20 */ virtual void SolveAnim();
+
+    EXTERN_TEXT(
+      0x805BD2DC, //
+      /* VT+0x24 */ virtual void OnPageEvent(Page::SlideDir dir, PageID page)
+    );
+
+public:
+    void InitControlGroup(u32 count);
+    void SetControl(u32 index, UIControl* control);
+
+    f32 GetSlideDelay();
+
+    void SetGroup(ControlGroup* group, u32 drawPass);
+
+    void SetSlideSound(s32 forwardSound, s32 backSound);
+
+    const char* GetTypeName() const;
+
+protected:
+    UI_H_EXTERN_TYPEINFO(
+      /* VT+0x28 */ 0x80606BDC /* VT+0x2C */
+    );
+
+public:
+    void SolvePropagate();
+    void SolveScreenSpace();
+
+    /* VT+0x30 */ virtual void VT_0x30();
+
+    void FUN_0x8063D648();
+
+    EXTERN_TEXT(
+      0x805BD2D8, //
+      /* VT+0x34 */ virtual void VT_0x34()
+    );
+
+    void PlaySound(s32 sound, s32 param_2);
 
     /* 0x04 */ ControlPosition m_basePos; // code position
     /* 0x1C */ ControlPosition m_layoutPos; // layout position
@@ -86,42 +158,94 @@ public:
 static_assert(sizeof(UIControl) == 0x98);
 
 struct MsgFormatParam {
-    s32 integers[9];
-    s32 msgIds[9];
-    sys::Mii* miis[9];
-    u8 licenseIds[9];
-    s32 playerIds[9];
-    const wchar_t* strings[9];
-    u32 unk_0xC0;
+    /* 0x00 */ s32 numbers[9];
+    /* 0x24 */ s32 msgIds[9];
+    /* 0x48 */ sys::Mii* miis[9];
+    /* 0x6C */ u8 licenses[9];
+    /* 0x78 */ s32 playerIds[9];
+    /* 0x9C */ const wchar_t* strings[9];
+    /* 0xC0 */ u32 unk_0xC0;
 };
 
 static_assert(sizeof(MsgFormatParam) == 0xC4);
 
 class LayoutUIControl : public UIControl
 {
-    UI_EXTERN_RTTI(0x80606BD0, 0x8063D788);
+    UI_H_EXTERN_TYPEINFO(
+      /* VT+0x28 */ 0x80606BD0 /* VT+0x2C */
+    );
 
 public:
-    EXTERN_TEXT(0x8063D798, LayoutUIControl());
-    EXTERN_TEXT(0x8063D8C0, virtual ~LayoutUIControl());
+    LayoutUIControl();
 
-    EXTERN_TEXT(0x8063DAC0, virtual void Init());
-    EXTERN_TEXT(0x8063DB00, virtual void Calc());
-    EXTERN_TEXT(0x8063DB84, virtual void Draw());
-    EXTERN_TEXT(0x8063E61C, virtual void _30());
-    EXTERN_TEXT(0x8063D954, virtual void _38());
+    /* VT+0x08 */ virtual ~LayoutUIControl() override;
 
-    EXTERN_TEXT(
-      0x8063DCBC, void SetMessage(
-                    const char* pane, int msgId, MsgFormatParam* param = nullptr
-                  )
-    );
-    EXTERN_TEXT(
-      0x8063DDB4, void SetMessage(int msgId, MsgFormatParam* param = nullptr)
-    );
+    /* VT+0x0C */ virtual void Init() override;
+    /* VT+0x10 */ virtual void Calc() override;
+    /* VT+0x14 */ virtual void Draw() override;
 
-    EXTERN_TEXT(
-      0x8063E0F0, void SetTexture(const char* pane, const char* texture)
+    /* VT+0x30 */ virtual void VT_0x30() override;
+    /* VT+0x38 */ virtual void VT_0x38();
+
+    void SetParentPane(const char* pane);
+
+    /**
+     * Set the text of the specified pane to the message ID.
+     */
+    void
+    SetMessage(const char* pane, int msgId, MsgFormatParam* param = nullptr);
+
+    /**
+     * Set the text of every pane in the layout to the message ID.
+     */
+    void SetMessageAll(int msgId, MsgFormatParam* param = nullptr);
+
+    /**
+     * Clear the text of the specified pane.
+     */
+    void ClearMessage(const char* pane);
+
+    /**
+     * Clear the text of every pane in the layout.
+     */
+    void ClearMessageAll();
+
+    /**
+     * Set the picture layout.
+     */
+    void SetPictureLayout(const char* dir, const char* filename);
+
+    /**
+     * Set a picture pane to a picture from the picture layout.
+     */
+    void SetPicture(const char* pane, const char* picture);
+
+    /**
+     * Check if the current picture layout has a picture with the specified
+     * name.
+     */
+    bool HasPicture(const char* picture);
+
+    /**
+     * Set a picture pane to a render of a Mii.
+     */
+    void SetMiiPicture(const char* pane, void* miiGroup, u32 index, u32 preset);
+
+    /**
+     * Set the visibility flag of a pane.
+     */
+    void SetPaneVisible(const char* pane, bool visible);
+
+    /**
+     * Something movie related
+     */
+    void FUN_0x8063E58C(const char* param_1);
+
+    /**
+     * Set the rectangle coordinates of the movie to draw to the pane.
+     */
+    void SetMovieCoords(
+      const char* pane, float top, float bottom, float left, float right
     );
 
     /* 0x098 */ UIAnimator m_animator;
@@ -133,6 +257,21 @@ public:
 };
 
 static_assert(sizeof(LayoutUIControl) == 0x174);
+
+class LayoutUIControlScaleFade : public LayoutUIControl
+{
+    UI_H_EXTERN_TYPEINFO(
+      /* VT+0x28 */ 0x8063E924 /* VT+0x2C */
+    );
+
+public:
+    LayoutUIControlScaleFade();
+    virtual ~LayoutUIControlScaleFade() override;
+
+    virtual void SolveAnim() override;
+};
+
+static_assert(sizeof(LayoutUIControlScaleFade) == 0x174);
 
 class CtrlRes
 {

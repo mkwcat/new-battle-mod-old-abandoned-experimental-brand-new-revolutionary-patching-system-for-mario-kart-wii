@@ -2,10 +2,14 @@
 #include "game/sys/RaceConfig.h"
 
 EXTERN_DATA(
-  0x809C4748, object::BattleBalloonMgr* object::BattleBalloonMgr::s_instance
+  0x809C4748, //
+  object::BattleBalloonMgr* object::BattleBalloonMgr::s_instance
 );
 
-REPLACE(0x80869884, object::BattleBalloonMgr::BattleBalloonMgr())
+REPLACE(
+  0x80869884, //
+  object::BattleBalloonMgr::BattleBalloonMgr()
+)
 {
     auto config = &sys::RaceConfig::s_instance->m_currentRace;
 
@@ -46,7 +50,7 @@ REPLACE(0x80869884, object::BattleBalloonMgr::BattleBalloonMgr())
     }
 }
 
-REPLACE_ASM(0x80869DF4,
+REPLACE_ASM(0x80869DF4, //
             void object::BattleBalloonMgr::AddToPlayer(
               u32 playerId, u8 team, int param_4, int param_5, u8 count,
               int param_7

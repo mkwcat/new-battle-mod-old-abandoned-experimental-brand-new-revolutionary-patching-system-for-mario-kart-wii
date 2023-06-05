@@ -9,7 +9,9 @@ class HomeButtonMenu
 {
 public:
     EXTERN_TEXT(
-      0x8051D4D4, static HomeButtonMenu* CreateInstance(EGG::Heap* heap));
+      0x8051D4D4, //
+      static HomeButtonMenu* CreateInstance(EGG::Heap* heap)
+    );
 
     FILL(0x0, 0x2B4);
 };

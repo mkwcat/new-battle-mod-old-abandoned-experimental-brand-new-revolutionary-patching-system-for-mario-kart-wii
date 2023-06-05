@@ -33,7 +33,10 @@ public:
     // Static Instance: 0x809BD6E8
     static CourseMap* s_instance;
 
-    EXTERN_TEXT(0x80514B30, MapdataStartPoint* GetStartPoint(u8 index));
+    EXTERN_TEXT(
+      0x80514B30, //
+      MapdataStartPoint* GetStartPoint(u8 index)
+    );
 };
 
 } // namespace sys

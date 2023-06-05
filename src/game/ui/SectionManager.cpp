@@ -11,7 +11,10 @@
 #include <host_sys/SystemManager.h>
 #include <nw4r/lyt/lyt_init.h>
 
-EXTERN_DATA(0x809C1E38, ui::SectionManager* ui::SectionManager::s_instance);
+EXTERN_DATA(
+  0x809C1E38, //
+  ui::SectionManager* ui::SectionManager::s_instance
+);
 
 constexpr int s_debugLicenseId = 0;
 
@@ -22,7 +25,8 @@ bool ui::SectionManager::SelectDebugLicense()
 
     if (sys::SaveManager::IsInvalidMii(
           sys::SaveManager::s_instance->GetSelectedLicense(),
-          sys::RootScene::s_instance->m_heaps.m_heaps[1]))
+          sys::RootScene::s_instance->m_heaps.m_heaps[1]
+        ))
         return false;
 
     m_globalContext->m_licenseId = s_debugLicenseId;
@@ -85,12 +89,16 @@ void ui::SectionManager::DebugBootSetup()
     }
 }
 
-REPLACE(0x80634E44, void ui::SectionManager::Init())
+REPLACE(
+  0x80634E44, //
+  void ui::SectionManager::Init()
+)
 {
     m_currentSection = nullptr;
 
-    m_systemMessageGroup = new (
-      sys::RootScene::s_instance->m_heaps.m_heaps[1], 4) SystemMessageGroup();
+    m_systemMessageGroup =
+      new (sys::RootScene::s_instance->m_heaps.m_heaps[1], 4)
+        SystemMessageGroup();
     m_systemMessageGroup->Load();
 
     sys::NandManager::s_instance->Init();
@@ -112,7 +120,7 @@ REPLACE(0x80634E44, void ui::SectionManager::Init())
 
     m_nextSectionId = m_errorSection == -1 ? 0x3F : m_errorSection;
 
-    if (m_errorSection == -1) {
+    if (m_errorSection == -1 && false) {
         m_debugMode = true;
         DebugBootSetup();
     } else {

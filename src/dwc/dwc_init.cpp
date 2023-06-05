@@ -1,7 +1,7 @@
-#include "dwc_auth.h"
+#include "dwc_auth_interface.h"
 #include "dwc_memfunc.h"
-#include <string.h>
 #include <rvl/os.h>
+#include <string.h>
 
 #define WIIMMFI_PATCHER_STRING "TLSCODE"
 

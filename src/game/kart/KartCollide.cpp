@@ -1,9 +1,15 @@
 #include "KartCollide.h"
 #include "game/sys/RaceConfig.h"
 
-EXTERN_REPL(0x80573ED4, void kart::KartCollide::UpdateRespawn())
+EXTERN_REPL(
+  0x80573ED4, //
+  void kart::KartCollide::UpdateRespawn()
+)
 
-REPLACE(0x80573ED4, void kart::KartCollide::UpdateRespawnCall())
+REPLACE(
+  0x80573ED4, //
+  void kart::KartCollide::UpdateRespawnCall()
+)
 {
     auto state = m_accessor->m_state;
 

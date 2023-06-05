@@ -8,7 +8,10 @@ namespace kart
 class KartBlink : public KartObjectProxy
 {
 public:
-    EXTERN_TEXT(0x8056A300, void Calc(bool lastFrame));
+    EXTERN_TEXT(
+      0x8056A300, //
+      void Calc(bool lastFrame)
+    );
 
     FILL(0xC, 0x14);
 };

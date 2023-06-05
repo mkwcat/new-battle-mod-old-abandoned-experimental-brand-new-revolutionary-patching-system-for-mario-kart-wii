@@ -13,9 +13,15 @@
 #include <game/ui/SectionManager.h>
 #include <host_sys/RKSystem.h>
 
-EXTERN_DATA(0x809BD740, sys::RootScene* sys::RootScene::s_instance);
+EXTERN_DATA(
+  0x809BD740, //
+  sys::RootScene* sys::RootScene::s_instance
+);
 
-REPLACE(0x80542D4C, void sys::RootScene::Allocate())
+REPLACE(
+  0x80542D4C, //
+  void sys::RootScene::Allocate()
+)
 {
     // TODO: Randomize memory order like the base game
 

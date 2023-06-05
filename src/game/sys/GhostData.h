@@ -11,8 +11,15 @@ struct RawGhostData {
     u8 m_data[0x27FC - 0x88];
     u32 m_checksum;
 
-    EXTERN_TEXT(0x8051D0E0, bool Compress(RawGhostData* out));
-    EXTERN_TEXT(0x8051D388, u32 GetFileSize() const);
+    EXTERN_TEXT(
+      0x8051D0E0, //
+      bool Compress(RawGhostData* out)
+    );
+
+    EXTERN_TEXT(
+      0x8051D388, //
+      u32 GetFileSize() const
+    );
 };
 
 static_assert(sizeof(RawGhostData) == 0x2800);
@@ -20,11 +27,25 @@ static_assert(sizeof(RawGhostData) == 0x2800);
 class GhostData
 {
 public:
-    EXTERN_TEXT(0x8051C270, GhostData());
+    EXTERN_TEXT(
+      0x8051C270, //
+      GhostData()
+    );
 
-    EXTERN_TEXT(0x8051C7F4, void MakeHeader(RawGhostData* out));
-    EXTERN_TEXT(0x8051CA80, void MakeFile(RawGhostData* out));
-    EXTERN_TEXT(0x8051CB1C, void MakeGhostFromPlayer(int playerId));
+    EXTERN_TEXT(
+      0x8051C7F4, //
+      void MakeHeader(RawGhostData* out)
+    );
+
+    EXTERN_TEXT(
+      0x8051CA80, //
+      void MakeFile(RawGhostData* out)
+    );
+
+    EXTERN_TEXT(
+      0x8051CB1C, //
+      void MakeGhostFromPlayer(int playerId)
+    );
 
     /* 0x00 */ bool m_valid;
     /* 0x02 */ wchar_t m_userData[10];

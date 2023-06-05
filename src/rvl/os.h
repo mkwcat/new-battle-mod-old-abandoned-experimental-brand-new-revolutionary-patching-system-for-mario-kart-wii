@@ -82,6 +82,10 @@ void OSRegisterVersion(const char* string);
 
 void OSReport(const char* format, ...);
 
+EXTERN_TEXT_C(0x801A2660, //
+  void OSPanic(const char* file, int line, const char* format, ...) //
+);
+
 #ifdef __cplusplus
 }
 #endif

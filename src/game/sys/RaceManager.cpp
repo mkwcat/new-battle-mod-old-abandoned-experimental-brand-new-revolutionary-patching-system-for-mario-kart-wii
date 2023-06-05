@@ -4,10 +4,17 @@
 #include "game/kart/KartObjectManager.h"
 #include "game/object/BattleBalloon.h"
 
-EXTERN_DATA(0x809BD730, sys::RaceManager* sys::RaceManager::s_instance);
+EXTERN_DATA(
+  0x809BD730, //
+  sys::RaceManager* sys::RaceManager::s_instance
+);
 
-REPLACE(0x80538770, void sys::RaceManager::BalloonBattle::PlayerHitByPlayer(
-                      u32 attackerId, u32 targetId))
+REPLACE(
+  0x80538770, //
+  void sys::RaceManager::BalloonBattle::PlayerHitByPlayer(
+    u32 attackerId, u32 targetId
+  )
+)
 {
     // Don't run if the battle is already over
     if (RaceManager::s_instance->HasReachedStage(4))
@@ -37,8 +44,10 @@ REPLACE(0x80538770, void sys::RaceManager::BalloonBattle::PlayerHitByPlayer(
     }
 }
 
-REPLACE(0x80538BC0,
-  void sys::RaceManager::BalloonBattle::PlayerFallOutOfBounds(u32 targetId))
+REPLACE(
+  0x80538BC0, //
+  void sys::RaceManager::BalloonBattle::PlayerFallOutOfBounds(u32 targetId)
+)
 {
     // Don't run if the battle is already over
     if (RaceManager::s_instance->HasReachedStage(4))
@@ -59,8 +68,10 @@ REPLACE(0x80538BC0,
     }
 }
 
-REPLACE(0x80538CE0,
-  void sys::RaceManager::BalloonBattle::PlayerHitByObject(u32 targetId))
+REPLACE(
+  0x80538CE0, //
+  void sys::RaceManager::BalloonBattle::PlayerHitByObject(u32 targetId)
+)
 {
     // Don't run if the battle is already over
     if (RaceManager::s_instance->HasReachedStage(4))
@@ -82,24 +93,8 @@ REPLACE(0x80538CE0,
 }
 
 REPLACE(
-  0x80538E00, void sys::RaceManager::BalloonBattle::SidelinePlayer(u8 playerId))
+  0x80538E00, //
+  void sys::RaceManager::BalloonBattle::SidelinePlayer(u8 playerId)
+)
 {
-#if 0
-    // Don't run if the battle is already over
-    if (RaceManager::s_instance->HasReachedStage(4))
-        return;
-
-    auto balloonMgr = object::BattleBalloonMgr::s_instance;
-
-    balloonMgr->PopBalloons(
-      playerId, 0, 1, 0, balloonMgr->m_playerData[playerId].m_count, 0);
-
-    RaceManager::s_instance->UNDEF_80533d84(playerId);
-    RaceManager::s_instance->m_players[playerId]->m_flags |= 0x10;
-
-    RaceManager::s_instance->EndPlayerRace(playerId);
-    RaceManager::s_instance->UNDEF_80533d84(playerId);
-
-    // RaceManager::s_instance->m_stage = 3;
-#endif
 }

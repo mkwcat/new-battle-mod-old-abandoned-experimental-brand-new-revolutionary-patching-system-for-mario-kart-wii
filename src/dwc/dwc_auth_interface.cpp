@@ -1,4 +1,9 @@
-EXTERN_TEXT(0x800ECA8C, void DWCi_Auth_InitInterface(int param_1));
+#include "dwc_auth_interface.h"
+
+EXTERN_TEXT(
+  0x800ECA8C, //
+  void DWCi_Auth_InitInterface(int param_1)
+);
 
 // Wiimmfi patch. Ugly but we only do patches of entire functions.
 bool sPayloadExecuted = false;
@@ -33,9 +38,11 @@ char str__016lld[] = "%016lld";
 char str_cfc[] = "cfc";
 char str_region[] = "region";
 
-// clang-format off
 // 6 parameters undocumented
-REPLACE_ASM(0x800ED6E8, void DWCi_Auth_SendRequest(),
+REPLACE_ASM(
+  0x800ED6E8, //
+  void DWCi_Auth_SendRequest(),
+  // clang-format off
 	stwu     r1, -432(r1);
 
 	// Branching back to the original function... I don't like doing this, but

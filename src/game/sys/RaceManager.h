@@ -33,9 +33,20 @@ public:
     public:
         // Note: vtable at 0x808B36E4
 
-        EXTERN_TEXT(0x80539770, virtual bool CanRaceEnd());
-        EXTERN_TEXT(0x80535DE8, virtual void vt_0xC());
-        EXTERN_TEXT(0x80539574, virtual void vt_0x10());
+        EXTERN_TEXT(
+          0x80539770, //
+          virtual bool CanRaceEnd()
+        );
+
+        EXTERN_TEXT(
+          0x80535DE8, //
+          virtual void vt_0xC()
+        );
+
+        EXTERN_TEXT(
+          0x80539574, //
+          virtual void vt_0x10()
+        );
 
         // Actually a virtual function
         void PlayerHitByPlayer(u32 attackerId, u32 targetId);
@@ -50,19 +61,48 @@ public:
     {
     public:
         // vtable 0x808B34B0
-        EXTERN_TEXT(0x805376E0, virtual ~RaceTimer());
-        EXTERN_TEXT(0x80535864, virtual void Reset());
-        EXTERN_TEXT(0x80535904, virtual void Update());
+        EXTERN_TEXT(
+          0x805376E0, //
+          virtual ~RaceTimer()
+        );
+
+        EXTERN_TEXT(
+          0x80535864, //
+          virtual void Reset()
+        );
+
+        EXTERN_TEXT(
+          0x80535904, //
+          virtual void Update()
+        );
     };
 
-    EXTERN_TEXT(0x805327A0, RaceManager());
-    EXTERN_TEXT(0x80532E3C, virtual ~RaceManager());
+    EXTERN_TEXT(
+      0x805327A0, //
+      RaceManager()
+    );
 
-    EXTERN_TEXT(0x805336A4, u32 GetLapCount() const);
-    EXTERN_TEXT(0x80533C6C, void EndPlayerRace(u32 playerId));
+    EXTERN_TEXT(
+      0x80532E3C, //
+      virtual ~RaceManager()
+    );
+
+    EXTERN_TEXT(
+      0x805336A4, //
+      u32 GetLapCount() const
+    );
+
+    EXTERN_TEXT(
+      0x80533C6C, //
+      void EndPlayerRace(u32 playerId)
+    );
+
     void UNDEF_80533d84(u32 playerId);
 
-    EXTERN_TEXT(0x80536230, bool HasReachedStage(u32 stage));
+    EXTERN_TEXT(
+      0x80536230, //
+      bool HasReachedStage(u32 stage)
+    );
 
 public:
     /* 0x04 */ void* m_random1;

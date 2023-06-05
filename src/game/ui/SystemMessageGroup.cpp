@@ -12,20 +12,12 @@ INCBIN("game/ui/msg/System_Q.bmg", SystemMsg_Q);
 INCBIN("game/ui/msg/System_S.bmg", SystemMsg_S);
 INCBIN("game/ui/msg/System_U.bmg", SystemMsg_U);
 
-// We don't need to replace the function as we replace the only call to it. For
-// reference the address is at 0x80637A20.
-void ui::SystemMessageGroup::Load()
+void ui::SystemMessageGroup::LoadP()
 {
     switch (host_sys::SystemManager::s_instance->m_language) {
-    case host_sys::SystemManager::Language::Japanese:
-        MessageGroup::Load(SystemMsg_J);
-        break;
-
     default:
     case host_sys::SystemManager::Language::English:
-        MessageGroup::Load(
-          GetCodeRegion() == Region::P ? SystemMsg_E : SystemMsg_U
-        );
+        MessageGroup::Load(SystemMsg_E);
         break;
 
     case host_sys::SystemManager::Language::German:
@@ -33,19 +25,64 @@ void ui::SystemMessageGroup::Load()
         break;
 
     case host_sys::SystemManager::Language::French:
-        MessageGroup::Load(
-          GetCodeRegion() == Region::P ? SystemMsg_F : SystemMsg_Q
-        );
+        MessageGroup::Load(SystemMsg_F);
         break;
 
     case host_sys::SystemManager::Language::Spanish:
-        MessageGroup::Load(
-          GetCodeRegion() == Region::P ? SystemMsg_S : SystemMsg_M
-        );
+        MessageGroup::Load(SystemMsg_S);
         break;
 
     case host_sys::SystemManager::Language::Italian:
         MessageGroup::Load(SystemMsg_I);
         break;
+    }
+}
+
+void ui::SystemMessageGroup::LoadE()
+{
+    switch (host_sys::SystemManager::s_instance->m_language) {
+    default:
+    case host_sys::SystemManager::Language::English:
+        MessageGroup::Load(SystemMsg_U);
+        break;
+
+    case host_sys::SystemManager::Language::French:
+        MessageGroup::Load(SystemMsg_Q);
+        break;
+
+    case host_sys::SystemManager::Language::Spanish:
+        MessageGroup::Load(SystemMsg_M);
+        break;
+    }
+}
+
+void ui::SystemMessageGroup::LoadJ()
+{
+    MessageGroup::Load(SystemMsg_J);
+}
+
+void ui::SystemMessageGroup::LoadK()
+{
+    MessageGroup::Load(SystemMsg_K);
+    // TODO: Chinese?
+}
+
+// We don't need to replace the function as we replace the only call to it. For
+// reference the address is at 0x80637A20.
+void ui::SystemMessageGroup::Load()
+{
+    switch (GetCodeRegion()) {
+    default:
+    case Region::P:
+        LoadP();
+
+    case Region::E:
+        LoadE();
+
+    case Region::J:
+        LoadJ();
+
+    case Region::K:
+        LoadK();
     }
 }

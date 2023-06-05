@@ -9,14 +9,20 @@ public:
     class CourseCache
     {
     public:
-        EXTERN_TEXT(0x80541A70, void Init());
+        EXTERN_TEXT(
+          0x80541A70, //
+          void Init()
+        );
 
         FILL(0x0, 0x24);
     };
 
     static_assert(sizeof(CourseCache) == 0x24);
 
-    EXTERN_TEXT(0x8053FC4C, static ResourceManager* CreateInstance());
+    EXTERN_TEXT(
+      0x8053FC4C, //
+      static ResourceManager* CreateInstance()
+    );
 
     FILL(0x0, 0x588);
     CourseCache m_courseCache;

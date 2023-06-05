@@ -5,7 +5,10 @@
 class AIBattleManager
 {
 public:
-    EXTERN_TEXT(0x80727788, AIBattleManager());
+    EXTERN_TEXT(
+      0x80727788, //
+      AIBattleManager()
+    );
 
     class Team
     {

@@ -3,7 +3,10 @@
 #include "game/sys/RaceConfig.h"
 #include "game/sys/RaceManager.h"
 
-REPLACE(0x80581824, void kart::KartMove::BattleFlagsUpdate())
+REPLACE(
+  0x80581824, //
+  void kart::KartMove::BattleFlagsUpdate()
+)
 {
     auto state = m_accessor->m_state;
 

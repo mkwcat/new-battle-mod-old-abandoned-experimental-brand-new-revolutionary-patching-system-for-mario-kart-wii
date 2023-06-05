@@ -21,10 +21,25 @@ struct KartAccessor {
 class KartObjectProxy
 {
 public:
-    EXTERN_TEXT(0x8059020C, f32* GetPlayerPosition());
-    EXTERN_TEXT(0x80590A5C, u32 GetPlayerID());
-    EXTERN_TEXT(0x8059077C, KartMove* GetKartMove());
-    EXTERN_TEXT(0x8059108C, KartBlink* GetKartBlink());
+    EXTERN_TEXT(
+      0x8059020C, //
+      f32* GetPlayerPosition()
+    );
+
+    EXTERN_TEXT(
+      0x80590A5C, //
+      u32 GetPlayerID()
+    );
+
+    EXTERN_TEXT(
+      0x8059077C, //
+      KartMove* GetKartMove()
+    );
+
+    EXTERN_TEXT(
+      0x8059108C, //
+      KartBlink* GetKartBlink()
+    );
 
 protected:
     KartAccessor* m_accessor;

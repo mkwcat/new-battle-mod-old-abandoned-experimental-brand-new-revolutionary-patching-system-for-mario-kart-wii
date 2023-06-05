@@ -63,9 +63,16 @@ class RaceConfig : public ParamFile
 public:
     static RaceConfig* s_instance;
 
-    EXTERN_TEXT(0x8052FE58, static RaceConfig* CreateInstance());
+    EXTERN_TEXT(
+      0x8052FE58, //
+      static RaceConfig* CreateInstance()
+    );
 
-    EXTERN_TEXT(0x80530038, virtual ~RaceConfig());
+    EXTERN_TEXT(
+      0x80530038, //
+      virtual ~RaceConfig()
+    );
+
     virtual int UNDEF_80009DDC();
     virtual int UNDEF_80532078(); // just a blr
     virtual int UNDEF_80532074(); // just a blr
@@ -74,10 +81,19 @@ public:
     class Player
     {
     public:
-        EXTERN_TEXT(0x8052D96C, Player());
-        EXTERN_TEXT(0x8052DC68, virtual ~Player());
+        EXTERN_TEXT(
+          0x8052D96C, //
+          Player()
+        );
+        EXTERN_TEXT(
+          0x8052DC68, //
+          virtual ~Player()
+        );
 
-        EXTERN_TEXT(0x8052DAF0, u32 ComputeGPRank());
+        EXTERN_TEXT(
+          0x8052DAF0, //
+          u32 ComputeGPRank()
+        );
 
         enum PlayerType {
             PLAYER_REAL_LOCAL,
@@ -119,13 +135,22 @@ public:
     class RaceSetting
     {
     public:
-        EXTERN_TEXT(0x8052DBC8, RaceSetting());
+        EXTERN_TEXT(
+          0x8052DBC8, //
+          RaceSetting()
+        );
+
         virtual ~RaceSetting();
 
         EXTERN_TEXT(
-          0x8052ED28, void SetupNextRaceInput(const RaceSetting* lastRace));
+          0x8052ED28, //
+          void SetupNextRaceInput(const RaceSetting* lastRace)
+        );
 
-        EXTERN_TEXT(0x8052FB90, void InitRace(RaceSetting* race));
+        EXTERN_TEXT(
+          0x8052FB90, //
+          void InitRace(RaceSetting* race)
+        );
 
         bool IsBattle()
         {

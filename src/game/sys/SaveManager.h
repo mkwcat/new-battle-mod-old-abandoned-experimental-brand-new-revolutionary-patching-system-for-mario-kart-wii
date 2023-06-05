@@ -11,7 +11,10 @@ class SaveManager
 public:
     static SaveManager* s_instance;
 
-    EXTERN_TEXT(0x80543DB0, static SaveManager* CreateInstance());
+    EXTERN_TEXT(
+      0x80543DB0, //
+      static SaveManager* CreateInstance()
+    );
 
     class License
     {
@@ -53,7 +56,10 @@ public:
         return false;
     }
 
-    EXTERN_TEXT(0x80544CD8, void SelectLicense(int licenseId));
+    EXTERN_TEXT(
+      0x80544CD8, //
+      void SelectLicense(int licenseId)
+    );
 
 private:
     u32 _0[0x36 - 0x0];

@@ -1,7 +1,7 @@
 #include "system/Common.h"
 
 #include "dwc/WiimmfiCA.cpp"
-#include "dwc/dwc_auth.cpp"
+#include "dwc/dwc_auth_interface.cpp"
 #include "dwc/dwc_init.cpp"
 #include "dwc/dwc_memfunc.cpp"
 #include "egg/core/eggHeap.cpp"
@@ -18,10 +18,10 @@
 #include "game/sys/RaceManager.cpp"
 #include "game/sys/RootScene.cpp"
 #include "game/sys/SaveManager.cpp"
-#include "game/ui/ExternTypeInfo.cpp"
 #include "game/ui/Section.cpp"
 #include "game/ui/SectionManager.cpp"
 #include "game/ui/SystemMessageGroup.cpp"
+#include "game/ui/UIControl.cpp"
 #include "host_sys/RKSystem.cpp"
 #include "host_sys/SystemManager.cpp"
 #include "nw4r/lyt/lyt_init.cpp"
@@ -101,7 +101,8 @@ void PatchRelocations()
                 if ((offset = SearchPatch(offset)) != 0) {
                     OSReport(
                       "[PALA] Patched R_PPC_ADDR32 at %08X (%08X -> %08X)\n",
-                      ptr, oldOffset, offset);
+                      ptr, oldOffset, offset
+                    );
                     *(u32*) ToUncached(ptr) = offset;
                 }
                 break;
@@ -113,21 +114,27 @@ void PatchRelocations()
                     if (reltab->type == R_PPC_ADDR16_LO) {
                         offset &= 0xFFFF;
                         oldOffset &= 0xFFFF;
-                        OSReport("[PALA] Patched R_PPC_ADDR16_LO at %08X (%04X "
-                                 "-> %04X)\n",
-                          ptr, oldOffset, offset);
+                        OSReport(
+                          "[PALA] Patched R_PPC_ADDR16_LO at %08X (%04X "
+                          "-> %04X)\n",
+                          ptr, oldOffset, offset
+                        );
                     } else if (reltab->type == R_PPC_ADDR16_HI) {
                         offset >>= 16;
                         oldOffset >>= 16;
-                        OSReport("[PALA] Patched R_PPC_ADDR16_HI at %08X (%04X "
-                                 "-> %04X)\n",
-                          ptr, oldOffset, offset);
+                        OSReport(
+                          "[PALA] Patched R_PPC_ADDR16_HI at %08X (%04X "
+                          "-> %04X)\n",
+                          ptr, oldOffset, offset
+                        );
                     } else if (reltab->type == R_PPC_ADDR16_HA) {
                         offset = (offset + 0x8000) >> 16;
                         oldOffset = (oldOffset + 0x8000) >> 16;
-                        OSReport("[PALA] Patched R_PPC_ADDR16_HA at %08X (%04X "
-                                 "-> %04X)\n",
-                          ptr, oldOffset, offset);
+                        OSReport(
+                          "[PALA] Patched R_PPC_ADDR16_HA at %08X (%04X "
+                          "-> %04X)\n",
+                          ptr, oldOffset, offset
+                        );
                     }
 
                     if (ptr & 2) {

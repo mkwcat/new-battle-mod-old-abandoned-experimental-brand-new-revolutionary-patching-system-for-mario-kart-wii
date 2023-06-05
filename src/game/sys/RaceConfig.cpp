@@ -1,9 +1,15 @@
 #include "RaceConfig.h"
 
-EXTERN_DATA(0x809BD728, sys::RaceConfig* sys::RaceConfig::s_instance);
+EXTERN_DATA(
+  0x809BD728, //
+  sys::RaceConfig* sys::RaceConfig::s_instance
+);
 
 // This is so our new fields get copied
-REPLACE(0x805302C4, void sys::RaceConfig::InitRace())
+REPLACE(
+  0x805302C4, //
+  void sys::RaceConfig::InitRace()
+)
 {
     m_nextRace.InitRace(&m_currentRace);
     m_currentRace = m_nextRace;

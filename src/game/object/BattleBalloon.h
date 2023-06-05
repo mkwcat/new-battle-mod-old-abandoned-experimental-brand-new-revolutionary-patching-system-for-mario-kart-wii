@@ -10,7 +10,10 @@ class BattleBalloonMgr
 public:
     static BattleBalloonMgr* s_instance;
 
-    EXTERN_TEXT(0x808697BC, static void InitStatic());
+    EXTERN_TEXT(
+      0x808697BC, //
+      static void InitStatic()
+    );
 
     BattleBalloonMgr();
 
@@ -20,10 +23,11 @@ public:
     );
 
     EXTERN_TEXT(
-      0x80869FD0, void PopBalloons(
-                    u32 playerId, int param_3, int param_4, int param_5,
-                    u8 count, int param_7
-                  )
+      0x80869FD0, //
+      void PopBalloons(
+        u32 playerId, int param_3, int param_4, int param_5, u8 count,
+        int param_7
+      )
     );
 
     u8 m_playerCount;

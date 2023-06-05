@@ -1,7 +1,10 @@
 #include "InputManager.h"
 #include <game/ui/SectionManager.h>
 
-REPLACE(0x805242D8, void sys::InputManager::Init())
+REPLACE(
+  0x805242D8, //
+  void sys::InputManager::Init()
+)
 {
     extern void
     UNDEF_80521554(PlayerInput*, Pad*, Pad*); // KartInput_setController

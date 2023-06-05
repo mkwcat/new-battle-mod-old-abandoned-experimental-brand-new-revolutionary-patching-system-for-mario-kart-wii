@@ -52,7 +52,10 @@ class InputManager
 public:
     static InputManager* s_instance;
 
-    EXTERN_TEXT(0x8052313C, static InputManager* CreateInstance());
+    EXTERN_TEXT(
+      0x8052313C, //
+      static InputManager* CreateInstance()
+    );
 
     void Init(); // Replaced
 

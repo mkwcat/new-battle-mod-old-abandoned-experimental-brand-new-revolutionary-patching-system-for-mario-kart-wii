@@ -6,7 +6,10 @@ namespace ui
 class GlobalContext
 {
 public:
-    EXTERN_TEXT(0x805E2F60, GlobalContext());
+    EXTERN_TEXT(
+      0x805E2F60, //
+      GlobalContext()
+    );
 
 private:
     u8 _0[0x4E8 - 0x0];
