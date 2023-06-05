@@ -1,21 +1,24 @@
 #include "BattleBalloon.h"
-#include "game/sys/RaceConfig.h"
+#include <System/RaceConfig.h>
+
+namespace Object
+{
 
 EXTERN_DATA(
   0x809C4748, //
-  object::BattleBalloonMgr* object::BattleBalloonMgr::s_instance
+  BattleBalloonMgr* BattleBalloonMgr::s_instance
 );
 
 REPLACE(
   0x80869884, //
-  object::BattleBalloonMgr::BattleBalloonMgr()
+  BattleBalloonMgr::BattleBalloonMgr()
 )
 {
-    auto config = &sys::RaceConfig::s_instance->m_currentRace;
+    auto config = &System::RaceConfig::s_instance->m_currentRace;
 
     m_playerCount = config->m_playerCount;
 
-    if (config->m_modeFlags & sys::RaceConfig::RaceSetting::FLAG_TEAMS) {
+    if (config->m_modeFlags & System::RaceConfig::RaceSetting::FLAG_TEAMS) {
         // Teams mode is only 2 colors: red and blue. You can't steal balloons
         // from your teammates, so assume that everyone can only have three
         // balloons from their own team.
@@ -51,7 +54,7 @@ REPLACE(
 }
 
 REPLACE_ASM(0x80869DF4, //
-            void object::BattleBalloonMgr::AddToPlayer(
+            void BattleBalloonMgr::AddToPlayer(
               u32 playerId, u8 team, int param_4, int param_5, u8 count,
               int param_7
             ),
@@ -68,8 +71,8 @@ REPLACE_ASM(0x80869DF4, //
 /* 80869E18 41800008 */  // blt-     UNDEF_80869e20;
 /* 80869E1C 38A00000 */  // li       r5, 0;
                          // Check to see if it's team mode or not
-                         lis      r11, s_instance__Q23sys10RaceConfig@ha;
-                         lwz      r11, s_instance__Q23sys10RaceConfig@l(r11);
+                         lis      r11, s_instance__Q26System10RaceConfig@ha;
+                         lwz      r11, s_instance__Q26System10RaceConfig@l(r11);
                          lbz      r11, 0xB93(r11);
                          andi.    r11, r11, 2;
                          bne-     UNDEF_80869e20;
@@ -200,13 +203,13 @@ UNDEF_80869fb0:;
             // clang-format on
 );
 
-const char* g_BalloonModels[] = {
+extern "C" const char* g_BalloonModels[] = {
   "ballon", "ballon_b", "yellow", "green",     "purple",    "brown",
   "orange", "pink",     "black",  "bluelight", "greendark", "bluedark",
 };
 
 REPLACE_ASM(
-  0x8086E224, object::BattleBalloon::BattleBalloon(u32 index, Color color),
+  0x8086E224, BattleBalloon::BattleBalloon(u32 index, Color color),
   // clang-format off
 /* 8086E224 9421FF70 */  stwu     r1, -144(r1);
 /* 8086E228 7C0802A6 */  mflr     r0;
@@ -690,5 +693,7 @@ UNDEF_8086e8ec:;
 UNDEF_8086e908:;
 /* 8086E908 38210090 */  addi     r1, r1, 144;
 /* 8086E90C 4E800020 */  blr;
-  // clang=format on
+  // clang-format on
 );
+
+} // namespace Object

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 class Group
@@ -36,4 +36,4 @@ private:
 
 static_assert(sizeof(UIAnimator) == 0x10);
 
-} // namespace ui
+} // namespace UI

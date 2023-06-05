@@ -1,11 +1,14 @@
 #include "KartMove.h"
 #include "KartBlink.h"
-#include "game/sys/RaceConfig.h"
-#include "game/sys/RaceManager.h"
+#include <System/RaceConfig.h>
+#include <System/RaceManager.h>
+
+namespace Kart
+{
 
 REPLACE(
   0x80581824, //
-  void kart::KartMove::BattleFlagsUpdate()
+  void KartMove::BattleFlagsUpdate()
 )
 {
     auto state = m_accessor->m_state;
@@ -21,7 +24,7 @@ REPLACE(
         }
     }
 
-    if (sys::RaceConfig::s_instance->m_currentRace.IsBalloonBattle() &&
+    if (System::RaceConfig::s_instance->m_currentRace.IsBalloonBattle() &&
         state->b_BattleSideline && !state->b_OnlineRemote) {
         // Increase to 90 frames if it's an out of bounds sideline. This is to
         // prevent the player shrink from occurring before the balloon actually
@@ -34,8 +37,8 @@ REPLACE(
             }
 
             // Remove the player's map icon and name tag
-            sys::RaceManager::s_instance->m_players[GetPlayerID()]->m_flags |=
-              0x10;
+            System::RaceManager::s_instance->m_players[GetPlayerID()]
+              ->m_flags |= 0x10;
 
             m_battleVanishTimer = 0;
             state->b_BattleSideline = 0;
@@ -43,3 +46,5 @@ REPLACE(
         }
     }
 }
+
+} // namespace Kart

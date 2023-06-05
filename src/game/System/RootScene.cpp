@@ -5,22 +5,25 @@
 #include "NandManager.h"
 #include "ResourceManager.h"
 #include "SaveManager.h"
+#include <Effect/EffectInfo.h>
+#include <Net/NetManager.h>
+#include <Sound/SoundManager.h>
+#include <UI/FontManager.h>
+#include <UI/SectionManager.h>
 #include <egg/core/eggExpHeap.h>
-#include <game/effect/EffectInfo.h>
-#include <game/net/NetManager.h>
-#include <game/sound/SoundManager.h>
-#include <game/ui/FontManager.h>
-#include <game/ui/SectionManager.h>
 #include <host_sys/RKSystem.h>
+
+namespace System
+{
 
 EXTERN_DATA(
   0x809BD740, //
-  sys::RootScene* sys::RootScene::s_instance
+  RootScene* RootScene::s_instance
 );
 
 REPLACE(
   0x80542D4C, //
-  void sys::RootScene::Allocate()
+  void RootScene::Allocate()
 )
 {
     // TODO: Randomize memory order like the base game
@@ -51,16 +54,16 @@ REPLACE(
         m_heaps.SetGroupIDAll(0);
 
         m_heaps.SetGroupIDAll(6);
-        ui::SectionManager::CreateInstance();
-        ui::FontManager::CreateInstance();
+        UI::SectionManager::CreateInstance();
+        UI::FontManager::CreateInstance();
         m_heaps.SetGroupIDAll(0);
 
         m_heaps.SetGroupIDAll(7);
-        effect::EffectInfo::CreateInstance();
+        Effect::EffectInfo::CreateInstance();
         m_heaps.SetGroupIDAll(0);
 
         m_heaps.SetGroupIDAll(8);
-        auto soundMgr = sound::SoundManager::CreateInstance();
+        auto soundMgr = Sound::SoundManager::CreateInstance();
         host_sys::RKSystem::s_instance->m_soundManager = soundMgr;
         m_soundHeap = EGG::ExpHeap::create(0x600100, m_heaps.m_heaps[1], 1);
         soundMgr->Init(m_soundHeap);
@@ -71,7 +74,7 @@ REPLACE(
         m_heaps.SetGroupIDAll(0);
 
         m_heaps.SetGroupIDAll(13);
-        net::NetManager::CreateInstance();
+        Net::NetManager::CreateInstance();
         m_heaps.SetGroupIDAll(0);
     }
 
@@ -79,3 +82,5 @@ REPLACE(
     m_heaps.SetGroupIDAll(0);
     m_heaps.SetGroupIDAll(0);
 }
+
+} // namespace System

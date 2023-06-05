@@ -10,7 +10,7 @@ public:
     u8 _0[0x18 - 0x0];
 };
 
-namespace sys
+namespace System
 {
 
 struct MissionSetting {
@@ -272,4 +272,4 @@ public:
 
 static_assert(sizeof(RaceConfig) == 0x73F0);
 
-} // namespace sys
+} // namespace System

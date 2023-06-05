@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sys
+namespace System
 {
 
 class InputManager
@@ -71,4 +71,4 @@ private:
 
 static_assert(sizeof(InputManager) == 0x415C);
 
-} // namespace sys
+} // namespace System

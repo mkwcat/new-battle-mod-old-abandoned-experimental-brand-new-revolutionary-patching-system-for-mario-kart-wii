@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 class SaveManagerProxy
@@ -16,4 +16,4 @@ private:
 
 static_assert(sizeof(SaveManagerProxy) == 0x128);
 
-} // namespace ui
+} // namespace UI

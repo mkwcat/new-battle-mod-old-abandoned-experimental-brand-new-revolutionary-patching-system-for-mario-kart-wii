@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sys
+namespace System
 {
 
 enum class CourseID : u32 {
@@ -177,4 +177,4 @@ enum class ItemID : u32 {
     None = 0x14,
 }
 
-} // namespace sys
+} // namespace System

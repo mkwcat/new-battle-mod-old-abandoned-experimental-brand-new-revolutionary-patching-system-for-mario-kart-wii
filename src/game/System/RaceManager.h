@@ -3,7 +3,7 @@
 #include "GhostData.h"
 #include "Timer.h"
 
-namespace sys
+namespace System
 {
 
 class RaceManager
@@ -131,4 +131,4 @@ public:
 
 static_assert(sizeof(RaceManager) == 0x50);
 
-} // namespace sys
+} // namespace System

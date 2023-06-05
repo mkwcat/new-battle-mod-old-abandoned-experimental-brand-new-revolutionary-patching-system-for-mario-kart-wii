@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 enum class SectionID : s32 {
@@ -154,4 +154,4 @@ enum class SectionID : s32 {
     Broken_Mission_Mode_Menu = 0x94,
 };
 
-} // namespace ui
+} // namespace UI

@@ -2,7 +2,7 @@
 
 #include <egg/core/eggHeap.h>
 
-namespace sys
+namespace System
 {
 
 class HomeButtonMenu
@@ -18,4 +18,4 @@ public:
 
 static_assert(sizeof(HomeButtonMenu) == 0x2B4);
 
-} // namespace sys
+} // namespace System

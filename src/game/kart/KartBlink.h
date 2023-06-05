@@ -2,7 +2,7 @@
 
 #include "KartObjectProxy.h"
 
-namespace kart
+namespace Kart
 {
 
 class KartBlink : public KartObjectProxy
@@ -18,4 +18,4 @@ public:
 
 static_assert(sizeof(KartBlink) == 0x14);
 
-} // namespace kart
+} // namespace Kart

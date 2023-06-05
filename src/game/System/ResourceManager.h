@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sys
+namespace System
 {
 
 class ResourceManager
@@ -31,4 +31,4 @@ public:
 
 static_assert(sizeof(ResourceManager) == 0x61C);
 
-} // namespace sys
+} // namespace System

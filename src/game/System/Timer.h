@@ -1,8 +1,8 @@
 #pragma once
 
-#include "game/util/Random.h"
+#include <Util/Random.h>
 
-namespace sys
+namespace System
 {
 
 class Timer
@@ -29,7 +29,7 @@ public:
     static_assert(sizeof(Time) == 0xC);
 
     /* 0x04 */ Time m_time[3];
-    /* 0x24 */ util::Random m_random;
+    /* 0x24 */ Util::Random m_random;
     /* 0x40 */ u8 m_unk_0x40;
     /* 0x41 */ bool m_started;
     /* 0x42 */ bool m_reverse;
@@ -39,4 +39,4 @@ public:
 
 static_assert(sizeof(Timer) == 0x50);
 
-} // namespace sys
+} // namespace System

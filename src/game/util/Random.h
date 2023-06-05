@@ -1,6 +1,6 @@
 #pragma once
 
-namespace util
+namespace Util
 {
 
 class Random
@@ -25,4 +25,4 @@ private:
 
 static_assert(sizeof(Random) == 0x18);
 
-} // namespace util
+} // namespace Util

@@ -97,6 +97,7 @@ typedef struct {
 } __replace_struct;
 
 #define REPLACE(addr, prototype)                                               \
+  extern "C" {                                                                 \
   extern unsigned int ext_##addr;                                              \
   extern unsigned int replaced_func_##addr;                                    \
   __attribute__((section(".replarray")))                                       \
@@ -105,9 +106,11 @@ typedef struct {
       ".global replaced_func_" #addr "\n"                                      \
       ".p2align 2\n"                                                           \
       "replaced_func_" #addr ":\n");                                           \
+  }                                                                            \
   __attribute__((section(".replaced." #addr))) prototype
 
 #define REPLACE_ASM(addr, prototype, ...)                                      \
+  extern "C" {                                                                 \
   extern unsigned int ext_##addr;                                              \
   extern unsigned int replaced_func_##addr;                                    \
   __attribute__((section(".replarray")))                                       \
@@ -116,21 +119,23 @@ typedef struct {
       ".global replaced_func_" #addr "\n"                                      \
       ".p2align 2\n"                                                           \
       "replaced_func_" #addr ":\n");                                           \
+  }                                                                            \
   __attribute__((section(".replaced." #addr))) __attribute__((naked))          \
   prototype                                                                    \
   {                                                                            \
     ASM(__VA_ARGS__);                                                          \
   }
 #define EXTERN_TEXT(addr, prototype)                                           \
-  _Pragma("GCC diagnostic push")                                               \
-    _Pragma("GCC diagnostic ignored \"-Wreturn-type\"")                        \
-      __attribute__((section(".external." #addr))) __attribute__((weak))       \
-      prototype                                                                \
+  _Pragma("GCC diagnostic push");                                              \
+  _Pragma("GCC diagnostic ignored \"-Wreturn-type\"");                         \
+  __attribute__((section(".external." #addr))) __attribute__((weak)) prototype \
   {                                                                            \
+    __builtin_unreachable();                                                   \
   }                                                                            \
-  _Pragma("GCC diagnostic pop")
+  _Pragma("GCC diagnostic pop");
 
 #define EXTERN_REPL(addr, prototype)                                           \
+  extern "C" {                                                                 \
   extern unsigned int ext_##addr;                                              \
   extern unsigned int extern_func_##addr;                                      \
   __attribute__((section(".externarray")))                                     \
@@ -139,23 +144,25 @@ typedef struct {
       ".global extern_func_" #addr "\n"                                        \
       ".p2align 2\n"                                                           \
       "extern_func_" #addr ":\n");                                             \
-  _Pragma("GCC diagnostic push")                                               \
-    _Pragma("GCC diagnostic ignored \"-Wreturn-type\"")                        \
-      __attribute__((section(".extern_repl." #addr))) __attribute__((weak))    \
-      __attribute__((naked)) prototype                                         \
+  }                                                                            \
+  _Pragma("GCC diagnostic push");                                              \
+  _Pragma("GCC diagnostic ignored \"-Wreturn-type\"");                         \
+  __attribute__((section(".extern_repl." #addr))) __attribute__((weak))        \
+  __attribute__((naked)) prototype                                             \
   {                                                                            \
     ASM(nop; b ext_##addr + 4;);                                               \
   }                                                                            \
-  _Pragma("GCC diagnostic pop")
+  _Pragma("GCC diagnostic pop");
 
 #define EXTERN_TEXT_C(addr, prototype)                                         \
-  _Pragma("GCC diagnostic push")                                               \
-    _Pragma("GCC diagnostic ignored \"-Wreturn-type\"")                        \
-      __attribute__((section(".external." #addr)))                             \
-      __attribute__((weak)) extern "C" prototype                               \
+  _Pragma("GCC diagnostic push");                                              \
+  _Pragma("GCC diagnostic ignored \"-Wreturn-type\"");                         \
+  __attribute__((section(".external." #addr)))                                 \
+  __attribute__((weak)) extern "C" prototype                                   \
   {                                                                            \
+    __builtin_unreachable();                                                   \
   }                                                                            \
-  _Pragma("GCC diagnostic pop")
+  _Pragma("GCC diagnostic pop");
 
 #define EXTERN_DATA(addr, prototype)                                           \
   __attribute__((section(".external." #addr))) prototype

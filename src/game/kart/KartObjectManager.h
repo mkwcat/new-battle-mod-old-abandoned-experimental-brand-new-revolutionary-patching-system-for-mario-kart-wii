@@ -2,7 +2,7 @@
 
 #include "KartObject.h"
 
-namespace kart
+namespace Kart
 {
 
 class KartObjectManager
@@ -16,4 +16,4 @@ public:
     );
 };
 
-} // namespace kart
+} // namespace Kart

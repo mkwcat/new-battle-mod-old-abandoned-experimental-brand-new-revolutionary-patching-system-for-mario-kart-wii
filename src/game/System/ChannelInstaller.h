@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sys
+namespace System
 {
 
 class ChannelInstaller
@@ -16,4 +16,4 @@ public:
 
 static_assert(sizeof(ChannelInstaller) == 0x7C);
 
-} // namespace sys
+} // namespace System

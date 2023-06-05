@@ -1,6 +1,9 @@
 #include "SystemMessageGroup.h"
 #include <host_sys/SystemManager.h>
 
+namespace UI
+{
+
 INCBIN("game/ui/msg/System_E.bmg", SystemMsg_E);
 INCBIN("game/ui/msg/System_F.bmg", SystemMsg_F);
 INCBIN("game/ui/msg/System_G.bmg", SystemMsg_G);
@@ -12,7 +15,7 @@ INCBIN("game/ui/msg/System_Q.bmg", SystemMsg_Q);
 INCBIN("game/ui/msg/System_S.bmg", SystemMsg_S);
 INCBIN("game/ui/msg/System_U.bmg", SystemMsg_U);
 
-void ui::SystemMessageGroup::LoadP()
+void SystemMessageGroup::LoadP()
 {
     switch (host_sys::SystemManager::s_instance->m_language) {
     default:
@@ -38,7 +41,7 @@ void ui::SystemMessageGroup::LoadP()
     }
 }
 
-void ui::SystemMessageGroup::LoadE()
+void SystemMessageGroup::LoadE()
 {
     switch (host_sys::SystemManager::s_instance->m_language) {
     default:
@@ -56,12 +59,12 @@ void ui::SystemMessageGroup::LoadE()
     }
 }
 
-void ui::SystemMessageGroup::LoadJ()
+void SystemMessageGroup::LoadJ()
 {
     MessageGroup::Load(SystemMsg_J);
 }
 
-void ui::SystemMessageGroup::LoadK()
+void SystemMessageGroup::LoadK()
 {
     MessageGroup::Load(SystemMsg_K);
     // TODO: Chinese?
@@ -69,7 +72,7 @@ void ui::SystemMessageGroup::LoadK()
 
 // We don't need to replace the function as we replace the only call to it. For
 // reference the address is at 0x80637A20.
-void ui::SystemMessageGroup::Load()
+void SystemMessageGroup::Load()
 {
     switch (GetCodeRegion()) {
     default:
@@ -86,3 +89,5 @@ void ui::SystemMessageGroup::Load()
         LoadK();
     }
 }
+
+} // namespace UI

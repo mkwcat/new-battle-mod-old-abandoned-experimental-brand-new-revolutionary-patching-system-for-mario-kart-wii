@@ -1,6 +1,6 @@
 #pragma once
 
-namespace object
+namespace Object
 {
 
 class BattleBalloon;
@@ -80,4 +80,4 @@ public:
 
 static_assert(sizeof(BattleBalloon) == 0x1E4);
 
-} // namespace object
+} // namespace Object

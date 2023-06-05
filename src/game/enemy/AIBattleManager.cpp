@@ -1,5 +1,8 @@
 #include "AIBattleManager.h"
 
+namespace Enemy
+{
+
 EXTERN_REPL(
   0x80728CC8, //
   void AIBattleManager::Class_0xBC::__TeamPositionUpdate(
@@ -21,3 +24,5 @@ REPLACE(
 
     __TeamPositionUpdate(param_2, team);
 }
+
+} // namespace Enemy

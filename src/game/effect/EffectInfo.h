@@ -1,6 +1,6 @@
 #pragma once
 
-namespace effect
+namespace Effect
 {
 
 class EffectInfo
@@ -16,4 +16,4 @@ public:
 
 static_assert(sizeof(EffectInfo) == 0x9F4);
 
-} // namespace effect
+} // namespace Effect

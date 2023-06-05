@@ -2,13 +2,13 @@
 
 EXTERN_DATA(
   0x809BD728, //
-  sys::RaceConfig* sys::RaceConfig::s_instance
+  System::RaceConfig* System::RaceConfig::s_instance
 );
 
 // This is so our new fields get copied
 REPLACE(
   0x805302C4, //
-  void sys::RaceConfig::InitRace()
+  void System::RaceConfig::InitRace()
 )
 {
     m_nextRace.InitRace(&m_currentRace);

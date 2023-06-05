@@ -3,7 +3,7 @@
 #include "PageID.h"
 #include "SectionID.h"
 
-namespace ui
+namespace UI
 {
 
 class Page;
@@ -19,4 +19,4 @@ public:
     /* 0x008 */ Page* m_pages[static_cast<u32>(PageID::Count)];
 };
 
-} // namespace ui
+} // namespace UI

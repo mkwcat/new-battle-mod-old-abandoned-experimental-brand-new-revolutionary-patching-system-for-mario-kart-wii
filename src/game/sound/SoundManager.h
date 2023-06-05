@@ -2,7 +2,7 @@
 
 #include <egg/core/eggHeap.h>
 
-namespace sound
+namespace Sound
 {
 
 class SoundManager
@@ -17,4 +17,4 @@ public:
 
 static_assert(sizeof(SoundManager) == 0x8C0);
 
-} // namespace sound
+} // namespace Sound

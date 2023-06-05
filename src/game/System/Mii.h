@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sys
+namespace System
 {
 
 #define MII_NAME_LENGTH 10
@@ -162,4 +162,4 @@ private:
 
 static_assert(sizeof(Mii) == 0xB8);
 
-} // namespace sys
+} // namespace System

@@ -2,7 +2,7 @@
 
 #include "MessageGroup.h"
 
-namespace ui
+namespace UI
 {
 
 class SystemMessageGroup : public MessageGroup
@@ -34,4 +34,4 @@ public:
 
 static_assert(sizeof(SystemMessageGroup) == 0x14);
 
-} // namespace ui
+} // namespace UI

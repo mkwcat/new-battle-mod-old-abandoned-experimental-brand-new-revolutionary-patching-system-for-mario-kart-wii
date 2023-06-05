@@ -2,7 +2,7 @@
 
 #include "PageID.h"
 
-namespace ui
+namespace UI
 {
 
 class Page
@@ -27,4 +27,4 @@ private:
     PageID m_id;
 };
 
-} // namespace ui
+} // namespace UI

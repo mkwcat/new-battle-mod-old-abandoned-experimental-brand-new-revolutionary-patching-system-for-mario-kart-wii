@@ -2,7 +2,7 @@
 
 #include "Mii.h"
 
-namespace sys
+namespace System
 {
 
 class MiiManager
@@ -26,4 +26,4 @@ public:
     );
 };
 
-} // namespace sys
+} // namespace System

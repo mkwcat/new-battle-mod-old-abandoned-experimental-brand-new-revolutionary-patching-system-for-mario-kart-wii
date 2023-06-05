@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 class FontManager
@@ -16,4 +16,4 @@ public:
 
 static_assert(sizeof(FontManager) == 0x18);
 
-} // namespace ui
+} // namespace UI

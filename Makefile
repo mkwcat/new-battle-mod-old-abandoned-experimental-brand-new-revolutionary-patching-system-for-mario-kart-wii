@@ -31,7 +31,7 @@ LOADER_DEPS	:= $(LOADER_OFILES:.o=.d)
 
 DUMMY != mkdir -p $(BUILD)/src $(BUILD)/loader
 
-CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O3 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -ffunction-sections -fdata-sections -Isrc -Isrc/platform -DLOADER_REL_LZ
+CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O3 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -ffunction-sections -fdata-sections -Isrc -Isrc/platform -Isrc/game -DLOADER_REL_LZ
 
 
 default: $(BUILD)/$(TARGET).rel.LZ $(BUILD)/$(LOADER).bin

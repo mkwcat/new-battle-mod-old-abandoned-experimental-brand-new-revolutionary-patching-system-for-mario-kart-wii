@@ -3,7 +3,7 @@
 #include "Mii.h"
 #include "Timer.h"
 
-namespace sys
+namespace System
 {
 
 struct RawGhostData {
@@ -69,4 +69,4 @@ public:
 
 static_assert(sizeof(GhostData) == 0xD8);
 
-} // namespace sys
+} // namespace System

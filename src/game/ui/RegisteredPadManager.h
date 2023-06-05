@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 class RegisteredPadManager
@@ -39,4 +39,4 @@ private:
 
 static_assert(sizeof(RegisteredPadManager) == 0x5C);
 
-} // namespace ui
+} // namespace UI

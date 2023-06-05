@@ -3,7 +3,7 @@
 #include <egg/core/eggHeap.h>
 #include <host_sys/Scene.h>
 
-namespace sys
+namespace System
 {
 
 class RootScene : public host_sys::Scene
@@ -21,4 +21,4 @@ private:
 
 static_assert(sizeof(RootScene) == 0xCB8);
 
-} // namespace sys
+} // namespace System

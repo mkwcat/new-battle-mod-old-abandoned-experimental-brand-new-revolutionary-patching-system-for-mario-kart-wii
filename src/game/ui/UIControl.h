@@ -5,11 +5,10 @@
 #include "Page.h"
 #include "PageID.h"
 #include "UIAnimator.h"
-#include <game/sys/Mii.h>
+#include <System/Mii.h>
 #include <nw4r/ut/ut_RTTI.h>
-#include <system/Common.h>
 
-namespace ui
+namespace UI
 {
 
 #define UI_H_INSTANTIATE_TYPEINFO()                                            \
@@ -160,7 +159,7 @@ static_assert(sizeof(UIControl) == 0x98);
 struct MsgFormatParam {
     /* 0x00 */ s32 numbers[9];
     /* 0x24 */ s32 msgIds[9];
-    /* 0x48 */ sys::Mii* miis[9];
+    /* 0x48 */ System::Mii* miis[9];
     /* 0x6C */ u8 licenses[9];
     /* 0x78 */ s32 playerIds[9];
     /* 0x9C */ const wchar_t* strings[9];
@@ -287,4 +286,4 @@ public:
     char fill[0x20];
 };
 
-} // namespace ui
+} // namespace UI

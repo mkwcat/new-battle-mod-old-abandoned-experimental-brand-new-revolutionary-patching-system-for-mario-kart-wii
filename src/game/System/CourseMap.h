@@ -2,7 +2,7 @@
 
 #include <egg/math/eggVector.h>
 
-namespace sys
+namespace System
 {
 
 class MapdataStartPoint
@@ -39,4 +39,4 @@ public:
     );
 };
 
-} // namespace sys
+} // namespace System

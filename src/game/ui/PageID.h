@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 enum class PageID : s32 {
@@ -221,4 +221,4 @@ enum class PageID : s32 {
     Count = 0xD3,
 };
 
-} // namespace ui
+} // namespace UI

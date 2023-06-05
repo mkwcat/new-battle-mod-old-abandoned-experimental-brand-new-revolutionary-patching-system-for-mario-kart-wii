@@ -2,7 +2,7 @@
 
 #include "RegisteredPadManager.h"
 
-namespace ui
+namespace UI
 {
 
 class GlobalContext;
@@ -42,4 +42,4 @@ public:
 
 static_assert(sizeof(SectionManager) == 0x9C);
 
-} // namespace ui
+} // namespace UI

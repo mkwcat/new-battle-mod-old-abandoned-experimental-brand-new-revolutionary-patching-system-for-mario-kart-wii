@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 class GlobalContext
@@ -23,4 +23,4 @@ private:
 
 static_assert(sizeof(GlobalContext) == 0x510);
 
-} // namespace ui
+} // namespace UI

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 class Page;
@@ -39,4 +39,4 @@ struct ControlGroup {
     /* 0x10 */ int m_count;
 };
 
-} // namespace ui
+} // namespace UI

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace net
+namespace Net
 {
 
 class Nwc24Manager
@@ -8,4 +8,4 @@ class Nwc24Manager
 public:
 };
 
-} // namespace net
+} // namespace Net

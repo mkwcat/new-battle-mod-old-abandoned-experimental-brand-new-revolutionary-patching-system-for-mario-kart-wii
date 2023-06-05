@@ -1,9 +1,12 @@
 #include "InputManager.h"
-#include <game/ui/SectionManager.h>
+#include <game/UI/SectionManager.h>
+
+namespace System
+{
 
 REPLACE(
   0x805242D8, //
-  void sys::InputManager::Init()
+  void InputManager::Init()
 )
 {
     extern void
@@ -42,9 +45,11 @@ REPLACE(
 
     // This will register P1 GameCube controller as the player 1 controller in
     // debug mode
-    auto mgr = ui::SectionManager::s_instance;
+    auto mgr = UI::SectionManager::s_instance;
     if (mgr->m_debugMode) {
         mgr->m_registeredPadManager.ForceRegisterGCN();
         mgr->m_registeredPadManager.UNDEF_8061B5A4();
     }
 }
+
+} // namespace System

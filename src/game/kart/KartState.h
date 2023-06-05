@@ -1,6 +1,6 @@
 #pragma once
 
-namespace kart
+namespace Kart
 {
 
 class KartState
@@ -141,4 +141,4 @@ public:
     u32 b_CPU : 1; // (1 << 0), 0x1
 };
 
-} // namespace kart
+} // namespace Kart

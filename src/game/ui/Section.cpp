@@ -1,6 +1,9 @@
 #include "Section.h"
 
-REPLACE(0x8062C3A4, void ui::Section::AddPages(ui::SectionID sectionId))
+namespace UI
+{
+
+REPLACE(0x8062C3A4, void Section::AddPages(SectionID sectionId))
 {
     switch (sectionId) {
     default:
@@ -1730,3 +1733,5 @@ REPLACE(0x8062C3A4, void ui::Section::AddPages(ui::SectionID sectionId))
         break;
     }
 }
+
+} // namespace UI

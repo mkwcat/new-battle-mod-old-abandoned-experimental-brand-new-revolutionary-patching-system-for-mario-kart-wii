@@ -1,6 +1,6 @@
 #pragma once
 
-namespace net
+namespace Net
 {
 
 class NetManager
@@ -13,4 +13,4 @@ public:
 
 static_assert(sizeof(NetManager) == 0x29C8);
 
-} // namespace net
+} // namespace Net

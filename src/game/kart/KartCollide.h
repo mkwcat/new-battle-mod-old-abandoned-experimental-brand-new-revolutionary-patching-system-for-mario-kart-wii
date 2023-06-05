@@ -2,7 +2,7 @@
 
 #include "KartObjectProxy.h"
 
-namespace kart
+namespace Kart
 {
 
 class KartCollideAbstract
@@ -31,4 +31,4 @@ public:
     void UpdateRespawnCall(); // Replaced 0x80573ED4
 };
 
-} // namespace kart
+} // namespace Kart

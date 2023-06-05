@@ -1,17 +1,20 @@
 #include "RaceManager.h"
 #include "RaceConfig.h"
-#include "game/kart/KartMove.h"
-#include "game/kart/KartObjectManager.h"
-#include "game/object/BattleBalloon.h"
+#include <Kart/KartMove.h>
+#include <Kart/KartObjectManager.h>
+#include <Object/BattleBalloon.h>
+
+namespace System
+{
 
 EXTERN_DATA(
   0x809BD730, //
-  sys::RaceManager* sys::RaceManager::s_instance
+  RaceManager* System::RaceManager::s_instance
 );
 
 REPLACE(
   0x80538770, //
-  void sys::RaceManager::BalloonBattle::PlayerHitByPlayer(
+  void RaceManager::BalloonBattle::PlayerHitByPlayer(
     u32 attackerId, u32 targetId
   )
 )
@@ -20,7 +23,7 @@ REPLACE(
     if (RaceManager::s_instance->HasReachedStage(4))
         return;
 
-    auto balloonMgr = object::BattleBalloonMgr::s_instance;
+    auto balloonMgr = Object::BattleBalloonMgr::s_instance;
 
     // Don't run if the player has no balloons
     if (balloonMgr->m_playerData[targetId].m_count == 0)
@@ -38,7 +41,7 @@ REPLACE(
     balloonMgr->PopBalloons(targetId, 0, 1, 0, 1, 0);
 
     if (balloonMgr->m_playerData[targetId].m_count == 0) {
-        kart::KartObjectManager::s_instance->GetObject(targetId)
+        Kart::KartObjectManager::s_instance->GetObject(targetId)
           ->GetKartMove()
           ->BattleSideline();
     }
@@ -46,14 +49,14 @@ REPLACE(
 
 REPLACE(
   0x80538BC0, //
-  void sys::RaceManager::BalloonBattle::PlayerFallOutOfBounds(u32 targetId)
+  void RaceManager::BalloonBattle::PlayerFallOutOfBounds(u32 targetId)
 )
 {
     // Don't run if the battle is already over
     if (RaceManager::s_instance->HasReachedStage(4))
         return;
 
-    auto balloonMgr = object::BattleBalloonMgr::s_instance;
+    auto balloonMgr = Object::BattleBalloonMgr::s_instance;
 
     // Don't run if the player has no balloons
     if (balloonMgr->m_playerData[targetId].m_count == 0)
@@ -62,7 +65,7 @@ REPLACE(
     balloonMgr->PopBalloons(targetId, 1, 1, 0, 1, 0);
 
     if (balloonMgr->m_playerData[targetId].m_count == 0) {
-        kart::KartObjectManager::s_instance->GetObject(targetId)
+        Kart::KartObjectManager::s_instance->GetObject(targetId)
           ->GetKartMove()
           ->BattleSideline();
     }
@@ -70,14 +73,14 @@ REPLACE(
 
 REPLACE(
   0x80538CE0, //
-  void sys::RaceManager::BalloonBattle::PlayerHitByObject(u32 targetId)
+  void RaceManager::BalloonBattle::PlayerHitByObject(u32 targetId)
 )
 {
     // Don't run if the battle is already over
     if (RaceManager::s_instance->HasReachedStage(4))
         return;
 
-    auto balloonMgr = object::BattleBalloonMgr::s_instance;
+    auto balloonMgr = Object::BattleBalloonMgr::s_instance;
 
     // Don't run if the player has no balloons
     if (balloonMgr->m_playerData[targetId].m_count == 0)
@@ -86,7 +89,7 @@ REPLACE(
     balloonMgr->PopBalloons(targetId, 0, 1, 0, 1, 0);
 
     if (balloonMgr->m_playerData[targetId].m_count == 0) {
-        kart::KartObjectManager::s_instance->GetObject(targetId)
+        Kart::KartObjectManager::s_instance->GetObject(targetId)
           ->GetKartMove()
           ->BattleSideline();
     }
@@ -94,7 +97,9 @@ REPLACE(
 
 REPLACE(
   0x80538E00, //
-  void sys::RaceManager::BalloonBattle::SidelinePlayer(u8 playerId)
+  void RaceManager::BalloonBattle::SidelinePlayer(u8 playerId)
 )
 {
 }
+
+} // namespace System

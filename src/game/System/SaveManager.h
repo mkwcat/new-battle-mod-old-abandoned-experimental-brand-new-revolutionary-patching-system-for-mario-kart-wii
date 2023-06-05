@@ -3,7 +3,7 @@
 #include "Mii.h"
 #include "MiiManager.h"
 
-namespace sys
+namespace System
 {
 
 class SaveManager
@@ -67,4 +67,4 @@ private:
     License m_licenses[4];
 };
 
-} // namespace sys
+} // namespace System

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ui
+namespace UI
 {
 
 class MessageGroup
@@ -32,4 +32,4 @@ private:
 
 static_assert(sizeof(MessageGroup) == 0x14);
 
-} // namespace ui
+} // namespace UI

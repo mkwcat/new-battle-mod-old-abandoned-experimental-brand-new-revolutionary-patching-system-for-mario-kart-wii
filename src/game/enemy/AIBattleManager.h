@@ -1,5 +1,8 @@
 #pragma once
 
+namespace Enemy
+{
+
 // 0x94 in "AIHolder". This name is really just a complete guess.
 
 class AIBattleManager
@@ -36,3 +39,5 @@ private:
 };
 
 static_assert(sizeof(AIBattleManager) == 0xD0);
+
+} // namespace Enemy

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sys
+namespace System
 {
 
 class NandManager
@@ -23,4 +23,4 @@ public:
 
 static_assert(sizeof(NandManager) == 0x28);
 
-} // namespace sys
+} // namespace System
