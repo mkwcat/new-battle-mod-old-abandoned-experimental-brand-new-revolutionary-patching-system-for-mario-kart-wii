@@ -1,5 +1,5 @@
 build
 mc.bat
 port/dump80*.gko
-tool/python
+tool/python/oldtools
 tool/win32/clang.exe

@@ -155,12 +155,40 @@ int main(int argc, char** argv)
       outputBuffer, relVersion, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     );
     int sectionInfoOffset = outputBuffer.size();
-    for (int i = 0; i < inputElf.sections.size(); ++i) {
-        writeSectionInfo(outputBuffer, 0, 0);
+
+    std::map<int, int> elfToRelSection;
+    std::map<int, int> relToElfSection;
+    int elfSectIndex = 0;
+    int relSectIndex = 1;
+
+    writeSectionInfo(outputBuffer, 0, 0);
+
+    for (const auto& section : inputElf.sections) {
+        // Should keep?
+        if (
+          std::find_if(
+            cRelSectionMask.begin(), cRelSectionMask.end(),
+            [&](const std::string& val) {
+            return val == section->get_name() ||
+                   section->get_name().find(val + ".") == 0;
+            }
+          ) != cRelSectionMask.end()) {
+            writeSectionInfo(outputBuffer, 0, 0);
+            elfToRelSection[elfSectIndex] = relSectIndex;
+            relToElfSection[relSectIndex] = elfSectIndex;
+            relSectIndex++;
+        } else {
+            elfToRelSection[elfSectIndex] = -1;
+        }
+
+        elfSectIndex++;
     }
 
     // Write sections
     std::vector<uint8_t> sectionInfoBuffer;
+
+    writeSectionInfo(sectionInfoBuffer, 0, 0);
+
     std::map<ELFIO::section*, int> writtenSections;
     int totalBssSize = 0;
     int maxAlign = 2;
@@ -221,9 +249,10 @@ int main(int argc, char** argv)
             }
         } else {
             // Section was removed
-            writeSectionInfo(sectionInfoBuffer, 0, 0);
+            // writeSectionInfo(sectionInfoBuffer, 0, 0);
         }
     }
+
     // Fill in section info in main buffer
     std::copy(
       sectionInfoBuffer.begin(), sectionInfoBuffer.end(),
@@ -281,7 +310,7 @@ int main(int argc, char** argv)
                 // Add relocation to list
                 bool resolved = false;
                 Relocation rel;
-                rel.section = relocatedSectionIndex;
+                rel.section = elfToRelSection[relocatedSectionIndex];
                 rel.offset = static_cast<uint32_t>(offset);
                 rel.type = type;
                 if (sectionIndex) {
@@ -303,7 +332,8 @@ int main(int argc, char** argv)
                     } else {
                         // Internal symbol
                         rel.moduleID = moduleID;
-                        rel.targetSection = static_cast<uint8_t>(sectionIndex);
+                        rel.targetSection =
+                          static_cast<uint8_t>(elfToRelSection[sectionIndex]);
                         rel.addend =
                           static_cast<uint32_t>(addend + symbolValue);
 
@@ -416,11 +446,14 @@ int main(int argc, char** argv)
         // Resolve early if possible
         if (nextRel.moduleID == moduleID &&
             (nextRel.type == R_PPC_REL24 || nextRel.type == R_PPC_REL32)) {
-            int offset =
-              writtenSections.at(inputElf.sections[nextRel.section]) +
-              nextRel.offset;
+            int offset = writtenSections.at(
+                           inputElf.sections[relToElfSection[nextRel.section]]
+                         ) +
+                         nextRel.offset;
             int delta =
-              writtenSections.at(inputElf.sections[nextRel.targetSection]) +
+              writtenSections.at(
+                inputElf.sections[relToElfSection[nextRel.targetSection]]
+              ) +
               nextRel.addend - offset;
             std::vector<uint8_t> instructionBuffer(
               outputBuffer.begin() + offset, outputBuffer.begin() + offset + 4
@@ -514,11 +547,11 @@ int main(int argc, char** argv)
     // Write final header
     std::vector<uint8_t> headerBuffer;
     writeModuleHeader(
-      headerBuffer, relVersion, moduleID, inputElf.sections.size(),
-      sectionInfoOffset, totalBssSize, relocationOffset, importInfoOffset,
-      importInfoSize, prologSectionIndex, epilogSectionIndex,
-      unresolvedSectionIndex, prologOffset, epilogOffset, unresolvedOffset,
-      maxAlign, maxBssAlign, relocationOffset
+      headerBuffer, relVersion, moduleID, relSectIndex, sectionInfoOffset,
+      totalBssSize, relocationOffset, importInfoOffset, importInfoSize,
+      elfToRelSection[prologSectionIndex], elfToRelSection[epilogSectionIndex],
+      elfToRelSection[unresolvedSectionIndex], prologOffset, epilogOffset,
+      unresolvedOffset, maxAlign, maxBssAlign, relocationOffset
     );
     std::copy(headerBuffer.begin(), headerBuffer.end(), outputBuffer.begin());
 

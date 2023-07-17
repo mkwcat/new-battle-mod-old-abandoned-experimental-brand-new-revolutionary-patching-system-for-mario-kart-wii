@@ -4,9 +4,7 @@ SECTIONS {
 		*(.extern_repl*)
 		KEEP(*(.replaced*))
 	}
-	.rodata : {
-		*(.rodata*)
-	}
+
 	.data : {
         . = ALIGN(4);
         _replarray = .;
@@ -14,25 +12,33 @@ SECTIONS {
         _replarray_end = .;
 
         . = ALIGN(4);
+        _replrelarray = .;
+        KEEP(*(.replrelarray))
+        _replrelarray_end = .;
+
+        . = ALIGN(4);
         _externarray = .;
         KEEP(*(.externarray))
         _externarray_end = .;
 
-        . = ALIGN(4);
-		*(.data)
-		*(.sdata)
-		*(.sdata2)
-	}
-	.bss : {
-		*(.bss*)
-		*(.sbss*)
-	}
+        *(.rodata*)
 
-	.ctors : {
         . = ALIGN(4);
+		*(.data*)
+		*(.sdata*)
+		*(.sdata2*)
+
+		. = ALIGN(4);
 		_ctors = .;
 		*(.ctors)
 		*(.init_array)
 		_ctors_end = .;
 	}
+
+	.bss : {
+		*(.bss*)
+		*(.sbss*)
+	}
+
+
 }

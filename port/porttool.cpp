@@ -132,10 +132,10 @@ int main(int argc, char** argv)
     assert(cmd != CMD_UNKNOWN);
 
     u32 inRelSize;
-    u32* inRel = RipFile<u32*>("mkwtm.rel", &inRelSize);
-    u32* relE = RipFile<u32*>("mkwtm.rel", &inRelSize);
-    u32* relJ = RipFile<u32*>("mkwtm.rel", &inRelSize);
-    u32* relK = RipFile<u32*>("mkwtm.rel", &inRelSize);
+    u32* inRel = RipFile<u32*>("BattleP.rel", &inRelSize);
+    u32* relE = RipFile<u32*>("BattleP.rel", &inRelSize);
+    u32* relJ = RipFile<u32*>("BattleP.rel", &inRelSize);
+    u32* relK = RipFile<u32*>("BattleP.rel", &inRelSize);
     assert(inRelSize >= 0x30);
     u32 relNum = bswap32(inRel[0x0 / 4]);
 
@@ -175,7 +175,7 @@ int main(int argc, char** argv)
                     if (port->addr_usa == 0 || port->addr_jap == 0 || port->addr_kor == 0) {
                         printf(
                           "WARNING: Missing ports for address 0x%08X!!!\n",
-                          port->addr_pal
+                          bswap32(rel->addend)
                         );
                     }
 
@@ -213,13 +213,13 @@ int main(int argc, char** argv)
 
         fclose(f);
     } else {
-        FILE* f = fopen("mkwtm_E.rel", "wb");
+        FILE* f = fopen("BattleE.rel", "wb");
         fwrite(relE, 1, inRelSize, f);
         fclose(f);
-        f = fopen("mkwtm_J.rel", "wb");
+        f = fopen("BattleJ.rel", "wb");
         fwrite(relJ, 1, inRelSize, f);
         fclose(f);
-        f = fopen("mkwtm_K.rel", "wb");
+        f = fopen("BattleK.rel", "wb");
         fwrite(relK, 1, inRelSize, f);
         fclose(f);
     }
