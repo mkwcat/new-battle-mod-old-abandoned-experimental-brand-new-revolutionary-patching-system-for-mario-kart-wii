@@ -8,4 +8,9 @@ EXTERN_DATA(
   KartObjectManager* KartObjectManager::s_instance
 );
 
+EXTERN_TEXT(
+  0x80590100, //
+  KartObject* KartObjectManager::GetObject(u32 playerId)
+);
+
 } // namespace Kart

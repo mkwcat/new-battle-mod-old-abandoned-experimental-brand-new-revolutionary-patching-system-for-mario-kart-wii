@@ -8,19 +8,16 @@ namespace Kart
 class KartMove : public KartObjectProxy
 {
 public:
-    EXTERN_TEXT(
-      0x80581778, //
-      void BattleSideline()
-    );
+    /* 0x805799AC */
+    void StartRespawn();
 
-    EXTERN_TEXT(
-      0x805799AC, //
-      void Respawn()
-    );
+    /* 0x80581778 */
+    void BattleSideline();
 
-    void TriggerJumpPad();
+    /* --- */
+    void StartFeatherJump();
 
-    // Replaced 0x80581824
+    /* 0x80581824 */
     void BattleFlagsUpdate();
 
 private:

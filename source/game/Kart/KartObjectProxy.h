@@ -1,6 +1,7 @@
 #pragma once
 
 #include "KartState.h"
+#include <Sound/KartSound.h>
 
 namespace Kart
 {
@@ -21,30 +22,28 @@ struct KartAccessor {
 class KartObjectProxy
 {
 public:
-    EXTERN_TEXT(
-      0x8059020C, //
-      f32* GetPlayerPosition()
-    );
+    /* 0x8059020C */
+    f32* GetPlayerPosition();
 
-    EXTERN_TEXT(
-      0x80590A5C, //
-      u32 GetPlayerID()
-    );
+    /* 0x80590A5C */
+    u32 GetPlayerID();
 
     KartState* GetKartState()
     {
         return m_accessor->m_state;
     }
 
-    EXTERN_TEXT(
-      0x8059077C, //
-      KartMove* GetKartMove()
-    );
+    /* 0x8059077C */
+    KartMove* GetKartMove();
 
-    EXTERN_TEXT(
-      0x8059108C, //
-      KartBlink* GetKartBlink()
-    );
+    /* 0x80590794 */
+    Sound::KartSound* GetKartSound();
+
+    /* 0x805907B0 */
+    void PlayVoiceSe(u32 type);
+
+    /* 0x8059108C */
+    KartBlink* GetKartBlink();
 
 protected:
     KartAccessor* m_accessor;

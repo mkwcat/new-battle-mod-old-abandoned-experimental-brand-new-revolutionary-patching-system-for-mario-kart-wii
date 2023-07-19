@@ -60,7 +60,7 @@ void SectionManager::DebugBootSetup()
 
     auto set = &System::RaceConfig::s_instance->m_nextRace;
 
-    set->m_courseId = 0x20;
+    set->m_courseId = 0x22;
     set->m_playerCount = 12;
     set->m_hudCount = 1;
     set->m_localPlayerCount = 1;

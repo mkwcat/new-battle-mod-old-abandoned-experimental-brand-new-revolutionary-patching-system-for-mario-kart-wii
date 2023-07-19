@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ItemType.h"
+#include <Sound/SoundID.h>
 #include <Util/Handler.h>
 
 namespace Item
@@ -37,17 +38,19 @@ struct ItemObjConfig {
     /* 0x4C */ f32 m_0x4C;
     /* 0x50 */ f32 m_0x50;
     /* 0x54 */ f32 m_0x54;
-    /* 0x58 */ u8 m_0x58;
-    /* 0x59 */ bool m_0x59;
-    /* 0x5A */ bool m_0x5A;
+    /* 0x58 */ bool m_canLand;
+    /* 0x59 */ bool m_battleScoreOnKartCollide; // Pop a balloon
+    /* 0x5A */ bool m_destroyOnKartCollide;
     /* 0x5B */ u8 m_0x5B;
     /* 0x5C */ s32 m_0x5C;
     /* 0x60 */ u32 m_0x60;
-    /* 0x64 */ u32 m_0x64;
-    /* 0x68 */ u32 m_0x68;
+    /* 0x64 */ Sound::eSoundID m_hitSound;
+    /* 0x68 */ Sound::eSoundID m_hitGroundSound;
     /* 0x6C */ f32 m_0x6C;
     /* 0x70 */ bool m_0x70;
 };
+
+static_assert(sizeof(ItemObjConfig) == 0x74);
 
 extern ItemObjConfig g_itemObjConfigTable[ITEM_GEO_OBJ_EXP_END];
 

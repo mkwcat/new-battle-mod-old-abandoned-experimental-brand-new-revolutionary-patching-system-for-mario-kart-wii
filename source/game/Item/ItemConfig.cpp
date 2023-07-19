@@ -141,7 +141,7 @@ REPLACE(
     if (Race::ModeInfo::s_modeInfo.m_isTimeAttack) {
         for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
             if (IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
-                g_itemObjConfigTable[i].m_0x58 = 0;
+                g_itemObjConfigTable[i].m_canLand = 0;
             }
         }
     }

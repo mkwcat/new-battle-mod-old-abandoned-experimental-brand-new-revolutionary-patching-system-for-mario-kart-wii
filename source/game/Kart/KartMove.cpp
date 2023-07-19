@@ -12,7 +12,7 @@ struct JumpPadParam {
     f32 m_velY;
 };
 
-REPLACE_DATA(
+INSERT_DATA(
   0x808B5BD0, 0x60, //
   JumpPadParam s_jumpPadParam[8] = {
     /* 00 */ {50.0, 50.0, 35.0},
@@ -26,10 +26,30 @@ REPLACE_DATA(
   }
 );
 
-void KartMove::TriggerJumpPad()
+EXTERN_TEXT(
+  0x805799AC, //
+  void KartMove::StartRespawn()
+);
+
+void KartMove::StartFeatherJump()
 {
     m_specialFloor |= SPECIAL_FLOOR_JUMP_PAD;
+
+    auto kartState = GetKartState();
+
+    if (kartState->b_Unknown1_14) {
+        kartState->m_jumpPadType = 2;
+    } else {
+        kartState->m_jumpPadType = 7;
+    }
+
+    PlayVoiceSe(0x6);
 }
+
+EXTERN_TEXT(
+  0x80581778, //
+  void KartMove::BattleSideline()
+);
 
 REPLACE(
   0x80581824, //

@@ -40,22 +40,19 @@ ItemObjConfig ItemObjFeather::s_itemObjConfig = {
   .m_0x4C = 0.1,
   .m_0x50 = 0.1,
   .m_0x54 = 1.0 / 100.0,
-  .m_0x58 = 1,
-  .m_0x59 = false,
-  .m_0x5A = true,
+  .m_canLand = false,
+  .m_battleScoreOnKartCollide = false,
+  .m_destroyOnKartCollide = true,
   .m_0x5B = 0,
   .m_0x5C = 1,
   .m_0x60 = 0,
-  .m_0x64 = 0,
-  .m_0x68 = 102,
+  .m_hitSound = Sound::SE_DUMMY,
+  .m_hitGroundSound = Sound::SE_ITM_KINOKO_GND,
   .m_0x6C = 0.8,
   .m_0x70 = true,
 };
 
-// REPLACE(
-//  0x807A3A24, //
 ItemObj** ItemObjFeather::Create(u32 objCount)
-// )
 {
     ItemObj** array = new ItemObj*[objCount];
 
@@ -69,15 +66,8 @@ ItemObj** ItemObjFeather::Create(u32 objCount)
 void ItemObjFeather::UseHandler(ItemKartProxy* kart)
 {
     auto kartMove = kart->GetKartMove();
-    auto kartState = kart->GetKartState();
 
-    kartMove->TriggerJumpPad();
-
-    if (kartState->b_Unknown1_14) {
-        kartState->m_jumpPadType = 2;
-    } else {
-        kartState->m_jumpPadType = 7;
-    }
+    kartMove->StartFeatherJump();
 
     kart->m_itemStock.Remove(1);
 }

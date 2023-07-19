@@ -104,6 +104,12 @@ typedef struct {
     unsigned int* dest;
 } _MRel_ReplaceRel;
 
+typedef struct {
+    unsigned int* addr;
+    unsigned int size;
+    unsigned int* dest;
+} _MRel_InsertData;
+
 #define REPLACE(addr, prototype)                                               \
     extern "C" {                                                               \
     extern unsigned int ext_##addr;                                            \
@@ -140,6 +146,20 @@ typedef struct {
     extern unsigned int replaced_data_##_ADDR;                                 \
     __attribute__((section(".replrelarray")))                                  \
     _MRel_ReplaceRel _MRel_ReplaceRel_##_ADDR = {                              \
+      &ext_##_ADDR, _LENGTH, &replaced_data_##_ADDR};                          \
+    }                                                                          \
+    asm(".section .replaced." #_ADDR "\n"                                      \
+        ".global replaced_data_" #_ADDR "\n"                                   \
+        ".p2align 2\n"                                                         \
+        "replaced_data_" #_ADDR ":\n");                                        \
+    __attribute__((section(".replaced." #_ADDR))) __VA_ARGS__
+
+#define INSERT_DATA(_ADDR, _LENGTH, ...)                                       \
+    extern "C" {                                                               \
+    extern unsigned int ext_##_ADDR;                                           \
+    extern unsigned int replaced_data_##_ADDR;                                 \
+    __attribute__((section(".replinsertarray")))                               \
+    _MRel_InsertData _MRel_InsertData_##_ADDR = {                              \
       &ext_##_ADDR, _LENGTH, &replaced_data_##_ADDR};                          \
     }                                                                          \
     asm(".section .replaced." #_ADDR "\n"                                      \

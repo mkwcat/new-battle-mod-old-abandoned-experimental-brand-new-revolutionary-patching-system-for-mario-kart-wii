@@ -4,6 +4,7 @@
 #include <revolution/cache.h>
 #include <revolution/dvd.h>
 #include <revolution/os.h>
+#include <string.h>
 
 typedef void (*PFN_voidfunc)();
 
@@ -15,6 +16,9 @@ extern __replace_struct _replarray_end[];
 
 extern _MRel_ReplaceRel _replrelarray[];
 extern _MRel_ReplaceRel _replrelarray_end[];
+
+extern _MRel_InsertData _replinsertarray[];
+extern _MRel_InsertData _replinsertarray_end[];
 
 extern __replace_struct _externarray[];
 extern __replace_struct _externarray_end[];
@@ -129,8 +133,6 @@ void PatchRelocations()
 
 extern "C" void _prolog(s32 arcEntryNum, ARCHandle* arcHandle)
 {
-    PatchRelocations();
-
     // Do the external replaced array
     for (auto repl = _externarray; repl != _externarray_end; ++repl) {
         *ToUncached(repl->dest) = *repl->addr;
@@ -143,6 +145,14 @@ extern "C" void _prolog(s32 arcEntryNum, ARCHandle* arcHandle)
           0x48000000 | ((u32(repl->dest) - u32(repl->addr)) & 0x3FFFFFC);
         ICInvalidateRange(repl->addr, 4);
     }
+
+    // Do data patches
+    for (auto repl = _replinsertarray; repl != _replinsertarray_end; ++repl) {
+        memcpy(repl->addr, repl->dest, repl->size);
+        DCFlushRange(repl->addr, repl->size);
+    }
+
+    PatchRelocations();
 
     __DVDEXInit(arcEntryNum, arcHandle);
 

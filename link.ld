@@ -17,6 +17,11 @@ SECTIONS {
         _replrelarray_end = .;
 
         . = ALIGN(4);
+        _replinsertarray = .;
+        KEEP(*(.replinsertarray))
+        _replinsertarray_end = .;
+
+        . = ALIGN(4);
         _externarray = .;
         KEEP(*(.externarray))
         _externarray_end = .;
