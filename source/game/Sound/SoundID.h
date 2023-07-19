@@ -3,7 +3,7 @@
 namespace Sound
 {
 
-enum eSoundID {
+enum ESoundID {
     SE_DUMMY = 0x000,
     SEQ_O_EARTH = 0x001,
     SEQ_O_SELECT_CH = 0x002,
@@ -6787,7 +6787,7 @@ enum eSoundID {
     VO_F4_L_NPC_STRM = 0x1A7C
 };
 
-enum eGroupID {
+enum EGroupID {
     GRP_CH = 0x000,
     GRP_CMN = 0x001,
     GRP_CH_MENU = 0x002,
@@ -7279,7 +7279,7 @@ enum eGroupID {
     GRP_VO_END = 0x1E8
 };
 
-enum eBankID {
+enum EBankID {
     BNK_SEQ_O_EARTH = 0x000,
     BNK_SEQ_O_SELECT_CH = 0x001,
     BNK_SEQ_O_OPTION_CH = 0x002,

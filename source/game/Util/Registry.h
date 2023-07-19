@@ -5,6 +5,6 @@
 namespace Util
 {
 
-const char* GetItemPane(Item::eItemType item, u32 count);
+const char* GetItemPane(Item::EItemType item, u32 count);
 
 }

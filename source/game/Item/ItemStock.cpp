@@ -9,7 +9,7 @@ namespace Item
 
 EXTERN_TEXT(
   0x807BC940, //
-  void ItemStock::Set(eItemType item, bool isMultiItem)
+  void ItemStock::Set(EItemType item, bool isMultiItem)
 );
 
 EXTERN_TEXT(

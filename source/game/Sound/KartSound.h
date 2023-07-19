@@ -9,7 +9,7 @@ class KartSound
 {
 public:
     /* 0x80709980 */
-    void PlaySound(eSoundID sound);
+    void PlaySound(ESoundID sound);
 
     /* 0x80708BAC */
     void PlayDashSound();

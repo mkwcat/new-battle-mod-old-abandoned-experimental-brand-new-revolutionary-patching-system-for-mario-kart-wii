@@ -52,7 +52,7 @@ public:
         return m_karts + index;
     }
 
-    ItemGeoObjManager* GetGeoObjManager(eItemGeoObjType item)
+    ItemGeoObjManager* GetGeoObjManager(EItemGeoObjType item)
     {
         if (item < ITEM_GEO_OBJ_BASE_COUNT) {
             return &m_itemGeoObj[item];

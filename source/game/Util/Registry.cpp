@@ -5,7 +5,7 @@ namespace Util
 
 REPLACE(
   0x80860AF0, //
-  const char* GetItemPane(Item::eItemType item, u32 count)
+  const char* GetItemPane(Item::EItemType item, u32 count)
 )
 {
     switch (item) {

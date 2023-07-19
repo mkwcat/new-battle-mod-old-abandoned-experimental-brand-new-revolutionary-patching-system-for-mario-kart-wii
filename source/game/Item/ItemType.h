@@ -3,7 +3,7 @@
 namespace Item
 {
 
-enum eItemType {
+enum EItemType {
     ITEM_KOURA_GREEN = 0x00,
     ITEM_KOURA_RED = 0x01,
     ITEM_BANANA = 0x02,
@@ -36,7 +36,7 @@ enum eItemType {
     ITEM_EXP_COUNT = ITEM_EXP_END - ITEM_EXP_START,
 };
 
-static inline bool IsValid_eItemType(eItemType item)
+static inline bool IsValid_EItemType(EItemType item)
 {
     if (item < ITEM_KOURA_GREEN) {
         return false;
@@ -57,7 +57,7 @@ static inline bool IsValid_eItemType(eItemType item)
     return false;
 }
 
-enum eItemGeoObjType {
+enum EItemGeoObjType {
     ITEM_GEO_OBJ_KOURA_GREEN = 0x00,
     ITEM_GEO_OBJ_KOURA_RED = 0x01,
     ITEM_GEO_OBJ_BANANA = 0x02,
@@ -86,7 +86,7 @@ enum eItemGeoObjType {
     ITEM_GEO_OBJ_EXP_COUNT = ITEM_GEO_OBJ_EXP_END - ITEM_GEO_OBJ_EXP_START,
 };
 
-static inline bool IsValid_eItemGeoObjType(eItemGeoObjType item)
+static inline bool IsValid_EItemGeoObjType(EItemGeoObjType item)
 {
     if (item < ITEM_GEO_OBJ_KOURA_GREEN) {
         return false;
@@ -107,7 +107,7 @@ static inline bool IsValid_eItemGeoObjType(eItemGeoObjType item)
     return false;
 }
 
-enum eItemTrail {
+enum EItemTrail {
     ITEM_TRAIL_NONE = 0, // e.g. Bullet Bill
     ITEM_TRAIL_HOLD = 1, // e.g. Banana
     ITEM_TRAIL_TAIL = 2, // e.g. Triple Banana
@@ -121,11 +121,11 @@ typedef void (*ItemUseHandler)(ItemKartProxy* kart);
 struct ItemTypeEntry {
     /* 0x00 */ bool m_0x00;
     /* 0x01 */ bool m_0x01;
-    /* 0x04 */ eItemGeoObjType m_objType;
+    /* 0x04 */ EItemGeoObjType m_objType;
     /* 0x08 */ u32 m_objCount;
     /* 0x0C */ u32 m_0x0C;
     /* 0x10 */ u8 m_0x10;
-    /* 0x14 */ eItemTrail m_trailType;
+    /* 0x14 */ EItemTrail m_trailType;
     /* 0x18 */ ItemUseHandler m_useHandler;
 };
 

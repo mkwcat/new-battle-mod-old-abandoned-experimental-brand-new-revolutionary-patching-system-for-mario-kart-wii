@@ -70,17 +70,14 @@ REPLACE(
     u32 totalObjCount = 0;
 
     for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-        if (!IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+        if (!IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
             continue;
         }
 
-        ItemGeoObjManager* item =
-          GetGeoObjManager(static_cast<eItemGeoObjType>(i));
+        ItemGeoObjManager* item = GetGeoObjManager(EItemGeoObjType(i));
 
         if (item != nullptr) {
-            item->CreateItemObj(
-              static_cast<eItemGeoObjType>(i), &totalObjCount
-            );
+            item->Create_ItemObj(EItemGeoObjType(i), &totalObjCount);
         }
     }
 
@@ -140,12 +137,11 @@ REPLACE(
 )
 {
     for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-        if (!IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+        if (!IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
             continue;
         }
 
-        ItemGeoObjManager* item =
-          GetGeoObjManager(static_cast<eItemGeoObjType>(i));
+        ItemGeoObjManager* item = GetGeoObjManager(EItemGeoObjType(i));
 
         if (item != nullptr) {
             item->Init();
@@ -186,12 +182,11 @@ REPLACE(
     }
 
     for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-        if (!IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+        if (!IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
             continue;
         }
 
-        ItemGeoObjManager* item =
-          GetGeoObjManager(static_cast<eItemGeoObjType>(i));
+        ItemGeoObjManager* item = GetGeoObjManager(EItemGeoObjType(i));
 
         if (item == nullptr) {
             continue;
@@ -205,12 +200,11 @@ REPLACE(
     u32 totalObj = 0;
 
     for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-        if (!IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+        if (!IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
             continue;
         }
 
-        ItemGeoObjManager* item =
-          GetGeoObjManager(static_cast<eItemGeoObjType>(i));
+        ItemGeoObjManager* item = GetGeoObjManager(EItemGeoObjType(i));
 
         if (item == nullptr) {
             continue;
@@ -226,12 +220,11 @@ REPLACE(
     }
 
     for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-        if (!IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+        if (!IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
             continue;
         }
 
-        ItemGeoObjManager* item =
-          GetGeoObjManager(static_cast<eItemGeoObjType>(i));
+        ItemGeoObjManager* item = GetGeoObjManager(EItemGeoObjType(i));
 
         if (item == nullptr) {
             continue;

@@ -11,7 +11,7 @@ class ItemStock
 {
 public:
     /* 0x807BC940 */
-    void Set(eItemType item, bool isMultiItem);
+    void Set(EItemType item, bool isMultiItem);
 
     /* 0x807BC97C */
     void Remove(u32 count);

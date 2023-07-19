@@ -10,7 +10,7 @@ namespace Item
 
 EXTERN_TEXT(
   0x80795CCC, //
-  void ItemGeoObjManager::CreateItemObj(eItemGeoObjType type, u32* outCount)
+  void ItemGeoObjManager::Create_ItemObj(EItemGeoObjType type, u32* outCount)
 );
 
 EXTERN_TEXT(

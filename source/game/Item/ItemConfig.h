@@ -44,8 +44,8 @@ struct ItemObjConfig {
     /* 0x5B */ u8 m_0x5B;
     /* 0x5C */ s32 m_0x5C;
     /* 0x60 */ u32 m_0x60;
-    /* 0x64 */ Sound::eSoundID m_hitSound;
-    /* 0x68 */ Sound::eSoundID m_hitGroundSound;
+    /* 0x64 */ Sound::ESoundID m_hitSound;
+    /* 0x68 */ Sound::ESoundID m_hitGroundSound;
     /* 0x6C */ f32 m_0x6C;
     /* 0x70 */ bool m_0x70;
 };

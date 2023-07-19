@@ -126,7 +126,7 @@ REPLACE(
     );
 
     for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-        if (!IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+        if (!IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
             continue;
         }
 
@@ -140,7 +140,7 @@ REPLACE(
 
     if (Race::ModeInfo::s_modeInfo.m_isTimeAttack) {
         for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-            if (IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+            if (IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
                 g_itemObjConfigTable[i].m_canLand = 0;
             }
         }
@@ -148,7 +148,7 @@ REPLACE(
 
     if (Race::DriverModelManager::s_instance->m_isAwards) {
         for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-            if (IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+            if (IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
                 g_itemObjConfigTable[i].m_count = 1;
             }
         }
@@ -160,7 +160,7 @@ REPLACE(
 
     if (Race::ModeInfo::UseCompetitionItemLimits()) {
         for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {
-            if (IsValid_eItemGeoObjType(eItemGeoObjType(i))) {
+            if (IsValid_EItemGeoObjType(EItemGeoObjType(i))) {
                 g_itemObjConfigTable[i].m_count =
                   g_itemObjConfigTable[i].m_competitionCount;
             }

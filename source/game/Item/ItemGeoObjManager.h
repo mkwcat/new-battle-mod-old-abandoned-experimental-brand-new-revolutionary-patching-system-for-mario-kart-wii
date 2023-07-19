@@ -11,7 +11,7 @@ public:
     ItemGeoObjManager() = default;
     ~ItemGeoObjManager() = default;
 
-    void CreateItemObj(eItemGeoObjType type, u32* outCount);
+    void Create_ItemObj(EItemGeoObjType type, u32* outCount);
 
     void Init();
 

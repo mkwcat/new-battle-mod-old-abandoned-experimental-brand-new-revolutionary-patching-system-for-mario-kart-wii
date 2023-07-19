@@ -1,5 +1,8 @@
 #include "Nwc24Manager.h"
 
+namespace Net
+{
+
 // Stub out the entire class
 
 REPLACE(
@@ -142,3 +145,5 @@ REPLACE(
 {
     return false;
 }
+
+} // namespace Net
