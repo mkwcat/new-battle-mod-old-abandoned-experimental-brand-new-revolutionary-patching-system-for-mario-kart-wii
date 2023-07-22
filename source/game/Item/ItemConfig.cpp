@@ -31,96 +31,96 @@ REPLACE_DATA(
 );
 
 u32 GetGeoObjCount();
-void SetItemObjConfig(ItemObjConfig* dst, const ItemObjConfig* src);
+void ItemObjConfig_Set(ItemObjConfig* dst, const ItemObjConfig* src);
 
 EXTERN_TEXT(
   0x80790AD8, //
-  void ItemObjConfig::InitGlobal()
+  void ItemConfig_Init()
 );
 
 REPLACE(
   0x80790AFC, //
-  void InitGeoObjConfig()
+  void ItemObjConfigTable_Init()
 )
 {
     memset(g_itemObjConfigTable, 0, sizeof(g_itemObjConfigTable));
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KOURA_GREEN], //
       &ItemObjKouraGreen::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KOURA_RED], //
       &ItemObjKoura::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_BANANA], //
       &ItemObjBanana::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KINOKO], //
       &ItemObjKinoko::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_STAR], //
       &ItemObjStar::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KOURA_BLUE], //
       &ItemObjKouraBlue::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_THUNDER], //
       &ItemObjThunder::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_DUMMY_BOX], //
       &ItemObjDummyBox::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KINOKO_BIG], //
       &ItemObjKinokoBig::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_BOMHEI], //
       &ItemObjBomhei::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_GESSO], //
       &ItemObjGesso::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_POW_BLOCK], //
       &ItemObjPowBlock::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KINOKO_GOLDEN], //
       &ItemObjKinokoGolden::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KILLER], //
       &ItemObjKiller::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KUMO], //
       &ItemObjKumo::s_itemObjConfig
     );
 
-    SetItemObjConfig(
+    ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_FEATHER], //
       &ItemObjFeather::s_itemObjConfig
     );
@@ -175,7 +175,7 @@ EXTERN_TEXT(
 
 EXTERN_TEXT(
   0x80790E7C, //
-  void SetItemObjConfig(ItemObjConfig* dst, const ItemObjConfig* src)
+  void ItemObjConfig_Set(ItemObjConfig* dst, const ItemObjConfig* src)
 );
 
 } // namespace Item

@@ -131,6 +131,7 @@ struct ItemTypeEntry {
 
 extern ItemTypeEntry g_itemTypeTable[ITEM_EXP_END];
 
-void InitItemTypeTable();
+/* 0x807BCAE0 */
+void ItemTypeTable_Init();
 
 } // namespace Item

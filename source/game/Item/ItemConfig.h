@@ -14,8 +14,6 @@ typedef ItemObj** (*ItemObjConstructFunction)(u32 objCount);
 typedef u32 (*ItemObjConfig0x24)(u32 param_1, u32 param_2, u32 param_3);
 
 struct ItemObjConfig {
-    static void InitGlobal();
-
     /* 0x00 */ ItemObjConstructFunction m_constructFunction;
     /* 0x04 */ u32 m_count;
     /* 0x08 */ u32 m_competitionCount;
@@ -53,5 +51,11 @@ struct ItemObjConfig {
 static_assert(sizeof(ItemObjConfig) == 0x74);
 
 extern ItemObjConfig g_itemObjConfigTable[ITEM_GEO_OBJ_EXP_END];
+
+/* 0x80790AD8 */
+void ItemConfig_Init();
+
+/* 0x80790AFC */
+void ItemObjConfigTable_Init();
 
 } // namespace Item

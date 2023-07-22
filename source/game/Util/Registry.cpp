@@ -72,7 +72,7 @@ REPLACE(
         return "kame_red_3";
 
     case Item::ITEM_BANANA_3:
-        return "banana";
+        return "banana_3";
 
     case Item::ITEM_FEATHER:
         return "wanwan";

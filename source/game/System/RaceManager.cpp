@@ -3,6 +3,7 @@
 #include <Kart/KartMove.h>
 #include <Kart/KartObjectManager.h>
 #include <Object/BattleBalloon.h>
+#include <Race/ModeInfo.h>
 
 namespace System
 {
@@ -100,6 +101,48 @@ REPLACE(
   void RaceManager::BalloonBattle::SidelinePlayer(u8 playerId)
 )
 {
+}
+
+EXTERN_REPL(
+  0x80539574, //
+  void RaceManager::BalloonBattle::CalcOld()
+);
+
+REPLACE(
+  0x80539574, //
+  void RaceManager::BalloonBattle::Calc()
+)
+{
+    CalcOld();
+
+    if (m_raceManager->m_stage != 2) {
+        return;
+    }
+
+    u32 remainingCount = 0;
+    u32 otherRemaining = 0;
+
+    auto balloonMgr = Object::BattleBalloonMgr::s_instance;
+
+    for (u32 i = 0; i < Race::ModeInfo::s_modeInfo.m_playerCount; i++) {
+        bool remaining = balloonMgr->m_playerData[i].m_count > 0;
+
+        if (remaining) {
+            if (Race::ModeInfo::IsImportantPlayer(i)) {
+                remainingCount++;
+            } else {
+                otherRemaining++;
+            }
+        }
+    }
+
+    if (remainingCount == 0) {
+        EndRace();
+    }
+
+    if (remainingCount == 1 && otherRemaining == 0) {
+        EndRace();
+    }
 }
 
 } // namespace System

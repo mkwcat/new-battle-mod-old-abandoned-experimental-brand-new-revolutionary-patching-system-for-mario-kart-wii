@@ -43,6 +43,7 @@ void KartMove::StartFeatherJump()
         kartState->m_jumpPadType = 7;
     }
 
+    GetKartSound()->PlayDashSound();
     PlayVoiceSe(0x6);
 }
 

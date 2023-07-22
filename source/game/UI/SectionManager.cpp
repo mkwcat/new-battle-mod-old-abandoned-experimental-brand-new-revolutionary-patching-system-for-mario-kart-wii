@@ -67,8 +67,7 @@ void SectionManager::DebugBootSetup()
     set->m_gameMode = System::RaceConfig::RaceSetting::MODE_BATTLE;
     set->m_players[0].m_characterId = 0x0A; // Yoshi
     set->m_players[0].m_vehicleId = 0x13; // Mach Bike
-    set->m_players[0].m_playerType =
-      System::RaceConfig::Player::PLAYER_REAL_LOCAL;
+    set->m_players[0].m_playerType = System::RaceConfig::Player::PLAYER_MASTER;
     set->m_players[0].m_team = System::RaceConfig::Player::TEAM_NONE;
     set->m_engineClass = System::RaceConfig::RaceSetting::CC_150;
     set->m_hudPlayerIds[0] = 0;

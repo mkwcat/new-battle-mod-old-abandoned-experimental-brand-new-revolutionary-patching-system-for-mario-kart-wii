@@ -5,7 +5,7 @@ namespace Sound
 
 EXTERN_TEXT(
   0x80709980, //
-  void PlaySound(ESoundID sound)
+  void KartSound::PlaySound(ESoundID sound)
 );
 
 EXTERN_TEXT(

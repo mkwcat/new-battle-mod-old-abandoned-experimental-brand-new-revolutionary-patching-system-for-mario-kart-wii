@@ -30,7 +30,7 @@ REPLACE_DATA(
 
 REPLACE(
   0x807BCAE0, //
-  void InitItemTypeTable()
+  void ItemTypeTable_Init()
 )
 {
     memset(g_itemTypeTable, 0, sizeof(g_itemTypeTable));

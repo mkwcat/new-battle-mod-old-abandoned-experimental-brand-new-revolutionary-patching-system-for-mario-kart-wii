@@ -33,7 +33,7 @@ public:
      * not, then false.
      */
     /* 0x807BD5BC */
-    static bool IsDetailedPlayer(s32 playerId);
+    static bool IsImportantPlayer(s32 playerId);
 
     /* 0x807BD6E4 */
     static bool UseCompetitionItemLimits();

@@ -96,7 +96,7 @@ public:
         );
 
         enum PlayerType {
-            PLAYER_REAL_LOCAL,
+            PLAYER_MASTER,
             PLAYER_CPU,
             PLAYER_UNKNOWN2,
             PLAYER_GHOST,

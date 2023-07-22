@@ -35,7 +35,7 @@ EXTERN_TEXT(
  */
 EXTERN_TEXT(
   0x807BD5BC, //
-  bool ModeInfo::IsDetailedPlayer(s32 playerId)
+  bool ModeInfo::IsImportantPlayer(s32 playerId)
 );
 
 EXTERN_TEXT(

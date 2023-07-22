@@ -24,7 +24,7 @@ public:
         RaceManager* m_raceManager;
 
         virtual bool CanRaceEnd() = 0; // vt + 0x8
-        virtual void vt_0xC() = 0; // Related to timer?
+        virtual void EndRace() = 0; // Related to timer?
         virtual void vt_0x10() = 0; // Related to online?
     };
 
@@ -40,7 +40,7 @@ public:
 
         EXTERN_TEXT(
           0x80535DE8, //
-          virtual void vt_0xC()
+          virtual void EndRace()
         );
 
         EXTERN_TEXT(
@@ -55,6 +55,16 @@ public:
 
         // At 0x80538E00, I don't know what else to call it
         void SidelinePlayer(u8 playerId);
+
+    private:
+        void CalcOld();
+
+    public:
+        void Calc();
+
+    private:
+        FILL(0x8, 0x34);
+        bool m_hasStarted;
     };
 
     class RaceTimer : public Timer
@@ -110,7 +120,7 @@ public:
     /* 0x0C */ Player** m_players;
     /* 0x10 */ RaceMode* m_raceMode;
     /* 0x14 */ RaceTimer* m_timer;
-    /* 0x18 */ u8* m_playerPolePositions;
+    /* 0x18 */ u8* m_playerRanks;
     /* 0x1C */ u8 m_finishedPlayerCount;
     /* 0x1E */ u16 m_introTimer;
     /* 0x20 */ u32 m_frame;

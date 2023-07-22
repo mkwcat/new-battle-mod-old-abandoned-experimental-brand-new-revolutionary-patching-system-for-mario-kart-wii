@@ -54,8 +54,8 @@ REPLACE(
     m_kartCount = Race::ModeInfo::s_modeInfo.m_playerCount;
     m_expGeoObjCount = ITEM_GEO_OBJ_EXP_COUNT;
 
-    InitItemTypeTable();
-    ItemObjConfig::InitGlobal();
+    ItemTypeTable_Init();
+    ItemConfig_Init();
 
     ItemSlotTable::CreateInstance();
 
