@@ -14,7 +14,7 @@
 #include "ItemObjKoura.h"
 #include "ItemObjKouraBlue.h"
 #include "ItemObjKouraGreen.h"
-#include "ItemObjKumo.h"
+#include "ItemObjPikakumo.h"
 #include "ItemObjPowBlock.h"
 #include "ItemObjStar.h"
 #include "ItemObjThunder.h"
@@ -117,7 +117,7 @@ REPLACE(
 
     ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_KUMO], //
-      &ItemObjKumo::s_itemObjConfig
+      &ItemObjPikakumo::s_itemObjConfig
     );
 
     ItemObjConfig_Set(

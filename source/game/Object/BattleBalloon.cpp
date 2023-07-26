@@ -46,19 +46,20 @@ REPLACE(
         m_balloons[i].m_object = new BattleBalloon(i, color);
 
         // Hack but we don't have the generic object vtable yet.
-        ((void (*)(BattleBalloon*)) m_balloons[i].m_object->m_vtable[0x20 / 4]
-        )(m_balloons[i].m_object);
+        ((void (*)(BattleBalloon*)) m_balloons[i].m_object->m_vtable[0x20 / 4])(
+          m_balloons[i].m_object
+        );
 
         m_balloons[i].m_color = u8(color);
     }
 }
 
-REPLACE_ASM(0x80869DF4, //
-            void BattleBalloonMgr::AddToPlayer(
-              u32 playerId, u8 team, int param_4, int param_5, u8 count,
-              int param_7
-            ),
-            // clang-format off
+REPLACE_ASM( //
+  0x80869DF4, //
+  void BattleBalloonMgr::AddToPlayer(
+    u32 playerId, u8 team, int param_4, int param_5, u8 count, int param_7
+  ),
+  // clang-format off
 /* 80869DF4 9421FFC0 */  stwu     r1, -64(r1);
 /* 80869DF8 7C0802A6 */  mflr     r0;
 /* 80869DFC 28050002 */  // cmplwi   r5, 2;
@@ -200,7 +201,7 @@ UNDEF_80869fb0:;
 /* 80869FC4 7C0803A6 */  mtlr     r0;
 /* 80869FC8 38210040 */  addi     r1, r1, 64;
 /* 80869FCC 4E800020 */  blr
-            // clang-format on
+  // clang-format on
 );
 
 extern "C" const char* g_BalloonModels[] = {

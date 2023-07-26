@@ -4,11 +4,12 @@ REPLACE_ASM( //
   0x80005F34, //
   void* memcpy(void* dst, const void* src, size_t len),
   // clang-format off
-    cmpwi   r5, 0;
-    beqlr-;
-
+    // Meh, signed comparison
     subic.  r7, r5, 4;
     bge-    L_MemcpyLong;
+
+    cmpwi   r5, 0;
+    beqlr-;
 
     mtctr   r5;
     lwbrx   r0, r0, r4;
@@ -103,6 +104,11 @@ L_MemcpyBegin1Word_2:;
 EXTERN_TEXT(
   0x80006038, //
   void* memset(void* dst, int value, size_t len)
+);
+
+EXTERN_TEXT(
+  0x8000F314, //
+  int memcmp(const void* s1, const void* s2, size_t n)
 );
 
 EXTERN_TEXT(

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ItemObjSearch.h"
+#include "ItemObjSearcher.h"
 #include "ItemType.h"
 
 namespace Item
 {
 
-class ItemObjKouraBlue : public ItemObjSearch
+class ItemObjKouraBlue : public ItemObjSearcher
 {
 public:
     static const ItemTypeEntry s_itemType;

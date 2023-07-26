@@ -85,6 +85,7 @@ $(DVDDATA)/thp/title
 DUMMY != mkdir -p $(DVDDATA) $(DVD_DIRS)
 
 DVD_FILES := \
+$(DVDDATA)/Boot/WiimmfiP.bin \
 $(DVDDATA)/Race/Common.szs \
 $(DVDDATA)/rel/BattleP.rel.LZ
 

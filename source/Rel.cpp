@@ -1,5 +1,6 @@
 #include "system/Common.h"
 
+#include <dwc/dwc_init.h>
 #include <revolution/arc.h>
 #include <revolution/cache.h>
 #include <revolution/dvd.h>
@@ -155,6 +156,8 @@ extern "C" void _prolog(s32 arcEntryNum, ARCHandle* arcHandle)
     PatchRelocations();
 
     __DVDEXInit(arcEntryNum, arcHandle);
+
+    DWC_InitWiimmfiPayload();
 
     // Run global constructors
     for (PFN_voidfunc* ctor = _ctors; ctor != _ctors_end && *ctor; ++ctor) {

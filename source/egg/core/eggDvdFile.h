@@ -9,15 +9,31 @@ namespace EGG
 class DvdFile : public File
 {
 public:
+    /* 0x8022235C */
     DvdFile();
+
+    /* 0x802223A0 */
     virtual ~DvdFile();
 
+    /* 0x80222470 */
     virtual bool open(int entryNum);
+
+    /* 0x802224E8 */
     virtual bool open(const char* path);
+
+    /* 0x80222530 */
     virtual bool open(const char* path, void* param_2);
+
+    /* 0x80222540 */
     virtual void close();
+
+    /* 0x8022259C */
     virtual s32 readData(void* data, s32 len, s32 offset);
+
+    /* 0x80222660 */
     virtual s32 writeData(const void* data, s32 len, s32 offset);
+
+    /* 0x802226D0 */
     virtual s32 getFileSize() const;
 
 public:

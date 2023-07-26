@@ -5,6 +5,8 @@
 #include "dwc/dwc_init.cpp"
 #include "dwc/dwc_memfunc.cpp"
 #include "egg/core/eggDisposer.cpp"
+#include "egg/core/eggDvdFile.cpp"
+#include "egg/core/eggDvdRipper.cpp"
 #include "egg/core/eggHeap.cpp"
 #include "game/Boot/RKSystem.cpp"
 #include "game/Boot/Scene.cpp"
@@ -73,13 +75,13 @@
 // MKW: 0x807AEAEC - 0x807AF140
 #include "game/Item/ItemObjKouraGreen.cpp"
 // MKW: 0x807AF140 - 0x807B1AB0
-#include "game/Item/ItemObjKumo.cpp"
+#include "game/Item/ItemObjPikakumo.cpp"
 // MKW: 0x807B1AB0 - 0x807B1BC0
 #include "game/Item/ItemObjPowBlock.cpp"
 // MKW: 0x807B1BC0 - 0x807B2EF8
 #include "game/Item/ItemObjPowBlockDirector.cpp"
 // MKW: 0x807B2EF8 - 0x807B6FF0
-#include "game/Item/ItemObjSearch.cpp"
+#include "game/Item/ItemObjSearcher.cpp"
 // MKW: 0x807B6FF0 - 0x807B7104
 #include "game/Item/ItemObjStar.cpp"
 // MKW: 0x807B7104 - 0x807B7B00

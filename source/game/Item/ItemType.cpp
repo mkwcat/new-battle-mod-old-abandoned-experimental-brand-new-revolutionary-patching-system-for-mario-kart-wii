@@ -13,7 +13,7 @@
 #include "ItemObjKoura.h"
 #include "ItemObjKouraBlue.h"
 #include "ItemObjKouraGreen.h"
-#include "ItemObjKumo.h"
+#include "ItemObjPikakumo.h"
 #include "ItemObjPowBlock.h"
 #include "ItemObjStar.h"
 #include "ItemObjThunder.h"
@@ -49,7 +49,7 @@ REPLACE(
     g_itemTypeTable[ITEM_KINOKO_BIG] = ItemObjKinokoBig::s_itemType;
     g_itemTypeTable[ITEM_GESSO] = ItemObjGesso::s_itemType;
     g_itemTypeTable[ITEM_POW_BLOCK] = ItemObjPowBlock::s_itemType;
-    g_itemTypeTable[ITEM_KUMO] = ItemObjKumo::s_itemType;
+    g_itemTypeTable[ITEM_KUMO] = ItemObjPikakumo::s_itemType;
     g_itemTypeTable[ITEM_KILLER] = ItemObjKiller::s_itemType;
     g_itemTypeTable[ITEM_KOURA_GREEN_3] = ItemObjKouraGreen::s_itemType3;
     g_itemTypeTable[ITEM_KOURA_RED_3] = ItemObjKoura::s_itemType3;

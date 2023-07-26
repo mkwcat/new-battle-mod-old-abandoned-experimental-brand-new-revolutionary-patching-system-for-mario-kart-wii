@@ -3,7 +3,7 @@
 namespace Item
 {
 
-class ItemObjSearch : public ItemObjCommon
+class ItemObjSearcher : public ItemObjCommon
 {
 };
 

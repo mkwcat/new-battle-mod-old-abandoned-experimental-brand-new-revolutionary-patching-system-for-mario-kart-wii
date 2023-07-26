@@ -6,7 +6,7 @@
 namespace Item
 {
 
-class ItemObjKumo : public ItemObjCommon
+class ItemObjPikakumo : public ItemObjCommon
 {
 public:
     static const ItemTypeEntry s_itemType;
