@@ -1,0 +1,50 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 2,
+            "groups": [],
+            "name": "fadein",
+            "start frame": 620,
+            "end frame": 630,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 11,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "time_null",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "translate x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 200.0,
+                                            "slope": 0.0,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": 0.0,
+                                            "slope": 17.158606,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

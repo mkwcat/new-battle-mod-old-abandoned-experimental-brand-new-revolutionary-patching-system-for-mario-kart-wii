@@ -1,0 +1,85 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 9,
+            "groups": [],
+            "name": "fade_out",
+            "start frame": 200,
+            "end frame": 210,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 11,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "null_all",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "translate x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.0,
+                                            "slope": -60.799999,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": -608.0,
+                                            "slope": -60.799999,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "chara_icon_null",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "scale x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -200.0,
+                                            "value": 1.2,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -200.0,
+                                            "value": 1.2,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

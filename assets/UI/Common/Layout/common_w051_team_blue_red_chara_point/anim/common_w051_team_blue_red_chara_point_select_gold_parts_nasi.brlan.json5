@@ -1,0 +1,88 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 1,
+            "groups": [],
+            "name": "select_gold_parts_nasi",
+            "start frame": 51,
+            "end frame": 100,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 49,
+            "loop": true,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "gold_parts",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVI",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "visibility",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": -1.0,
+                                            "value": 0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "black_base",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVI",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "visibility",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": -1.0,
+                                            "value": 0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "pikapika",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVI",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "visibility",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

@@ -1,0 +1,66 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 3,
+            "groups": [],
+            "name": "fade_out_anim",
+            "start frame": 36,
+            "end frame": 51,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 16,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "black_parts",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVI",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "visibility",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": -16.0,
+                                            "value": 1,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "magic": "RLVC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "pane alpha",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 255.0,
+                                            "slope": -17.0,
+                                        },
+                                        {
+                                            "frame": 15.0,
+                                            "value": 0.0,
+                                            "slope": -17.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

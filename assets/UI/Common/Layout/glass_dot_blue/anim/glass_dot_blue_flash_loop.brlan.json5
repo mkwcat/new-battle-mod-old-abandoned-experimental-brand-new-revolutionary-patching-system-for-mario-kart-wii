@@ -1,0 +1,137 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 0,
+            "groups": [],
+            "name": "flash_loop",
+            "start frame": 0,
+            "end frame": 40,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 40,
+            "loop": true,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "flash_light",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "scale x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.0,
+                                            "slope": 0.098778,
+                                        },
+                                        {
+                                            "frame": 39.0,
+                                            "value": 3.85234,
+                                            "slope": 0.031085,
+                                        },
+                                        {
+                                            "frame": 39.0,
+                                            "value": 3.85234,
+                                            "slope": -0.2,
+                                        },
+                                        {
+                                            "frame": 40.0,
+                                            "value": 0.0,
+                                            "slope": -3.85234,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.0,
+                                            "slope": 0.098778,
+                                        },
+                                        {
+                                            "frame": 39.0,
+                                            "value": 3.85234,
+                                            "slope": 0.031085,
+                                        },
+                                        {
+                                            "frame": 39.0,
+                                            "value": 3.85234,
+                                            "slope": -0.2,
+                                        },
+                                        {
+                                            "frame": 40.0,
+                                            "value": 0.0,
+                                            "slope": -3.85234,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "magic": "RLVC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "pane alpha",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 1.0,
+                                            "value": 255.0,
+                                            "slope": 0.0,
+                                        },
+                                        {
+                                            "frame": 39.0,
+                                            "value": 10.0,
+                                            "slope": 0.0,
+                                        },
+                                        {
+                                            "frame": 40.0,
+                                            "value": 255.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "light",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "pane alpha",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 255.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

@@ -1,0 +1,62 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 3,
+            "groups": [],
+            "name": "icon_slide_out_anim",
+            "start frame": 490,
+            "end frame": 500,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 11,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "ranking_null",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "translate x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.0,
+                                            "slope": 81.0,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": 810.0,
+                                            "slope": 81.0,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "translate y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -300.0,
+                                            "value": -0.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

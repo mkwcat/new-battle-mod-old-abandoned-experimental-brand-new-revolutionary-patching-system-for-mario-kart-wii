@@ -1,0 +1,276 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 1,
+            "groups": [],
+            "name": "free_to_select",
+            "start frame": 100,
+            "end frame": 103,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 4,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "text_light_01",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "scale x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1.0,
+                                            "slope": 0.0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1.849046,
+                                            "slope": 0.441149,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1.849046,
+                                            "slope": 0.027286,
+                                        },
+                                        {
+                                            "frame": 30.0,
+                                            "value": 1.0,
+                                            "slope": -0.029277,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1.0,
+                                            "slope": -0.397487,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 0.602513,
+                                            "slope": -0.397487,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 0.602513,
+                                            "slope": 0.026661,
+                                        },
+                                        {
+                                            "frame": 30.0,
+                                            "value": 1.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "pause_w_fade_n",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "scale x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.9,
+                                            "slope": 0.033333,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 1.0,
+                                            "slope": 0.033333,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.9,
+                                            "slope": 0.033333,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 1.0,
+                                            "slope": 0.033333,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "text_light_02",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "scale x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1.25,
+                                            "slope": 0.0,
+                                        },
+                                        {
+                                            "frame": 30.0,
+                                            "value": 1.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1.25,
+                                            "slope": 0.0,
+                                        },
+                                        {
+                                            "frame": 30.0,
+                                            "value": 1.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "color_down",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLMC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "tev color 1 color a",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -1.0,
+                                            "value": 100.0,
+                                            "slope": -50.0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 0.0,
+                                            "slope": -50.0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 0.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "color_down_00",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLMC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "tev color 1 color a",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -1.0,
+                                            "value": 100.0,
+                                            "slope": -50.0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 0.0,
+                                            "slope": -50.0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 0.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "color_down_01",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLMC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "tev color 1 color a",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -1.0,
+                                            "value": 100.0,
+                                            "slope": -50.0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 0.0,
+                                            "slope": -50.0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 0.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

@@ -1,0 +1,45 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 2,
+            "groups": [],
+            "name": "movie_off",
+            "start frame": 120,
+            "end frame": 130,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 10,
+            "loop": true,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "title_movie",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "pane alpha",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -10.0,
+                                            "value": 0.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

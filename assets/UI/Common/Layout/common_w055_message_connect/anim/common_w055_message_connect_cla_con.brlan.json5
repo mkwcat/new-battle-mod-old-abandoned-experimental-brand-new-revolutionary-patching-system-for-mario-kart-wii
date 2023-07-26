@@ -1,0 +1,152 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 1,
+            "groups": [],
+            "name": "cla_con",
+            "start frame": 50,
+            "end frame": 99,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 49,
+            "loop": true,
+            "tpls": [
+                "tt_clacon_body.tpl",
+                "tt_clacon_light.tpl",
+                "tt_remocon_han_body.tpl",
+                "tt_remocon_han_light.tpl",
+            ],
+            "contents": [
+                {
+                    "name": "con_null",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "translate y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 45.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.95,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.95,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "con_00",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 50.0,
+                                            "value": 2,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "con_light",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1,
+                                        },
+                                        {
+                                            "frame": 50.0,
+                                            "value": 3,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "con_light_01",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 50.0,
+                                            "value": 2,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

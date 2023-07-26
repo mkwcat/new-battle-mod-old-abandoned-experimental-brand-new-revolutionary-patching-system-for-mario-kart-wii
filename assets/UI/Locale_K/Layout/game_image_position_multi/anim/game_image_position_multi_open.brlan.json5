@@ -1,0 +1,196 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 1,
+            "groups": [],
+            "name": "open",
+            "start frame": 16,
+            "end frame": 26,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 11,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "race_null",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "scale x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1.221649,
+                                            "slope": -0.124757,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 0.847377,
+                                            "slope": -0.124757,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 0.847377,
+                                            "slope": 0.099097,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 1.045572,
+                                            "slope": 0.099097,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 1.045572,
+                                            "slope": -0.045572,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 1.0,
+                                            "slope": -0.045572,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 1.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1.221649,
+                                            "slope": -0.124757,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 0.847377,
+                                            "slope": -0.124757,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 0.847377,
+                                            "slope": 0.099097,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 1.045572,
+                                            "slope": 0.099097,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 1.045572,
+                                            "slope": -0.045572,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 1.0,
+                                            "slope": -0.045572,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 1.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "rotate z",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1800.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "position_l_00",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "scale x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1.2,
+                                            "slope": 0.188439,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": 3.072824,
+                                            "slope": 0.187282,
+                                        },
+                                    ],
+                                },
+                                {
+                                    "id": 0,
+                                    "kind": "scale y",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1.2,
+                                            "slope": 0.188439,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": 3.072824,
+                                            "slope": 0.187282,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "magic": "RLVC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "pane alpha",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 255.0,
+                                            "slope": -25.5,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": 0.0,
+                                            "slope": -25.5,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

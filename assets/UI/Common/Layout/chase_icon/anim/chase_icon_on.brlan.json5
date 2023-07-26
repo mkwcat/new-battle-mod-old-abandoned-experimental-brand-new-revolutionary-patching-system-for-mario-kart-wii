@@ -1,0 +1,45 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 4,
+            "groups": [],
+            "name": "on",
+            "start frame": 16,
+            "end frame": 30,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 14,
+            "loop": true,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "chase_icon_null",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "pane alpha",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 14.0,
+                                            "value": 255.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

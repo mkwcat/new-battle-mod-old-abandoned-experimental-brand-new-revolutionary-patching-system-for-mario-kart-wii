@@ -1,0 +1,48 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 0,
+            "groups": [],
+            "name": "fade_in_before",
+            "start frame": 0,
+            "end frame": 1,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 2,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "count_down_null",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVI",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "visibility",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

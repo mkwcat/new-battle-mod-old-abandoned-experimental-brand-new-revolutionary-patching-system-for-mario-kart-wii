@@ -1,0 +1,391 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 3,
+            "groups": [],
+            "name": "texture_pattern_0",
+            "start frame": 100,
+            "end frame": 109,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 10,
+            "loop": false,
+            "tpls": [
+                "tt_mario_battle_font_blue_00.tpl",
+                "tt_mario_battle_font_blue_01.tpl",
+                "tt_mario_battle_font_blue_02.tpl",
+                "tt_mario_battle_font_blue_03.tpl",
+                "tt_mario_battle_font_blue_04.tpl",
+                "tt_mario_battle_font_blue_05.tpl",
+                "tt_mario_battle_font_blue_06.tpl",
+                "tt_mario_battle_font_blue_07.tpl",
+                "tt_mario_battle_font_blue_08.tpl",
+                "tt_mario_battle_font_blue_09.tpl",
+                "tt_mario_battle_font_red_00.tpl",
+                "tt_mario_battle_font_red_01.tpl",
+                "tt_mario_battle_font_red_02.tpl",
+                "tt_mario_battle_font_red_03.tpl",
+                "tt_mario_battle_font_red_04.tpl",
+                "tt_mario_battle_font_red_05.tpl",
+                "tt_mario_battle_font_red_06.tpl",
+                "tt_mario_battle_font_red_07.tpl",
+                "tt_mario_battle_font_red_08.tpl",
+                "tt_mario_battle_font_red_09.tpl",
+            ],
+            "contents": [
+                {
+                    "name": "blue_a",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 2,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 3,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 4,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 5,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 6,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 7,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 8,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 9,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "blue_b",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 2,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 3,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 4,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 5,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 6,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 7,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 8,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 9,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "red_a",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 10,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 11,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 12,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 13,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 14,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 15,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 16,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 17,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 18,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 19,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "red_b",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 10,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 11,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 12,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 13,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 14,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 15,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 16,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 17,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 18,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 19,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "red_c",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 10,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 11,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 12,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 13,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 14,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 15,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 16,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 17,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 18,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 19,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "blue_c",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 2,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 3,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 4,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 5,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 6,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 7,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 8,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 9,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

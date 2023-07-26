@@ -1,0 +1,50 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 0,
+            "groups": [],
+            "name": "pointing_cursor_loop",
+            "start frame": 1,
+            "end frame": 30,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 29,
+            "loop": true,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "yajirushi_parts",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "pane alpha",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -1.0,
+                                            "value": 255.0,
+                                            "slope": 0.0,
+                                        },
+                                        {
+                                            "frame": 29.0,
+                                            "value": 180.0,
+                                            "slope": 0.0,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

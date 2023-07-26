@@ -1,0 +1,50 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 1,
+            "groups": [],
+            "name": "rotate",
+            "start frame": 11,
+            "end frame": 70,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 60,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "chara_0_n",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "rotate z",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.0,
+                                            "slope": 12.20339,
+                                        },
+                                        {
+                                            "frame": 59.0,
+                                            "value": 720.0,
+                                            "slope": 12.20339,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

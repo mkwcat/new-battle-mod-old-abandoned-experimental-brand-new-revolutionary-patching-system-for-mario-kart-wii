@@ -1,0 +1,66 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 0,
+            "groups": [],
+            "name": "fade_in_out",
+            "start frame": 30,
+            "end frame": 60,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 31,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "chara_name_null",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLVI",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "visibility",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 1,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "magic": "RLVC",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "pane alpha",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.0,
+                                            "slope": 8.5,
+                                        },
+                                        {
+                                            "frame": 30.0,
+                                            "value": 255.0,
+                                            "slope": 8.5,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

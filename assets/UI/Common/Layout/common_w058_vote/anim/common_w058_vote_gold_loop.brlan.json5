@@ -1,0 +1,45 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 11,
+            "groups": [],
+            "name": "gold_loop",
+            "start frame": 126,
+            "end frame": 175,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 49,
+            "loop": true,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "gold_parts",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTS",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "rotate",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": -76.0,
+                                            "value": 360.0,
+                                            "slope": 7.2,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

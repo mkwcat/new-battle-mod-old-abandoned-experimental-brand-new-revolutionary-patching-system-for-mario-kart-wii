@@ -1,0 +1,98 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 6,
+            "groups": [],
+            "name": "icon_select_gold1and2_rote",
+            "start frame": 0,
+            "end frame": 100,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 100,
+            "loop": true,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "select_gold_01",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTS",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "rotate",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.0,
+                                            "slope": 3.6,
+                                        },
+                                        {
+                                            "frame": 100.0,
+                                            "value": 360.0,
+                                            "slope": 3.6,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "select_gold_02",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTS",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "rotate",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0.0,
+                                            "slope": 7.2,
+                                        },
+                                        {
+                                            "frame": 50.0,
+                                            "value": 360.0,
+                                            "slope": 7.2,
+                                        },
+                                        {
+                                            "frame": 50.0,
+                                            "value": 360.0,
+                                            "slope": -360.0,
+                                        },
+                                        {
+                                            "frame": 51.0,
+                                            "value": 0.0,
+                                            "slope": -360.0,
+                                        },
+                                        {
+                                            "frame": 51.0,
+                                            "value": 0.0,
+                                            "slope": 7.346939,
+                                        },
+                                        {
+                                            "frame": 100.0,
+                                            "value": 360.0,
+                                            "slope": 7.346939,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

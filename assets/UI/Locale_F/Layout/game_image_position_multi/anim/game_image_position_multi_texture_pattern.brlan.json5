@@ -1,0 +1,233 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 3,
+            "groups": [],
+            "name": "texture_pattern",
+            "start frame": 31,
+            "end frame": 42,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 12,
+            "loop": false,
+            "tpls": [
+                "tt_multi_position_no_st_64x64_f_01.tpl",
+                "tt_multi_position_no_st_64x64_f_02.tpl",
+                "tt_multi_position_no_st_64x64_f_03.tpl",
+                "tt_multi_position_no_st_64x64_f_04.tpl",
+                "tt_multi_position_no_st_64x64_f_05.tpl",
+                "tt_multi_position_no_st_64x64_f_06.tpl",
+                "tt_multi_position_no_st_64x64_f_07.tpl",
+                "tt_multi_position_no_st_64x64_f_08.tpl",
+                "tt_multi_position_no_st_64x64_f_09.tpl",
+                "tt_multi_position_no_st_64x64_f_10.tpl",
+                "tt_multi_position_no_st_64x64_f_11.tpl",
+                "tt_multi_position_no_st_64x64_f_12.tpl",
+            ],
+            "contents": [
+                {
+                    "name": "position_sha",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 2,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 3,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 4,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 5,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 6,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 7,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 8,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 9,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": 10,
+                                        },
+                                        {
+                                            "frame": 11.0,
+                                            "value": 11,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "position",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 2,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 3,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 4,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 5,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 6,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 7,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 8,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 9,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": 10,
+                                        },
+                                        {
+                                            "frame": 11.0,
+                                            "value": 11,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "position_l_00",
+                    "kind": "material",
+                    "animations": [
+                        {
+                            "magic": "RLTP",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "image",
+                                    "curve type": "step",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": 0,
+                                        },
+                                        {
+                                            "frame": 1.0,
+                                            "value": 1,
+                                        },
+                                        {
+                                            "frame": 2.0,
+                                            "value": 2,
+                                        },
+                                        {
+                                            "frame": 3.0,
+                                            "value": 3,
+                                        },
+                                        {
+                                            "frame": 4.0,
+                                            "value": 4,
+                                        },
+                                        {
+                                            "frame": 5.0,
+                                            "value": 5,
+                                        },
+                                        {
+                                            "frame": 6.0,
+                                            "value": 6,
+                                        },
+                                        {
+                                            "frame": 7.0,
+                                            "value": 7,
+                                        },
+                                        {
+                                            "frame": 8.0,
+                                            "value": 8,
+                                        },
+                                        {
+                                            "frame": 9.0,
+                                            "value": 9,
+                                        },
+                                        {
+                                            "frame": 10.0,
+                                            "value": 10,
+                                        },
+                                        {
+                                            "frame": 11.0,
+                                            "value": 11,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}

@@ -1,0 +1,50 @@
+{
+    "version": 10,
+    "sections": [
+        {
+            "magic": "pat1",
+            "id": 1,
+            "groups": [],
+            "name": "out_to_in",
+            "start frame": 21,
+            "end frame": 81,
+            "descending bind": true,
+        },
+        {
+            "magic": "pai1",
+            "frame count": 61,
+            "loop": false,
+            "tpls": [],
+            "contents": [
+                {
+                    "name": "TextBox_00",
+                    "kind": "pane",
+                    "animations": [
+                        {
+                            "magic": "RLPA",
+                            "targets": [
+                                {
+                                    "id": 0,
+                                    "kind": "translate x",
+                                    "curve type": "hermite",
+                                    "keys": [
+                                        {
+                                            "frame": 0.0,
+                                            "value": -1000.0,
+                                            "slope": 16.666666,
+                                        },
+                                        {
+                                            "frame": 60.0,
+                                            "value": 0.0,
+                                            "slope": 16.666666,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+}
