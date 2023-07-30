@@ -60,6 +60,8 @@
 #include "game/Item/ItemObjGesso.cpp"
 // MKW: 0x807A8394 - 0x807A9A80
 #include "game/Item/ItemObjGessoDirector.cpp"
+// MKW: ---
+#include "game/Item/ItemObjItemBox.cpp"
 // MKW: 0x807A9A80 - 0x807A9CC0
 #include "game/Item/ItemObjKiller.cpp"
 // MKW: 0x807A9CC0 - 0x807A9DD4

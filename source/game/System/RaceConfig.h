@@ -14,21 +14,21 @@ namespace System
 {
 
 struct MissionSetting {
-    enum GameMode {
-        MODE_Miniturbo = 0,
-        MODE_LapRun01 = 1,
-        MODE_LapRun02 = 2,
-        MODE_Drift = 3,
-        MODE_ItemBox = 4,
-        MODE_EnemyDown01 = 5,
-        MODE_EnemyDown02 = 6,
-        MODE_EnemyDown03 = 7,
-        MODE_CoinGet01 = 8,
-        MODE_ToGate01 = 9,
-        MODE_RocketStart = 10,
-        MODE_ItemHit = 11,
-        MODE_Wheelie = 12,
-        MODE_Slipstream = 13
+    enum EGameMode {
+        MODE_MINITURBO = 0,
+        MODE_LAP_RUN_01 = 1,
+        MODE_LAP_RUN_02 = 2,
+        MODE_DRIFT = 3,
+        MODE_ITEM_BOX = 4,
+        MODE_ENEMY_DOWN_01 = 5,
+        MODE_ENEMY_DOWN_02 = 6,
+        MODE_ENEMY_DOWN_03 = 7,
+        MODE_COIN_GET = 8,
+        MODE_TO_GATE = 9,
+        MODE_ROCKET_START = 10,
+        MODE_ITEM_HIT = 11,
+        MODE_WHEELIE = 12,
+        MODE_SLIPSTREAM = 13
     };
 
     /* 0x00 */ u16 m_mrFile;
@@ -95,7 +95,7 @@ public:
           u32 ComputeGPRank()
         );
 
-        enum PlayerType {
+        enum EPlayerType {
             PLAYER_MASTER,
             PLAYER_CPU,
             PLAYER_UNKNOWN2,
@@ -104,7 +104,7 @@ public:
             PLAYER_NONE
         };
 
-        enum Team {
+        enum ETeam {
             TEAM_RED,
             TEAM_BLUE,
             TEAM_NONE
@@ -115,9 +115,9 @@ public:
         /* 0x06 */ u8 m_controllerId;
         /* 0x08 */ u32 m_vehicleId;
         /* 0x0C */ u32 m_characterId;
-        /* 0x10 */ u32 m_playerType;
+        /* 0x10 */ EPlayerType m_playerType;
         /* 0x14 - 0xCC */ u8 _0x14[0xCC - 0x14];
-        /* 0xCC */ u32 m_team;
+        /* 0xCC */ ETeam m_team;
         /* 0xD0 - 0xD8 */ u8 _0xD0[0xD8 - 0xD0];
         /* 0xD8 */ u16 m_lastScore;
         /* 0xDA */ u16 m_score;
@@ -164,7 +164,7 @@ public:
             return IsBattle() && m_battleMode == BATTLE_BALLOON;
         }
 
-        enum EngineClass {
+        enum EEngineClass {
             CC_50 = 0,
             CC_100 = 1,
             CC_150 = 2,
@@ -173,7 +173,7 @@ public:
             CC_BATTLE = 3
         };
 
-        enum GameMode {
+        enum EGameMode {
             MODE_GRAND_PRIX = 0,
             MODE_VS_RACE = 1,
             MODE_TIME_TRIAL = 2,
@@ -189,7 +189,7 @@ public:
             MODE_CREDITS = 12
         };
 
-        enum CameraMode {
+        enum ECameraMode {
             CAMERA_MODE_GAMEPLAY_NO_INTRO,
             CAMERA_MODE_REPLAY,
             CAMERA_MODE_TITLE_ONE_PLAYER,
@@ -205,21 +205,21 @@ public:
             CAMERA_MODE_LOSS,
         };
 
-        enum BattleMode {
+        enum EBattleMode {
             BATTLE_BALLOON = 0,
             BATTLE_COIN = 1,
 
             BATTLE_SHINE_THIEF = 2, // Added
         };
 
-        enum CpuSetting {
+        enum ECPUMode {
             CPU_EASY = 0,
             CPU_NORMAL = 1,
             CPU_HARD = 2,
             CPU_NONE = 3
         };
 
-        enum ItemSetting {
+        enum EItemMode {
             ITEM_BALANCED = 0,
             ITEM_FRANTIC = 1,
             ITEM_STRATEGIC = 2,
@@ -237,12 +237,12 @@ public:
         /* 0x006 */ u8 m_localPlayerCount;
         /* 0x008 */ Player m_players[12];
         /* 0xB48 */ u32 m_courseId;
-        /* 0xB4C */ u32 m_engineClass;
-        /* 0xB50 */ u32 m_gameMode;
-        /* 0xB54 */ u32 m_cameraMode;
-        /* 0xB58 */ u32 m_legacyBattleMode;
-        /* 0xB5C */ u32 m_cpuSetting;
-        /* 0xB60 */ u32 m_itemSetting;
+        /* 0xB4C */ EEngineClass m_engineClass;
+        /* 0xB50 */ EGameMode m_gameMode;
+        /* 0xB54 */ ECameraMode m_cameraMode;
+        /* 0xB58 */ EBattleMode m_legacyBattleMode;
+        /* 0xB5C */ ECPUMode m_cpuSetting;
+        /* 0xB60 */ EItemMode m_itemSetting;
         /* 0xB64 */ u8 m_hudPlayerIds[4];
         /* 0xB68 */ u32 m_cupId;
         /* 0xB6C */ u8 m_raceNum;

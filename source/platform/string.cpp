@@ -117,6 +117,11 @@ EXTERN_TEXT(
 );
 
 EXTERN_TEXT(
+  0x8001329C, //
+  int strcmp(const char* s1, const char* s2)
+);
+
+EXTERN_TEXT(
   0x800135F0, //
   char* strstr(const char* haystack, const char* needle)
 );

@@ -7,6 +7,7 @@
 #include "ItemObjDummyBox.h"
 #include "ItemObjFeather.h"
 #include "ItemObjGesso.h"
+#include "ItemObjItemBox.h"
 #include "ItemObjKiller.h"
 #include "ItemObjKinoko.h"
 #include "ItemObjKinokoBig.h"
@@ -123,6 +124,11 @@ REPLACE(
     ItemObjConfig_Set(
       &g_itemObjConfigTable[ITEM_GEO_OBJ_FEATHER], //
       &ItemObjFeather::s_itemObjConfig
+    );
+
+    ItemObjConfig_Set(
+      &g_itemObjConfigTable[ITEM_GEO_OBJ_ITEM_BOX], //
+      &ItemObjItemBox::s_itemObjConfig
     );
 
     for (u32 i = 0; i < ITEM_GEO_OBJ_EXP_END; i++) {

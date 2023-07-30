@@ -114,6 +114,11 @@ public:
       bool HasReachedStage(u32 stage)
     );
 
+    // 3 parameters undocumented
+    void GetKartStartPosition();
+
+    void* GetKartPoint(s32 playerId);
+
 public:
     /* 0x04 */ void* m_random1;
     /* 0x08 */ void* m_random2;

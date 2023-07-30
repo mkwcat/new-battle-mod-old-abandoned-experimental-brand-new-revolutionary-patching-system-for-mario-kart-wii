@@ -6,6 +6,7 @@
 #include "ItemObjBomhei.h"
 #include "ItemObjDummyBox.h"
 #include "ItemObjGesso.h"
+#include "ItemObjItemBox.h"
 #include "ItemObjKiller.h"
 #include "ItemObjKinoko.h"
 #include "ItemObjKinokoBig.h"
@@ -55,6 +56,7 @@ REPLACE(
     g_itemTypeTable[ITEM_KOURA_RED_3] = ItemObjKoura::s_itemType3;
     g_itemTypeTable[ITEM_BANANA_3] = ItemObjBanana::s_itemType3;
     g_itemTypeTable[ITEM_FEATHER] = ItemObjFeather::s_itemType;
+    g_itemTypeTable[ITEM_ITEM_BOX] = ItemObjItemBox::s_itemType;
 
     if (Race::ModeInfo::s_modeInfo.m_isOnline) {
         for (u32 i = 0; i < ITEM_EXP_END; i++) {

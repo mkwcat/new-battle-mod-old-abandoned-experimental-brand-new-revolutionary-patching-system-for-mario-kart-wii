@@ -77,6 +77,9 @@ REPLACE(
     case Item::ITEM_FEATHER:
         return "wanwan";
 
+    case Item::ITEM_ITEM_BOX:
+        return "dummybox";
+
     default:
         assert(!"Invalid item ID");
         return nullptr;

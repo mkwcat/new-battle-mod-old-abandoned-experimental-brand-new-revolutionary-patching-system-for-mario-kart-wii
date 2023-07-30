@@ -79,4 +79,21 @@ EXTERN_TEXT(
   )
 );
 
+EXTERN_REPL(
+  0x8055B618, //
+  void* ResMdl_LoadBrresInner(void* resMdl, int archiveIdx, const char* path)
+)
+
+REPLACE(
+  0x8055B618, //
+  void* ResMdl_LoadBrres(void* resMdl, int archiveIdx, const char* path)
+)
+{
+    if (!strcmp(path, "itembox.brres")) {
+        archiveIdx = 1;
+    }
+
+    return ResMdl_LoadBrresInner(resMdl, archiveIdx, path);
+}
+
 } // namespace Item
