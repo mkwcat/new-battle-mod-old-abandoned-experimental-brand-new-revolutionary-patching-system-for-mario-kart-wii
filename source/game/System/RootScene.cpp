@@ -44,7 +44,7 @@ REPLACE(
         InputManager::CreateInstance();
         MiiManager::CreateInstance();
         ChannelInstaller::CreateInstance();
-        RaceConfig::CreateInstance();
+        RaceInfoManager::CreateInstance();
         m_heaps.SetGroupIDAll(0);
 
         m_heaps.SetGroupIDAll(2);

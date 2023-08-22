@@ -1,6 +1,6 @@
 #include "KartMove.h"
 #include "KartBlink.h"
-#include <System/RaceConfig.h>
+#include <System/RaceInfo.h>
 #include <System/RaceManager.h>
 
 namespace Kart
@@ -70,7 +70,7 @@ REPLACE(
         }
     }
 
-    if (System::RaceConfig::s_instance->m_currentRace.IsBalloonBattle() &&
+    if (System::RaceInfoManager::s_instance->m_info.IsBalloonBattle() &&
         state->b_BattleSideline && !state->b_OnlineRemote) {
         // Increase to 90 frames if it's an out of bounds sideline. This is to
         // prevent the player shrink from occurring before the balloon actually

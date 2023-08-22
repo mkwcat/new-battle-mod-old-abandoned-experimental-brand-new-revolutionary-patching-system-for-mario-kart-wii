@@ -1,5 +1,5 @@
 #include "BattleBalloon.h"
-#include <System/RaceConfig.h>
+#include <System/RaceInfo.h>
 
 namespace Object
 {
@@ -14,11 +14,11 @@ REPLACE(
   BattleBalloonMgr::BattleBalloonMgr()
 )
 {
-    auto config = &System::RaceConfig::s_instance->m_currentRace;
+    auto config = &System::RaceInfoManager::s_instance->m_info;
 
     m_playerCount = config->m_playerCount;
 
-    if (config->m_modeFlags & System::RaceConfig::RaceSetting::FLAG_TEAMS) {
+    if (config->m_modeFlags & System::RaceInfo::FLAG_TEAMS) {
         // Teams mode is only 2 colors: red and blue. You can't steal balloons
         // from your teammates, so assume that everyone can only have three
         // balloons from their own team.
@@ -72,8 +72,8 @@ REPLACE_ASM( //
 /* 80869E18 41800008 */  // blt-     UNDEF_80869e20;
 /* 80869E1C 38A00000 */  // li       r5, 0;
                          // Check to see if it's team mode or not
-                         lis      r11, s_instance__Q26System10RaceConfig@ha;
-                         lwz      r11, s_instance__Q26System10RaceConfig@l(r11);
+                         lis      r11, s_instance__Q26System15RaceInfoManager@ha;
+                         lwz      r11, s_instance__Q26System15RaceInfoManager@l(r11);
                          lbz      r11, 0xB93(r11);
                          andi.    r11, r11, 2;
                          bne-     UNDEF_80869e20;

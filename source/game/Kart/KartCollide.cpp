@@ -1,5 +1,5 @@
 #include "KartCollide.h"
-#include <System/RaceConfig.h>
+#include <System/RaceInfo.h>
 
 namespace Kart
 {
@@ -20,7 +20,7 @@ REPLACE(
     if (state->b_OnlineRemote)
         return;
 
-    if (System::RaceConfig::s_instance->m_currentRace.IsBalloonBattle()) {
+    if (System::RaceInfoManager::s_instance->m_info.IsBalloonBattle()) {
         // Don't run for eliminated players
         if (state->b_BattleSideline || state->b_PostBattleSideline)
             return;

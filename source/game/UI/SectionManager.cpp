@@ -5,7 +5,7 @@
 #include <Boot/SystemManager.h>
 #include <System/MiiManager.h>
 #include <System/NandManager.h>
-#include <System/RaceConfig.h>
+#include <System/RaceInfo.h>
 #include <System/RootScene.h>
 #include <System/SaveManager.h>
 #include <egg/core/eggHeap.h>
@@ -58,37 +58,37 @@ void SectionManager::DebugBootSetup()
     m_nextSectionId = 0x1B;
     m_argsSection = 0x1B;
 
-    auto set = &System::RaceConfig::s_instance->m_nextRace;
+    auto set = &System::RaceInfoManager::s_instance->m_infoNext;
 
-    set->m_courseId = 0x22;
+    set->m_courseId = 0x20;
     set->m_playerCount = 12;
     set->m_hudCount = 1;
     set->m_localPlayerCount = 1;
-    set->m_gameMode = System::RaceConfig::RaceSetting::MODE_BATTLE;
+    set->m_gameMode = System::RaceInfo::MODE_BATTLE;
     set->m_players[0].m_characterId = 0x0A; // Yoshi
     set->m_players[0].m_vehicleId = 0x13; // Mach Bike
-    set->m_players[0].m_playerType = System::RaceConfig::Player::PLAYER_MASTER;
-    set->m_players[0].m_team = System::RaceConfig::Player::TEAM_NONE;
-    set->m_engineClass = System::RaceConfig::RaceSetting::CC_150;
+    set->m_players[0].m_playerType = System::RaceInfoPlayer::PLAYER_MASTER;
+    set->m_players[0].m_team = System::RaceInfoPlayer::TEAM_NONE;
+    set->m_engineClass = System::RaceInfo::CC_150;
     set->m_hudPlayerIds[0] = 0;
     set->m_lapCount = 3;
     set->m_cameraMode =
-      System::RaceConfig::RaceSetting::CAMERA_MODE_GAMEPLAY_INTRO;
-    set->m_legacyBattleMode = System::RaceConfig::RaceSetting::BATTLE_BALLOON;
-    set->m_battleMode = System::RaceConfig::RaceSetting::BATTLE_BALLOON;
+      System::RaceInfo::CAMERA_MODE_GAMEPLAY_INTRO;
+    set->m_legacyBattleMode = System::RaceInfo::BATTLE_BALLOON;
+    set->m_battleMode = System::RaceInfo::BATTLE_BALLOON;
 
     for (u32 i = 1; i < 6; i++) {
         set->m_players[i].m_characterId = 0x0A; // Yoshi
         set->m_players[i].m_vehicleId = 0x13; // Mach Bike
-        set->m_players[i].m_team = System::RaceConfig::Player::TEAM_NONE;
-        set->m_players[i].m_playerType = System::RaceConfig::Player::PLAYER_CPU;
+        set->m_players[i].m_team = System::RaceInfoPlayer::TEAM_NONE;
+        set->m_players[i].m_playerType = System::RaceInfoPlayer::PLAYER_CPU;
     }
 
     for (u32 i = 6; i < 12; i++) {
         set->m_players[i].m_characterId = 0x0A; // Yoshi
         set->m_players[i].m_vehicleId = 0x13; // Mach Bike
-        set->m_players[i].m_team = System::RaceConfig::Player::TEAM_NONE;
-        set->m_players[i].m_playerType = System::RaceConfig::Player::PLAYER_CPU;
+        set->m_players[i].m_team = System::RaceInfoPlayer::TEAM_NONE;
+        set->m_players[i].m_playerType = System::RaceInfoPlayer::PLAYER_CPU;
     }
 }
 

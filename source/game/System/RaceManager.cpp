@@ -1,5 +1,5 @@
 #include "RaceManager.h"
-#include "RaceConfig.h"
+#include "RaceInfo.h"
 #include <Kart/KartMove.h>
 #include <Kart/KartObjectManager.h>
 #include <Object/BattleBalloon.h>
@@ -10,7 +10,47 @@ namespace System
 
 EXTERN_DATA(
   0x809BD730, //
-  RaceManager* System::RaceManager::s_instance
+  RaceManager* RaceManager::s_instance
+);
+
+EXTERN_TEXT(
+  0x8053308C, //
+  void RaceMode::Init()
+);
+
+EXTERN_TEXT(
+  0x805336D8, //
+  void RaceMode::CalcPosition()
+);
+
+EXTERN_TEXT(
+  0x80533BE8, //
+  void RaceMode::VT_0x20()
+);
+
+EXTERN_TEXT(
+  0x80533C34, //
+  void RaceMode::FinishIfNeeded(s32 finishedCount, s32 playerCount)
+);
+
+EXTERN_TEXT(
+  0x80535D14, //
+  bool RaceMode::IsFinishReady()
+);
+
+EXTERN_TEXT(
+  0x80535DE8, //
+  void RaceMode::ForceFinish()
+);
+
+EXTERN_TEXT(
+  0x80535E84, //
+  void RaceMode::Calc()
+);
+
+EXTERN_TEXT(
+  0x80535EF4, //
+  void* RaceMode::GetJugemPoint()
 );
 
 REPLACE_ASM( //
@@ -23,9 +63,9 @@ REPLACE_ASM( //
 /* 805362E4 90010034 */  stw      r0, 52(r1);
 /* 805362E8 39610030 */  addi     r11, r1, 48;
 /* 805362EC 4BAEB2A9 */  bl       UNDEF_80021594;
-/* 805362F0 3F20809C */  lis      r25, s_instance__Q26System10RaceConfig@ha;
+/* 805362F0 3F20809C */  lis      r25, s_instance__Q26System15RaceInfoManager@ha;
 /* 805362F4 7C9A2378 */  mr       r26, r4;
-/* 805362F8 80F9D728 */  lwz      r7, s_instance__Q26System10RaceConfig@l(r25);
+/* 805362F8 80F9D728 */  lwz      r7, s_instance__Q26System15RaceInfoManager@l(r25);
 /* 805362FC 7CBB2B78 */  mr       r27, r5;
 /* 80536300 7CDC3378 */  mr       r28, r6;
 /* 80536304 80070B70 */  lwz      r0, 2928(r7);
@@ -71,9 +111,9 @@ UNDEF_80536350:;
 /* 80536358 3BC00000 */  li       r30, 0;
 /* 8053635C 480001FC */  b        UNDEF_80536558;
 UNDEF_80536360:;
-/* 80536360 3C80809C */  lis      r4, s_instance__Q26System10RaceConfig@ha;
+/* 80536360 3C80809C */  lis      r4, s_instance__Q26System15RaceInfoManager@ha;
 /* 80536364 3BC00000 */  li       r30, 0;
-                         lwz      r4, s_instance__Q26System10RaceConfig@l(r4);
+                         lwz      r4, s_instance__Q26System15RaceInfoManager@l(r4);
                          // Check if teams is enabled
                          lwz      r10, 0xB90(r4);
                          rlwinm.  r0, r10, 0, 30, 30;
@@ -116,7 +156,7 @@ UNDEF_805363c8:;
 /* 805363D0 3803AAAB */  subi     r0, r3, 21845;
 /* 805363D4 3B800000 */  li       r28, 0;
 /* 805363D8 7C843A14 */  add      r4, r4, r7;
-/* 805363DC 3F20809C */  lis      r25, s_instance__Q26System10RaceConfig@ha;
+/* 805363DC 3F20809C */  lis      r25, s_instance__Q26System15RaceInfoManager@ha;
 /* 805363E0 7C602096 */  mulhw    r3, r0, r4;
 /* 805363E4 54600FFE */  srwi     r0, r3, 31;
 /* 805363E8 7C030214 */  add      r0, r3, r0;
@@ -185,7 +225,7 @@ UNDEF_805364A4:;
 /* 805364B8 A8030018 */  lha      r0, 24(r3);
 /* 805364BC 2C00FFFF */  cmpwi    r0, -1;
 /* 805364C0 40820020 */  bne-     UNDEF_805364e0;
-/* 805364C4 8079D728 */  lwz      r3, s_instance__Q26System10RaceConfig@l(r25);
+/* 805364C4 8079D728 */  lwz      r3, s_instance__Q26System15RaceInfoManager@l(r25);
 /* 805364C8 3BC00000 */  li       r30, 0;
 /* 805364CC 8BA30024 */  lbz      r29, 36(r3);
 /* 805364D0 7C7CE850 */  sub      r3, r29, r28;
@@ -270,7 +310,7 @@ REPLACE_ASM( //
   // clang-format off
 /* 805365C8 9421FFE0 */  stwu     r1, -32(r1);
 /* 805365CC 7C0802A6 */  mflr     r0;
-/* 805365D0 3CA0809C */  lis      r5, s_instance__Q26System10RaceConfig@ha;
+/* 805365D0 3CA0809C */  lis      r5, s_instance__Q26System15RaceInfoManager@ha;
 /* 805365D4 90010024 */  stw      r0, 36(r1);
 /* 805365D8 93E1001C */  stw      r31, 28(r1);
 /* 805365DC 3BE00000 */  li       r31, 0;
@@ -278,7 +318,7 @@ REPLACE_ASM( //
 /* 805365E4 7C9E2378 */  mr       r30, r4;
 /* 805365E8 93A10014 */  stw      r29, 20(r1);
 /* 805365EC 93810010 */  stw      r28, 16(r1);
-/* 805365F0 80C5D728 */  lwz      r6, s_instance__Q26System10RaceConfig@l(r5);
+/* 805365F0 80C5D728 */  lwz      r6, s_instance__Q26System15RaceInfoManager@l(r5);
 /* 805365F4 80060B70 */  lwz      r0, 2928(r6);
 /* 805365F8 2800000C */  cmplwi   r0, 12;
 /* 805365FC 418101F8 */  bgt-     UNDEF_805367f4;
@@ -320,16 +360,16 @@ UNDEF_80536638:;
 /* 80536640 3BE00000 */  li       r31, 0;
 /* 80536644 480001B4 */  b        UNDEF_805367f8;
 UNDEF_80536648:;
-/* 80536648 3CA0809C */  lis      r5, s_instance__Q26System10RaceConfig@ha;
+/* 80536648 3CA0809C */  lis      r5, s_instance__Q26System15RaceInfoManager@ha;
 /* 8053664C 3BE00000 */  li       r31, 0;
-                         lwz      r5, s_instance__Q26System10RaceConfig@l(r5);
+                         lwz      r8, s_instance__Q26System15RaceInfoManager@l(r5);
                          // Check if teams is enabled
-                         lwz      r10, 0xB90(r5);
+                         lwz      r10, 0xB90(r8);
                          rlwinm.  r0, r10, 0, 30, 30;
                          rlwinm   r5, r4, 0, 31, 31;
                          beq-     UNDEF_8053666C;
 /* 80536654 1C0400F0 */  mulli    r0, r4, 240;
-/* 8053665C 39050028 */  addi     r8, r5, 40;
+/* 8053665C 39050028 */  addi     r8, r8, 40;
 /* 80536660 7CA80214 */  add      r5, r8, r0;
 /* 80536668 80A500CC */  lwz      r5, 204(r5);
 UNDEF_8053666C:;
@@ -477,136 +517,9 @@ UNDEF_805367f8:;
   // clang-format on
 );
 
-REPLACE(
-  0x80538770, //
-  void RaceManager::BalloonBattle::PlayerHitByPlayer(
-    u32 attackerId, u32 targetId
-  )
-)
-{
-    // Don't run if the battle is already over
-    if (RaceManager::s_instance->HasReachedStage(4))
-        return;
-
-    auto balloonMgr = Object::BattleBalloonMgr::s_instance;
-
-    // Don't run if the player has no balloons
-    if (balloonMgr->m_playerData[targetId].m_count == 0)
-        return;
-
-    auto currentRace = &RaceConfig::s_instance->m_currentRace;
-
-    if (currentRace->m_modeFlags & RaceConfig::RaceSetting::FLAG_TEAMS) {
-        // Check to see if the attacker and target are on the same team.
-        if (currentRace->m_players[attackerId].m_team ==
-            currentRace->m_players[targetId].m_team)
-            return;
-    }
-
-    balloonMgr->PopBalloons(targetId, 0, 1, 0, 1, 0);
-
-    if (balloonMgr->m_playerData[targetId].m_count == 0) {
-        Kart::KartObjectManager::s_instance->GetObject(targetId)
-          ->GetKartMove()
-          ->BattleSideline();
-    }
-}
-
-REPLACE(
-  0x80538BC0, //
-  void RaceManager::BalloonBattle::PlayerFallOutOfBounds(u32 targetId)
-)
-{
-    // Don't run if the battle is already over
-    if (RaceManager::s_instance->HasReachedStage(4))
-        return;
-
-    auto balloonMgr = Object::BattleBalloonMgr::s_instance;
-
-    // Don't run if the player has no balloons
-    if (balloonMgr->m_playerData[targetId].m_count == 0)
-        return;
-
-    balloonMgr->PopBalloons(targetId, 1, 1, 0, 1, 0);
-
-    if (balloonMgr->m_playerData[targetId].m_count == 0) {
-        Kart::KartObjectManager::s_instance->GetObject(targetId)
-          ->GetKartMove()
-          ->BattleSideline();
-    }
-}
-
-REPLACE(
-  0x80538CE0, //
-  void RaceManager::BalloonBattle::PlayerHitByObject(u32 targetId)
-)
-{
-    // Don't run if the battle is already over
-    if (RaceManager::s_instance->HasReachedStage(4))
-        return;
-
-    auto balloonMgr = Object::BattleBalloonMgr::s_instance;
-
-    // Don't run if the player has no balloons
-    if (balloonMgr->m_playerData[targetId].m_count == 0)
-        return;
-
-    balloonMgr->PopBalloons(targetId, 0, 1, 0, 1, 0);
-
-    if (balloonMgr->m_playerData[targetId].m_count == 0) {
-        Kart::KartObjectManager::s_instance->GetObject(targetId)
-          ->GetKartMove()
-          ->BattleSideline();
-    }
-}
-
-REPLACE(
-  0x80538E00, //
-  void RaceManager::BalloonBattle::SidelinePlayer(u8 playerId)
-)
-{
-}
-
-EXTERN_REPL(
-  0x80539574, //
-  void RaceManager::BalloonBattle::CalcOld()
+EXTERN_TEXT(
+  0x805371A4, //
+  void RaceMode::VT_0x28()
 );
-
-REPLACE(
-  0x80539574, //
-  void RaceManager::BalloonBattle::Calc()
-)
-{
-    CalcOld();
-
-    if (m_raceManager->m_stage != 2) {
-        return;
-    }
-
-    u32 remainingCount = 0;
-    u32 otherRemaining = 0;
-
-    auto balloonMgr = Object::BattleBalloonMgr::s_instance;
-
-    for (u32 i = 0; i < Race::ModeInfo::s_modeInfo.m_playerCount; i++) {
-        bool remaining = balloonMgr->m_playerData[i].m_count > 0;
-
-        if (remaining) {
-            if (Race::ModeInfo::IsImportantPlayer(i)) {
-                remainingCount++;
-            } else {
-                otherRemaining++;
-            }
-        }
-    }
-
-    if (remainingCount == 0) {
-        EndRace();
-    }
-
-    if (remainingCount == 1 && otherRemaining == 0) {
-        EndRace();
-    }
-}
 
 } // namespace System
