@@ -14,11 +14,11 @@ REPLACE(
   BattleBalloonMgr::BattleBalloonMgr()
 )
 {
-    auto config = &System::RaceInfoManager::s_instance->m_info;
+    auto info = System::RaceInfoManager::GetInfo();
 
-    m_playerCount = config->m_playerCount;
+    m_playerCount = info->GetPlayerCount();
 
-    if (config->m_modeFlags & System::RaceInfo::FLAG_TEAMS) {
+    if (info->GetIsTeams()) {
         // Teams mode is only 2 colors: red and blue. You can't steal balloons
         // from your teammates, so assume that everyone can only have three
         // balloons from their own team.

@@ -38,7 +38,7 @@ EXTERN_TEXT(
 
 // 0x8052DD20: const RaceInfoPlayer* RaceInfo::GetPlayer(s32 playerIndex) const
 
-// 0x8052DD30: u8 RaceInfoManager::GetRacePlayerCount()
+// 0x8052DD30: u8 RaceInfoManager::GetPlayerCount()
 
 EXTERN_TEXT(
   0x8052DD40, //
@@ -97,7 +97,7 @@ EXTERN_TEXT(
 
 EXTERN_TEXT(
   0x8052ED28, //
-  void RaceInfo::PostInitInputs()
+  void RaceInfo::PostPlayersSetupInputs(RaceInfo* prev)
 );
 
 EXTERN_TEXT(
@@ -142,10 +142,72 @@ EXTERN_TEXT(
   void RaceInfo::SetupCompetitionInfo()
 );
 
-EXTERN_TEXT(
+REPLACE(
   0x8052FB90, //
   void RaceInfo::SetupRace(RaceInfo* prev)
-);
+)
+{
+    if (GetIsCompetition()) {
+        SetupCompetitionInfo();
+    }
+
+    PlayersSetupStartOrder();
+
+    for (u8 i = 0; i < 12; i++) {
+        RaceInfoPlayer* player = GetPlayer(i);
+        player->m_screenId = -1;
+        player->m_inputIndex = -1;
+    }
+
+    for (u8 i = 0; i < 4; i++) {
+        m_screenPlayerIds[i] = -1;
+    }
+
+    u8 playerCount = 0;
+    u8 screenCount = 0;
+    u8 localPlayerCount = 0;
+    PlayersComputeCount(&playerCount, &screenCount, &localPlayerCount);
+
+    u8 screenCountRace = screenCount;
+
+    if (m_cameraMode == CAMERA_MODE_GAMEPLAY_INTRO) {
+        screenCount = 1;
+    }
+
+    if (m_raceNum == 0 && !IsWiFiMode()) {
+        for (u8 i = 0; i < playerCount; i++) {
+            RaceInfoPlayer* player = GetPlayer(i);
+            player->m_prevScore = 0;
+            player->SetStartPosition(playerCount - i);
+            player->SetGPRank(playerCount - i);
+        }
+    }
+
+    PlayersSetupInputs(screenCount);
+    PostPlayersSetupInputs(prev);
+    SetupRNGSeed();
+
+    m_playerCount = playerCount;
+    m_screenCount = screenCount;
+    m_screenCountRace = screenCountRace;
+    m_localPlayerCount = localPlayerCount;
+
+    if (IsBattle()) {
+        switch (m_battleMode) {
+        case BATTLE_MODE_BALLOON:
+            m_legacyBattleMode = BATTLE_MODE_BALLOON;
+            break;
+
+        case BATTLE_MODE_COIN:
+            m_legacyBattleMode = BATTLE_MODE_COIN;
+            break;
+
+        case BATTLE_MODE_SHINE_THIEF:
+            m_legacyBattleMode = BATTLE_MODE_COIN;
+            break;
+        }
+    }
+}
 
 // This is so our new fields get copied
 REPLACE(
@@ -155,20 +217,6 @@ REPLACE(
 {
     m_infoNext.SetupRace(&m_info);
     m_info = m_infoNext;
-
-    switch (m_infoNext.m_battleMode) {
-    case RaceInfo::BATTLE_BALLOON:
-        m_info.m_legacyBattleMode = RaceInfo::BATTLE_BALLOON;
-        break;
-
-    case RaceInfo::BATTLE_COIN:
-        m_info.m_legacyBattleMode = RaceInfo::BATTLE_COIN;
-        break;
-
-    case RaceInfo::BATTLE_SHINE_THIEF:
-        m_info.m_legacyBattleMode = RaceInfo::BATTLE_COIN;
-        break;
-    }
 }
 
 } // namespace System

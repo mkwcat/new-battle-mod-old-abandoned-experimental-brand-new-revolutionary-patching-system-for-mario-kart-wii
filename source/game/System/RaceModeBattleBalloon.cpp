@@ -18,12 +18,12 @@ REPLACE(
     if (balloonMgr->m_playerData[targetId].m_count == 0)
         return;
 
-    auto currentRace = &RaceInfoManager::s_instance->m_info;
+    auto info = RaceInfoManager::GetInfo();
 
-    if (currentRace->m_modeFlags & RaceInfo::FLAG_TEAMS) {
+    if (info->GetIsTeams()) {
         // Check to see if the attacker and target are on the same team.
-        if (currentRace->m_players[attackerId].m_team ==
-            currentRace->m_players[targetId].m_team)
+        if (info->GetPlayer(attackerId)->GetTeam() == //
+            info->GetPlayer(targetId)->GetTeam())
             return;
     }
 
@@ -101,6 +101,8 @@ REPLACE(
   void RaceModeBattleBalloon::Calc()
 )
 {
+    auto info = RaceInfoManager::GetInfo();
+
     CalcBase();
 
     if (m_raceManager->m_stage != 2) {
@@ -112,7 +114,7 @@ REPLACE(
 
     auto balloonMgr = Object::BattleBalloonMgr::s_instance;
 
-    for (u32 i = 0; i < Race::ModeInfo::s_modeInfo.m_playerCount; i++) {
+    for (u32 i = 0; i < info->GetPlayerCount(); i++) {
         bool remaining = balloonMgr->m_playerData[i].m_count > 0;
 
         if (remaining) {
@@ -132,26 +134,25 @@ REPLACE(
         ForceFinish();
     }
 
-    if (!Race::ModeInfo::s_modeInfo.m_isTeams) {
+    if (!info->GetIsTeams()) {
         return;
     }
 
     bool redTeam = false;
     bool blueTeam = false;
-    auto currentRace = &RaceInfoManager::s_instance->m_info;
 
-    for (u32 i = 0; i < Race::ModeInfo::s_modeInfo.m_playerCount; i++) {
+    for (u32 i = 0; i < info->GetPlayerCount(); i++) {
         bool remaining = balloonMgr->m_playerData[i].m_count > 0;
 
         if (!remaining) {
             continue;
         }
 
-        if (currentRace->m_players[i].m_team == RaceInfoPlayer::TEAM_RED) {
+        if (info->GetPlayer(i)->GetTeam() == RaceInfoPlayer::TEAM_RED) {
             redTeam = true;
         }
 
-        if (currentRace->m_players[i].m_team == RaceInfoPlayer::TEAM_BLUE) {
+        if (info->GetPlayer(i)->GetTeam() == RaceInfoPlayer::TEAM_BLUE) {
             blueTeam = true;
         }
 
