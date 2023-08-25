@@ -178,6 +178,9 @@ typedef struct {
     }                                                                          \
     _Pragma("GCC diagnostic pop");
 
+#define EXTERN_TEXT_INLINE(addr, prototype)                                    \
+    __attribute__((section(".external." #addr))) prototype
+
 #define EXTERN_TEXT_STATIC(addr, prototype) EXTERN_TEXT(addr, prototype)
 
 #define EXTERN_REPL(addr, prototype)                                           \

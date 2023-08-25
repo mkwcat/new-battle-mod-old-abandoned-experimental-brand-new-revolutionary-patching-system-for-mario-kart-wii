@@ -1,14 +1,9 @@
 #pragma once
 
 #include "GhostData.h"
-
-// A class for loading a prm file from the disc, an unused file type
-class ParamFile
-{
-public:
-    virtual ~ParamFile();
-    u8 _0[0x18 - 0x0];
-};
+#include "Mii.h"
+#include "PlayerRating.h"
+#include <Boot/ParameterFile.h>
 
 namespace System
 {
@@ -74,21 +69,6 @@ static_assert(sizeof(RaceInfoMission) == 0x70);
 class RaceInfoPlayer
 {
 public:
-    EXTERN_TEXT(
-      0x8052D96C, //
-      RaceInfoPlayer()
-    );
-
-    EXTERN_TEXT(
-      0x8052DC68, //
-      virtual ~RaceInfoPlayer()
-    );
-
-    EXTERN_TEXT(
-      0x8052DAF0, //
-      u32 ComputeGPRank()
-    );
-
     enum EPlayerType {
         PLAYER_MASTER,
         PLAYER_CPU,
@@ -104,24 +84,93 @@ public:
         TEAM_NONE
     };
 
+    /* 0x8052D96C */
+    RaceInfoPlayer();
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT(
+      0x8052DC68, //
+      virtual ~RaceInfoPlayer()
+    );
+
+    /* 0x8052E640 */
+    void Reset();
+
+    s32 GetCharacter()
+    {
+        return m_characterId;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052E42C, //
+      void SetCharacter(s32 characterId)
+    )
+    {
+        m_characterId = characterId;
+    }
+
+    s32 GetVehicle()
+    {
+        return m_vehicleId;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052E444, //
+      void SetVehicle(s32 vehicleId)
+    )
+    {
+        m_vehicleId = vehicleId;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052E44C, //
+      void SetType(EPlayerType type)
+    )
+    {
+        m_type = type;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052DD18, //
+      ETeam GetTeam() const
+    )
+    {
+        return m_team;
+    }
+
+    void SetTeam(ETeam team)
+    {
+        m_team = team;
+    }
+
+    /* 0x8052DA50 */
+    void AppendParamFile(Boot::ParameterFile* file);
+
+    /* 0x8052DAF0 */
+    u32 ComputeGPRank();
+
     /* 0x04 */ u8 m_0x04;
-    /* 0x05 */ u8 m_localPlayerId;
-    /* 0x06 */ u8 m_controllerId;
-    /* 0x08 */ u32 m_vehicleId;
-    /* 0x0C */ u32 m_characterId;
-    /* 0x10 */ EPlayerType m_playerType;
-    /* 0x14 - 0xCC */ u8 _0x14[0xCC - 0x14];
+    /* 0x05 */ u8 m_screenId;
+    /* 0x06 */ u8 m_inputIndex;
+    /* 0x08 */ s32 m_vehicleId;
+    /* 0x0C */ s32 m_characterId;
+    /* 0x10 */ EPlayerType m_type;
+    /* 0x14 */ Mii m_mii;
     /* 0xCC */ ETeam m_team;
-    /* 0xD0 - 0xD8 */ u8 _0xD0[0xD8 - 0xD0];
+    /* 0xD0 */ s32 m_controllerId;
+    /* 0xD4 */ u32 m_0xD4;
     /* 0xD8 */ u16 m_lastScore;
     /* 0xDA */ u16 m_score;
     /* 0xDC */ u16 m_0xDC;
     /* 0xDE */ u16 m_gpRankScore;
-    /* 0xE0 */ u8 m_0xE0;
-    /* 0xE1 */ u8 m_lastFinishPos;
-    /* 0xE2 - 0xE8 */ u8 _0xE2[0xE8 - 0xE2];
-    /* 0xE8 */ u16 m_rating; // online VR/BR
-    /* 0xEA - 0xF0 */ u8 _0xEA[0xF0 - 0xEA];
+    /* 0xE0 */ u8 m_gpRank;
+    /* 0xE1 */ u8 m_startPos;
+    /* 0xE4 */ PlayerRating m_rating;
+    /* 0xEC */ u8 m_0xEC;
 };
 
 static_assert(sizeof(RaceInfoPlayer) == 0xF0);
@@ -129,60 +178,33 @@ static_assert(sizeof(RaceInfoPlayer) == 0xF0);
 class RaceInfo
 {
 public:
-    EXTERN_TEXT(
-      0x8052DBC8, //
-      RaceInfo()
-    );
-
-    virtual ~RaceInfo();
-
-    EXTERN_TEXT(
-      0x8052ED28, //
-      void SetupNextRaceInput(const RaceInfo* lastRace)
-    );
-
-    EXTERN_TEXT(
-      0x8052FB90, //
-      void InitRace(RaceInfo* race)
-    );
-
-    bool IsBattle()
-    {
-        return m_gameMode == MODE_BATTLE || m_gameMode == MODE_PUBLIC_BATTLE ||
-               m_gameMode == MODE_PRIVATE_BATTLE;
-    }
-
-    bool IsBalloonBattle()
-    {
-        return IsBattle() && m_battleMode == BATTLE_BALLOON;
-    }
-
     enum EEngineClass {
         CC_50 = 0,
         CC_100 = 1,
         CC_150 = 2,
         // Note: Battle mode actually sets it to 50cc (which is ignored by
         // code), but setting it to this in other modes results in Battle CC
-        CC_BATTLE = 3
+        CC_BATTLE = 3,
     };
 
     enum EGameMode {
         MODE_GRAND_PRIX = 0,
         MODE_VS_RACE = 1,
-        MODE_TIME_TRIAL = 2,
+        MODE_TIME_ATTACK = 2,
         MODE_BATTLE = 3,
-        MODE_MISSION_TOURNAMENT = 4,
+        MODE_MISSION = 4,
         MODE_GHOST_RACE = 5,
         MODE_6 = 6,
-        MODE_PRIVATE_VS = 7,
-        MODE_PUBLIC_VS = 8,
-        MODE_PUBLIC_BATTLE = 9,
-        MODE_PRIVATE_BATTLE = 10,
+        MODE_WIFI_FRIEND_VS = 7,
+        MODE_WIFI_PUBLIC_VS = 8,
+        MODE_WIFI_PUBLIC_BATTLE = 9,
+        MODE_WIFI_FRIEND_BATTLE = 10,
         MODE_AWARD = 11,
-        MODE_CREDITS = 12
+        MODE_CREDITS = 12,
     };
 
     enum ECameraMode {
+
         CAMERA_MODE_GAMEPLAY_NO_INTRO,
         CAMERA_MODE_REPLAY,
         CAMERA_MODE_TITLE_ONE_PLAYER,
@@ -209,21 +231,118 @@ public:
         CPU_EASY = 0,
         CPU_NORMAL = 1,
         CPU_HARD = 2,
-        CPU_NONE = 3
+        CPU_NONE = 3,
     };
 
     enum EItemMode {
         ITEM_BALANCED = 0,
         ITEM_FRANTIC = 1,
         ITEM_STRATEGIC = 2,
-        ITEM_NONE = 3
+        ITEM_NONE = 3,
     };
 
     enum ModeFlags {
         FLAG_MIRROR = 1 << 0,
         FLAG_TEAMS = 1 << 1,
-        FLAG_TOURNAMENT = 1 << 2
+        FLAG_COMPETITION = 1 << 2,
     };
+
+    /* 0x8052DBC8 */
+    RaceInfo();
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT(
+      0x805300F4, //
+      virtual ~RaceInfo()
+    );
+
+    /* 0x8052E668 */
+    void Reset();
+
+    /* 0x8052E770 */
+    u8 NextRace();
+
+    /* 0x8052DCA8 */
+    void ComputeWinningTeam();
+
+    /* 0x8052E950 */
+    void UpdatePoints();
+
+    /* 0x8052ED28 */
+    void PostInitInputs();
+
+    /* 0x8052EEF0 */
+    void SetupGhost(u8 playerId, u8 inputIndex);
+
+    /* 0x8052EFD4 */
+    void PlayersReset();
+
+    /* 0x8052EFD4 */
+    void PlayersSetup();
+
+    /* 0x8052F1E0 */
+    void PlayersSetupStartOrder();
+
+    /* 0x8052F4E8 */
+    void PlayersSetupInputs(u8 screenCount);
+
+    /* 0x8052F788 */
+    void PlayersComputeCount( //
+      u8* playerCount, u8* screenCount, u8* localPlayerCount
+    );
+
+    /* 0x8052F924 */
+    void SetupRNGSeed();
+
+    /* 0x8052FA0C */
+    void SetupCompetitionInfo();
+
+    /* 0x8052FB90 */
+    void SetupRace(RaceInfo* prev);
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052ED18, //
+      ECameraMode GetCameraMode()
+    )
+    {
+        return m_cameraMode;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052E434, //
+      RaceInfoPlayer* GetPlayer(u8 playerIndex)
+    )
+    {
+        return &m_players[playerIndex];
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052DD20, //
+      const RaceInfoPlayer* GetPlayer(u8 playerIndex) const
+    )
+    {
+        return &m_players[playerIndex];
+    }
+
+    u8 GetPlayerCount() const
+    {
+        return m_playerCount;
+    }
+
+    bool IsBattle() const
+    {
+        return m_gameMode == MODE_BATTLE ||
+               m_gameMode == MODE_WIFI_PUBLIC_BATTLE ||
+               m_gameMode == MODE_WIFI_FRIEND_BATTLE;
+    }
+
+    bool IsBalloonBattle() const
+    {
+        return IsBattle() && m_battleMode == BATTLE_BALLOON;
+    }
 
     /* 0x004 */ u8 m_playerCount;
     /* 0x005 */ u8 m_hudCount;
@@ -252,7 +371,7 @@ public:
 
 static_assert(sizeof(RaceInfo) == 0xBF0);
 
-class RaceInfoManager : public ParamFile
+class RaceInfoManager : public Boot::ParameterFile
 {
 public:
     static RaceInfoManager* s_instance;
@@ -267,12 +386,31 @@ public:
       virtual ~RaceInfoManager()
     );
 
+    /* 0x8052DD40 */
+    void Init();
+
+    /* 0x8052E454 */
+    void Reset();
+
+    /* 0x8052E870 */
+    s32 GetUpdatedRating(u8 playerId);
+
+    /* 0x805302C4 */
+    void SetupRace();
+
     virtual int UNDEF_80009DDC();
     virtual int UNDEF_80532078(); // just a blr
     virtual int UNDEF_80532074(); // just a blr
     virtual int UNDEF_80532070(); // just a blr
 
-    void InitRace(); // Replaced
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052DD30, //
+      static u8 GetRacePlayerCount()
+    )
+    {
+        return s_instance->m_info.GetPlayerCount();
+    }
 
     /* 0x001C */ const u8* m_0x1C;
 

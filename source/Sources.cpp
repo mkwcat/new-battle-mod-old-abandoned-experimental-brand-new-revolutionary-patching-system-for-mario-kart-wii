@@ -23,6 +23,7 @@
 #include "game/System/InputManager.cpp"
 #include "game/System/MiiManager.cpp"
 #include "game/System/NandManager.cpp"
+// MKW: 0x8052CEF8 - 0x8052D298
 #include "game/System/PlayerRating.cpp"
 #include "game/System/RaceEnemyLineController.cpp"
 #include "game/System/RaceInfo.cpp"

@@ -10,13 +10,17 @@ class Page;
 
 class Section
 {
-    void AddPages(SectionID sectionId);
-    EXTERN_TEXT(0x80622D08, void AddPage(PageID pageId));
+    void AddPages(ESectionID sectionId);
+
+    EXTERN_TEXT(
+      0x80622D08, //
+      void AddPage(EPageID pageId)
+    );
 
 public:
-    /* 0x000 */ SectionID m_id;
+    /* 0x000 */ ESectionID m_id;
     /* 0x004 */ u32 m_unk_0x4;
-    /* 0x008 */ Page* m_pages[static_cast<u32>(PageID::Count)];
+    /* 0x008 */ Page* m_pages[PAGE_ID_COUNT];
 };
 
 } // namespace UI

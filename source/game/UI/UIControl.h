@@ -12,12 +12,12 @@ namespace UI
 {
 
 #define UI_H_INSTANTIATE_TYPEINFO()                                            \
-  public:                                                                      \
-  _Pragma("GCC diagnostic push");                                              \
-  _Pragma("GCC diagnostic ignored \"-Winconsistent-missing-override\"");       \
-  INSTANTIATE_TYPEINFO;                                                        \
-  virtual const char* RTTI_TypeName() const;                                   \
-  _Pragma("GCC diagnostic pop");
+public:                                                                        \
+    _Pragma("GCC diagnostic push");                                            \
+    _Pragma("GCC diagnostic ignored \"-Winconsistent-missing-override\"");     \
+    INSTANTIATE_TYPEINFO;                                                      \
+    virtual const char* RTTI_TypeName() const;                                 \
+    _Pragma("GCC diagnostic pop");
 
 // There is a limitation in the method we define external data in that it 1.
 // can't be defined in a header file, and 2. will need to rerun the static
@@ -28,30 +28,30 @@ namespace UI
 // rely on.
 
 #define UI_H_EXTERN_TYPEINFO(_GETTYPEINFO)                                     \
-  public:                                                                      \
-  _Pragma("GCC diagnostic push");                                              \
-  _Pragma("GCC diagnostic ignored \"-Winconsistent-missing-override\"");       \
-  EXTERN_TEXT(                                                                 \
-    _GETTYPEINFO,                                                              \
-    virtual const nw4r::ut::detail::RuntimeTypeInfo* GetRuntimeTypeInfo()      \
-  );                                                                           \
-  virtual const char* RTTI_TypeName() const;                                   \
-  _Pragma("GCC diagnostic pop");                                               \
-  static const nw4r::ut::detail::RuntimeTypeInfo typeInfo
+public:                                                                        \
+    _Pragma("GCC diagnostic push");                                            \
+    _Pragma("GCC diagnostic ignored \"-Winconsistent-missing-override\"");     \
+    EXTERN_TEXT(                                                               \
+      _GETTYPEINFO,                                                            \
+      virtual const nw4r::ut::detail::RuntimeTypeInfo* GetRuntimeTypeInfo()    \
+    );                                                                         \
+    virtual const char* RTTI_TypeName() const;                                 \
+    _Pragma("GCC diagnostic pop");                                             \
+    static const nw4r::ut::detail::RuntimeTypeInfo typeInfo
 
 #define UI_CPP_EXTERN_TYPEINFO_DERIVED(_ADDR, _OBJ, _BASE)                     \
-  EXTERN_DATA(                                                                 \
-    _ADDR,                                                                     \
-    const nw4r::ut::detail::RuntimeTypeInfo _OBJ::typeInfo(&_BASE::typeInfo)   \
-  )
+    EXTERN_DATA(                                                               \
+      _ADDR,                                                                   \
+      const nw4r::ut::detail::RuntimeTypeInfo _OBJ::typeInfo(&_BASE::typeInfo) \
+    )
 
 #define UI_CPP_EXTERN_TYPEINFO_ROOT(_ADDR, _OBJ)                               \
-  EXTERN_DATA(                                                                 \
-    _ADDR, const nw4r::ut::detail::RuntimeTypeInfo _OBJ::typeInfo(nullptr)     \
-  )
+    EXTERN_DATA(                                                               \
+      _ADDR, const nw4r::ut::detail::RuntimeTypeInfo _OBJ::typeInfo(nullptr)   \
+    )
 
 #define UI_CPP_EXTERN_TYPENAME(_ADDR, _OBJ)                                    \
-  EXTERN_TEXT(_ADDR, const char* _OBJ::RTTI_TypeName() const)
+    EXTERN_TEXT(_ADDR, const char* _OBJ::RTTI_TypeName() const)
 
 struct ControlPosition {
     ControlPosition()
@@ -96,13 +96,13 @@ public:
       /* VT+0x1C */ virtual void OnCalc()
     );
 
-    void PageEvent(Page::SlideDir dir, PageID page);
+    void PageEvent(Page::SlideDir dir, EPageID page);
 
     /* VT+0x20 */ virtual void SolveAnim();
 
     EXTERN_TEXT(
       0x805BD2DC, //
-      /* VT+0x24 */ virtual void OnPageEvent(Page::SlideDir dir, PageID page)
+      /* VT+0x24 */ virtual void OnPageEvent(Page::SlideDir dir, EPageID page)
     );
 
 public:
@@ -221,7 +221,7 @@ public:
     /**
      * Set the text of every pane in the layout to the message ID.
      */
-    void SetMessageAll(int msgId, MsgFormatParam* param = nullptr);
+    void SetMessageRecursive(int msgId, MsgFormatParam* param = nullptr);
 
     /**
      * Clear the text of the specified pane.
@@ -231,7 +231,7 @@ public:
     /**
      * Clear the text of every pane in the layout.
      */
-    void ClearMessageAll();
+    void ClearMessageRecursive();
 
     /**
      * Set the picture layout.

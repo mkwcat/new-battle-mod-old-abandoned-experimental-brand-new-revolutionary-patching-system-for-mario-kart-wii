@@ -47,7 +47,7 @@ EXTERN_TEXT(
 
 EXTERN_TEXT(
   0x8063D0E0, //
-  void UIControl::PageEvent(Page::SlideDir dir, PageID page)
+  void UIControl::PageEvent(Page::SlideDir dir, EPageID page)
 );
 
 EXTERN_TEXT(
@@ -174,7 +174,7 @@ EXTERN_TEXT(
 
 EXTERN_TEXT(
   0x8063DDB4, //
-  void LayoutUIControl::SetMessageAll(int msgId, MsgFormatParam* param)
+  void LayoutUIControl::SetMessageRecursive(int msgId, MsgFormatParam* param)
 );
 
 // 0x8063DDF4: Function of class defined in SetMessageAll
@@ -186,7 +186,7 @@ EXTERN_TEXT(
 
 EXTERN_TEXT(
   0x8063DFC8, //
-  void LayoutUIControl::ClearMessageAll()
+  void LayoutUIControl::ClearMessageRecursive()
 );
 
 // 8063E000: Function of class defined in ClearMessageAll

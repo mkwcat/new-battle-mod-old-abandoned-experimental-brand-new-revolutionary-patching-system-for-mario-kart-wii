@@ -33,7 +33,7 @@ LOADER_DEPS	:= $(LOADER_OFILES:.o=.d)
 
 DUMMY != mkdir -p $(BUILD)/source $(BUILD)/loader $(DVDDATA)
 
-CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O3 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -ffunction-sections -fdata-sections -Isource -Isource/platform -Isource/game -DLOADER_REL_LZ
+CFLAGS := --target=powerpc-gekko-ibm-kuribo-eabi -O0 -fno-rtti -fno-short-enums -fshort-wchar -fdeclspec -fno-exceptions -nodefaultlibs -ffreestanding -ffunction-sections -fdata-sections -Isource -Isource/platform -Isource/game -DLOADER_REL_LZ -fkeep-static-consts -femit-all-decls
 
 
 default: $(BUILD)/$(ARCHIVE).arc $(BUILD)/$(LOADER).bin

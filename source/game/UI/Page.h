@@ -24,7 +24,7 @@ public:
     };
 
 private:
-    PageID m_id;
+    EPageID m_id;
 };
 
 } // namespace UI
