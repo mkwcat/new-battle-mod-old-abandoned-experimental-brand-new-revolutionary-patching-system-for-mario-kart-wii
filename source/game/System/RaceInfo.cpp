@@ -1,7 +1,7 @@
 // System/RaceInfo.cpp
 // MKW: 0x8052D96C - 0x80532084
 //
-// Decompiled by vabold
+// References:
 // https://github.com/riidefi/mkw/blob/master/source/game/system/RaceConfig.cpp
 
 #include "RaceInfo.h"
@@ -45,11 +45,11 @@ EXTERN_TEXT(
   void RaceInfoManager::Init()
 );
 
-// 0x8052E42C: void RaceInfoPlayer::SetCharacter(s32 characterId)
+// 0x8052E42C: void RaceInfoPlayer::SetCharacter(ECharacter character)
 
 // 0x8052E434: RaceInfoPlayer* RaceInfo::GetPlayer(s32 playerIndex)
 
-// 0x8052E444: void RaceInfoPlayer::SetVehicle(s32 vehicleId)
+// 0x8052E444: void RaceInfoPlayer::SetVehicle(EVehicle vehicle)
 
 // 0x8052E44C: void RaceInfoPlayer::SetType(RaceInfoPlayer::EPlayerType type)
 
@@ -65,7 +65,7 @@ EXTERN_TEXT(
 
 // 0x8052E658: void RaceInfoPlayer::SetStartPosition(u8 pos)
 
-// 0x8052E660: void RaceInfoPlayer::SetGPRank(u8 rank)
+// 0x8052E660: void RaceInfoPlayer::SetGrandPrixRank(u8 rank)
 
 EXTERN_TEXT(
   0x8052E668, //
@@ -155,8 +155,8 @@ REPLACE(
 
     for (u8 i = 0; i < 12; i++) {
         RaceInfoPlayer* player = GetPlayer(i);
-        player->m_screenId = -1;
-        player->m_inputIndex = -1;
+        player->SetScreenID(-1);
+        player->SetInputIndex(-1);
     }
 
     for (u8 i = 0; i < 4; i++) {
@@ -177,9 +177,9 @@ REPLACE(
     if (m_raceNum == 0 && !IsWiFiMode()) {
         for (u8 i = 0; i < playerCount; i++) {
             RaceInfoPlayer* player = GetPlayer(i);
-            player->m_prevScore = 0;
+            player->SetPreviousScore(0);
             player->SetStartPosition(playerCount - i);
-            player->SetGPRank(playerCount - i);
+            player->SetGrandPrixRank(playerCount - i);
         }
     }
 
@@ -195,21 +195,40 @@ REPLACE(
     if (IsBattle()) {
         switch (m_battleMode) {
         case BATTLE_MODE_BALLOON:
-            m_legacyBattleMode = BATTLE_MODE_BALLOON;
+            m_battleBaseMode = BATTLE_MODE_BALLOON;
             break;
 
         case BATTLE_MODE_COIN:
-            m_legacyBattleMode = BATTLE_MODE_COIN;
+            m_battleBaseMode = BATTLE_MODE_COIN;
             break;
 
         case BATTLE_MODE_SHINE_THIEF:
-            m_legacyBattleMode = BATTLE_MODE_COIN;
+            m_battleBaseMode = BATTLE_MODE_COIN;
             break;
         }
     }
 }
 
-// This is so our new fields get copied
+EXTERN_TEXT(
+  0x8052FE58, //
+  RaceInfoManager* RaceInfoManager::CreateInstance()
+);
+
+EXTERN_TEXT(
+  0x8052FFE8, //
+  void RaceInfoManager::DestroyInstance()
+);
+
+// 0x80530038: RaceInfoManager::~RaceInfoManager()
+
+// 0x805300F4: RaceInfo::~RaceInfo()
+
+EXTERN_TEXT(
+  0x8053015C, //
+  RaceInfoManager::RaceInfoManager()
+);
+
+// Inlines a function we replace
 REPLACE(
   0x805302C4, //
   void RaceInfoManager::SetupRace()
@@ -218,5 +237,42 @@ REPLACE(
     m_infoNext.SetupRace(&m_info);
     m_info = m_infoNext;
 }
+
+// This is so our new fields get copied
+REPLACE(
+  0x805305AC, //
+  RaceInfo& RaceInfo::operator=(const RaceInfo& from)
+)
+{
+    *this = from;
+    return *this;
+}
+
+EXTERN_TEXT(
+  0x80530864, //
+  void RaceInfoManager::SetupAwards()
+);
+
+// 0x80530F0C: bool RaceInfo::GetIsTeams() const
+
+// 0x80530F18: u8 RaceInfoPlayer::GetGrandPrixRank() const
+
+// 0x80530F20: RaceInfoPlayer::ECharacter RaceInfoPlayer::GetCharacter() const
+
+// 0x80530F28: RaceInfoPlayer::EVehicle RaceInfoPlayer::GetVehicle() const
+
+// 0x80530F30: void RaceInfoPlayer::SetMii(const Mii& mii)
+
+// 0x80531068: const Mii& RaceInfoPlayer::GetMii() const
+
+EXTERN_TEXT(
+  0x80531070, //
+  void RaceInfoManager::SetupCredits()
+);
+
+EXTERN_TEXT(
+  0x80531CE4, //
+  u8 RaceInfoManager::NextRace()
+);
 
 } // namespace System

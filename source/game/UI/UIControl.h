@@ -96,13 +96,15 @@ public:
       /* VT+0x1C */ virtual void OnCalc()
     );
 
-    void PageEvent(Page::SlideDir dir, EPageID page);
+    void PageEvent(Page::EFadeDirection dir, EPageID page);
 
     /* VT+0x20 */ virtual void SolveAnim();
 
     EXTERN_TEXT(
       0x805BD2DC, //
-      /* VT+0x24 */ virtual void OnPageEvent(Page::SlideDir dir, EPageID page)
+      /* VT+0x24 */ virtual void OnPageEvent(
+        Page::EFadeDirection dir, EPageID page
+      )
     );
 
 public:
@@ -172,8 +174,8 @@ public:
     /* 0x7C */ f32 m_zIndex;
     /* 0x80 */ bool m_hidden;
     /* 0x84 */ u32 m_drawPass;
-    /* 0x88 */ bool m_slideAnimation;
-    /* 0x8C */ f32 m_slideDelay;
+    /* 0x88 */ bool m_fadeAnim;
+    /* 0x8C */ f32 m_fadeDelay;
     /* 0x90 */ s32 m_forwardSound;
     /* 0x94 */ s32 m_backSound;
 };

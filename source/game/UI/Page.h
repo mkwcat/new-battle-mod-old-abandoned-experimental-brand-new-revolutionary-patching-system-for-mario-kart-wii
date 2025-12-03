@@ -18,9 +18,9 @@ public:
       virtual ~Page()
     );
 
-    enum class SlideDir {
-        SLIDE_FORWARD = 0,
-        SLIDE_BACK = 1,
+    enum EFadeDirection {
+        FADE_DIRECTION_FORWARD = 0,
+        FADE_DIRECTION_BACK = 1,
     };
 
 private:

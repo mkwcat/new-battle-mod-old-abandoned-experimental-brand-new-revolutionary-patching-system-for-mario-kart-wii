@@ -47,7 +47,7 @@ EXTERN_TEXT(
 
 EXTERN_TEXT(
   0x8063D0E0, //
-  void UIControl::PageEvent(Page::SlideDir dir, EPageID page)
+  void UIControl::PageEvent(Page::EFadeDirection dir, EPageID page)
 );
 
 EXTERN_TEXT(

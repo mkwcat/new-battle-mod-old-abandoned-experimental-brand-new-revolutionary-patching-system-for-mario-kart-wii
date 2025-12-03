@@ -70,7 +70,7 @@ REPLACE(
         }
     }
 
-    if (System::RaceInfoManager::s_instance->m_info.IsBalloonBattle() &&
+    if (System::RaceInfoManager::GetInfo()->IsBalloonBattle() &&
         state->b_BattleSideline && !state->b_OnlineRemote) {
         // Increase to 90 frames if it's an out of bounds sideline. This is to
         // prevent the player shrink from occurring before the balloon actually

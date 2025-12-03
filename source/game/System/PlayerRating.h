@@ -22,6 +22,11 @@ public:
         return m_points;
     }
 
+    void SetPoints(u16 points)
+    {
+        m_points = points;
+    }
+
     /* 0x8052CEF8 */
     static f32 Calc(f32 x, s32 param_2);
 

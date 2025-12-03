@@ -20,7 +20,7 @@ REPLACE(
     if (state->b_OnlineRemote)
         return;
 
-    if (System::RaceInfoManager::s_instance->m_info.IsBalloonBattle()) {
+    if (System::RaceInfoManager::GetInfo()->IsBalloonBattle()) {
         // Don't run for eliminated players
         if (state->b_BattleSideline || state->b_PostBattleSideline)
             return;

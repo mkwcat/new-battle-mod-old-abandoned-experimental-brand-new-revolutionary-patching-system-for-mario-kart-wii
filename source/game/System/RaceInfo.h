@@ -69,13 +69,103 @@ static_assert(sizeof(RaceInfoMission) == 0x70);
 class RaceInfoPlayer
 {
 public:
+    enum ECharacter {
+        CHARACTER_MARIO = 0x00,
+        CHARACTER_BABY_PEACH = 0x01,
+        CHARACTER_WALUIGI = 0x02,
+        CHARACTER_BOWSER = 0x03,
+        CHARACTER_BABY_DAISY = 0x04,
+        CHARACTER_DRY_BONES = 0x05,
+        CHARACTER_BABY_MARIO = 0x06,
+        CHARACTER_LUIGI = 0x07,
+        CHARACTER_TOAD = 0x08,
+        CHARACTER_DONKEY_KONG = 0x09,
+        CHARACTER_YOSHI = 0x0A,
+        CHARACTER_WARIO = 0x0B,
+        CHARACTER_BABY_LUIGI = 0x0C,
+        CHARACTER_TOADETTE = 0x0D,
+        CHARACTER_KOOPA_TROOPA = 0x0E,
+        CHARACTER_DAISY = 0x0F,
+        CHARACTER_PEACH = 0x10,
+        CHARACTER_BIRDO = 0x11,
+        CHARACTER_DIDDY_KONG = 0x12,
+        CHARACTER_KING_BOO = 0x13,
+        CHARACTER_BOWSER_JR = 0x14,
+        CHARACTER_DRY_BOWSER = 0x15,
+        CHARACTER_FUNKY_KONG = 0x16,
+        CHARACTER_ROSALINA = 0x17,
+        CHARACTER_S_MII_AM = 0x18,
+        CHARACTER_S_MII_AF = 0x19,
+        CHARACTER_S_MII_BM = 0x1A,
+        CHARACTER_S_MII_BF = 0x1B,
+        CHARACTER_S_MII_CM = 0x1C,
+        CHARACTER_S_MII_CF = 0x1D,
+        CHARACTER_M_MII_AM = 0x1E,
+        CHARACTER_M_MII_AF = 0x1F,
+        CHARACTER_M_MII_BM = 0x20,
+        CHARACTER_M_MII_BF = 0x21,
+        CHARACTER_M_MII_CM = 0x22,
+        CHARACTER_M_MII_CF = 0x23,
+        CHARACTER_L_MII_AM = 0x24,
+        CHARACTER_L_MII_AF = 0x25,
+        CHARACTER_L_MII_BM = 0x26,
+        CHARACTER_L_MII_BF = 0x27,
+        CHARACTER_L_MII_CM = 0x28,
+        CHARACTER_L_MII_CF = 0x29,
+        CHARACTER_M_MII = 0x2A,
+        CHARACTER_S_MII = 0x2B,
+        CHARACTER_L_MII = 0x2C,
+        CHARACTER_PEACH_MENU = 0x2D,
+        CHARACTER_DAISY_MENU = 0x2E,
+        CHARACTER_ROSALINA_MENU = 0x2F,
+    };
+
+    enum EVehicle {
+        VEHICLE_S_STANDARD_KART = 0x00,
+        VEHICLE_M_STANDARD_KART = 0x01,
+        VEHICLE_L_STANDARD_KART = 0x02,
+        VEHICLE_S_BOOSTER_SEAT = 0x03,
+        VEHICLE_M_CLASSIC_DRAGSTER = 0x04,
+        VEHICLE_L_OFFROADER = 0x05,
+        VEHICLE_S_MINI_BEAST = 0x06,
+        VEHICLE_M_WILD_WING = 0x07,
+        VEHICLE_L_FLAME_FLYER = 0x08,
+        VEHICLE_S_CHEEP_CHARGER = 0x09,
+        VEHICLE_M_SUPER_BLOOPER = 0x0A,
+        VEHICLE_L_PIRANHA_PROWLER = 0x0B,
+        VEHICLE_S_TINY_TITAN = 0x0C,
+        VEHICLE_M_DAYTRIPPER = 0x0D,
+        VEHICLE_L_JETSETTER = 0x0E,
+        VEHICLE_S_BLUE_FALCON = 0x0F,
+        VEHICLE_M_SPRINTER = 0x10,
+        VEHICLE_L_HONEYCOUPE = 0x11,
+        VEHICLE_S_STANDARD_BIKE = 0x12,
+        VEHICLE_M_STANDARD_BIKE = 0x13,
+        VEHICLE_L_STANDARD_BIKE = 0x14,
+        VEHICLE_S_BULLET_BIKE = 0x15,
+        VEHICLE_M_MACH_BIKE = 0x16,
+        VEHICLE_L_FLAME_RUNNER = 0x17,
+        VEHICLE_S_BIT_BIKE = 0x18,
+        VEHICLE_M_SUGARSCOOT = 0x19,
+        VEHICLE_L_WARIO_BIKE = 0x1A,
+        VEHICLE_S_QUACKER = 0x1B,
+        VEHICLE_M_ZIP_ZIP = 0x1C,
+        VEHICLE_L_SHOOTING_STAR = 0x1D,
+        VEHICLE_S_MAGIKRUISER = 0x1E,
+        VEHICLE_M_SNEAKSTER = 0x1F,
+        VEHICLE_L_SPEAR = 0x20,
+        VEHICLE_S_JET_BUBBLE = 0x21,
+        VEHICLE_M_DOLPHIN_DASHER = 0x22,
+        VEHICLE_L_PHANTOM = 0x23,
+    };
+
     enum EPlayerType {
-        PLAYER_MASTER = 0x0,
-        PLAYER_CPU = 0x1,
-        PLAYER_UNKNOWN2 = 0x2,
-        PLAYER_GHOST = 0x3,
-        PLAYER_REAL_ONLINE = 0x4,
-        PLAYER_NONE = 0x5,
+        PLAYER_TYPE_MASTER = 0x0,
+        PLAYER_TYPE_CPU = 0x1,
+        PLAYER_TYPE_UNKNOWN = 0x2,
+        PLAYER_TYPE_GHOST = 0x3,
+        PLAYER_TYPE_REAL_ONLINE = 0x4,
+        PLAYER_TYPE_NONE = 0x5,
     };
 
     enum ETeam {
@@ -96,32 +186,65 @@ public:
     /* 0x8052E640 */
     void Reset();
 
-    s32 GetCharacter()
+    u8 GetScreenID() const
     {
-        return m_characterId;
+        return m_screenId;
+    }
+
+    void SetScreenID(u8 screenId)
+    {
+        m_screenId = screenId;
+    }
+
+    u8 GetInputIndex() const
+    {
+        return m_inputIndex;
+    }
+
+    void SetInputIndex(u8 inputIndex)
+    {
+        m_inputIndex = inputIndex;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80530F20, //
+      ECharacter GetCharacter() const
+    )
+    {
+        return m_character;
     }
 
     // Emitted in System/RaceInfo.cpp
     EXTERN_TEXT_INLINE(
       0x8052E42C, //
-      void SetCharacter(s32 characterId)
+      void SetCharacter(ECharacter character)
     )
     {
-        m_characterId = characterId;
+        m_character = character;
     }
 
-    s32 GetVehicle()
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80530F28, //
+      EVehicle GetVehicle() const
+    )
     {
-        return m_vehicleId;
+        return m_vehicle;
     }
 
     // Emitted in System/RaceInfo.cpp
     EXTERN_TEXT_INLINE(
       0x8052E444, //
-      void SetVehicle(s32 vehicleId)
+      void SetVehicle(EVehicle vehicle)
     )
     {
-        m_vehicleId = vehicleId;
+        m_vehicle = vehicle;
+    }
+
+    EPlayerType GetType() const
+    {
+        return m_type;
     }
 
     // Emitted in System/RaceInfo.cpp
@@ -131,6 +254,24 @@ public:
     )
     {
         m_type = type;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80531068, //
+      const Mii& GetMii() const
+    )
+    {
+        return m_mii;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80530F30, //
+      void SetMii(const Mii& mii)
+    )
+    {
+        m_mii = mii;
     }
 
     // Emitted in System/RaceInfo.cpp
@@ -147,6 +288,49 @@ public:
         m_team = team;
     }
 
+    u16 GetPreviousScore() const
+    {
+        return m_prevScore;
+    }
+
+    void SetPreviousScore(u16 prevScore)
+    {
+        m_prevScore = prevScore;
+    }
+
+    u16 GetScore() const
+    {
+        return m_score;
+    }
+
+    void SetScore(u16 score)
+    {
+        m_score = score;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80530F18, //
+      u8 GetGrandPrixRank() const
+    )
+    {
+        return m_gpRank;
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x8052E660, //
+      void SetGrandPrixRank(u8 rank)
+    )
+    {
+        m_gpRank = rank;
+    }
+
+    u8 GetStartPosition() const
+    {
+        return m_startPos;
+    }
+
     // Emitted in System/RaceInfo.cpp
     EXTERN_TEXT_INLINE(
       0x8052E658, //
@@ -156,26 +340,18 @@ public:
         m_startPos = pos;
     }
 
-    // Emitted in System/RaceInfo.cpp
-    EXTERN_TEXT_INLINE(
-      0x8052E660, //
-      void SetGPRank(u8 rank)
-    )
-    {
-        m_gpRank = rank;
-    }
-
     /* 0x8052DA50 */
     void AppendParamFile(Boot::ParameterFile* file);
 
     /* 0x8052DAF0 */
     u32 ComputeGPRank();
 
+private:
     /* 0x04 */ u8 m_0x04;
     /* 0x05 */ u8 m_screenId;
     /* 0x06 */ u8 m_inputIndex;
-    /* 0x08 */ s32 m_vehicleId;
-    /* 0x0C */ s32 m_characterId;
+    /* 0x08 */ EVehicle m_vehicle;
+    /* 0x0C */ ECharacter m_character;
     /* 0x10 */ EPlayerType m_type;
     /* 0x14 */ Mii m_mii;
     /* 0xCC */ ETeam m_team;
@@ -365,6 +541,9 @@ public:
       virtual ~RaceInfo()
     );
 
+    /* 0x805305AC */
+    RaceInfo& operator=(const RaceInfo& from);
+
     /* 0x8052E668 */
     void Reset();
 
@@ -526,7 +705,7 @@ public:
 
     EBattleMode GetBattleBaseMode() const
     {
-        return m_legacyBattleMode;
+        return m_battleBaseMode;
     }
 
     bool IsBalloonBattle() const
@@ -629,16 +808,22 @@ public:
 
     void SetIsMirror(bool mirror)
     {
+        m_modeFlags &= ~MODE_FLAGS_MIRROR;
         m_modeFlags |= MODE_FLAGS_MIRROR;
     }
 
-    bool GetIsTeams() const
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80530F0C, //
+      bool GetIsTeams() const
+    )
     {
         return m_modeFlags & MODE_FLAGS_TEAMS;
     }
 
     void SetIsTeams(bool teams)
     {
+        m_modeFlags &= ~MODE_FLAGS_TEAMS;
         m_modeFlags |= MODE_FLAGS_TEAMS;
     }
 
@@ -649,6 +834,7 @@ public:
 
     void SetIsCompetition(bool competition)
     {
+        m_modeFlags &= ~MODE_FLAGS_COMPETITION;
         m_modeFlags |= MODE_FLAGS_COMPETITION;
     }
 
@@ -662,7 +848,7 @@ private:
     /* 0xB4C */ EEngineClass m_engineClass;
     /* 0xB50 */ EGameMode m_gameMode;
     /* 0xB54 */ ECameraMode m_cameraMode;
-    /* 0xB58 */ EBattleMode m_legacyBattleMode;
+    /* 0xB58 */ EBattleMode m_battleBaseMode;
     /* 0xB5C */ ECPUMode m_cpuSetting;
     /* 0xB60 */ EItemMode m_itemSetting;
     /* 0xB64 */ u8 m_screenPlayerIds[4];
@@ -683,12 +869,27 @@ static_assert(sizeof(RaceInfo) == 0xBF0);
 
 class RaceInfoManager : public Boot::ParameterFile
 {
-public:
+    // vtable: 0x808B3260
+
+private:
     static RaceInfoManager* s_instance;
 
+public:
+    /* 0x8052FE58 */
+    static RaceInfoManager* CreateInstance();
+
+    /* 0x8052FFE8 */
+    static void DestroyInstance();
+
+    /* 0x8053015C */
+    RaceInfoManager();
+
+    RaceInfoManager(const RaceInfoManager&) = delete;
+
+    // Emitted in System/RaceInfo.cpp
     EXTERN_TEXT(
-      0x8052FE58, //
-      static RaceInfoManager* CreateInstance()
+      0x80530038, //
+      virtual ~RaceInfoManager()
     );
 
     // Emitted in UI/Control/CtrlRaceTime.cpp
@@ -699,11 +900,6 @@ public:
     {
         return s_instance;
     }
-
-    EXTERN_TEXT(
-      0x80530038, //
-      virtual ~RaceInfoManager()
-    );
 
     /* 0x8052DD40 */
     void Init();
@@ -717,10 +913,38 @@ public:
     /* 0x805302C4 */
     void SetupRace();
 
-    virtual int UNDEF_80009DDC();
-    virtual int UNDEF_80532078(); // just a blr
-    virtual int UNDEF_80532074(); // just a blr
-    virtual int UNDEF_80532070(); // just a blr
+    /* 0x80530864 */
+    void SetupAwards();
+
+    /* 0x80531070 */
+    void SetupCredits();
+
+    /* 0x80531CE4 */
+    u8 NextRace();
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80532078, //
+      virtual void VT_0x10()
+    )
+    {
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80532074, //
+      virtual void VT_0x14()
+    )
+    {
+    }
+
+    // Emitted in System/RaceInfo.cpp
+    EXTERN_TEXT_INLINE(
+      0x80532070, //
+      virtual void VT_0x18()
+    )
+    {
+    }
 
     // Emitted in System/RaceInfo.cpp
     EXTERN_TEXT_INLINE(
@@ -741,7 +965,9 @@ public:
         return &s_instance->m_infoNext;
     }
 
-    /* 0x001C */ const u8* m_0x1C;
+private:
+    // Dummy vtable
+    FILL(0x1C, 0x20);
 
     /* 0x0020 */ RaceInfo m_info;
     /* 0x0C10 */ RaceInfo m_infoNext;

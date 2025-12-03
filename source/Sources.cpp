@@ -8,9 +8,12 @@
 #include "egg/core/eggDvdFile.cpp"
 #include "egg/core/eggDvdRipper.cpp"
 #include "egg/core/eggHeap.cpp"
+
+#include "game/Boot/ParameterFile.cpp"
 #include "game/Boot/RKSystem.cpp"
 #include "game/Boot/Scene.cpp"
 #include "game/Boot/SystemManager.cpp"
+
 #include "game/Enemy/AIBattleManager.cpp"
 #include "game/Kart/KartCollide.cpp"
 #include "game/Kart/KartMove.cpp"
@@ -25,7 +28,9 @@
 #include "game/System/NandManager.cpp"
 // MKW: 0x8052CEF8 - 0x8052D298
 #include "game/System/PlayerRating.cpp"
+// MKW: 0x8052D298 - 0x8052D96C
 #include "game/System/RaceEnemyLineController.cpp"
+// MKW: 0x8052D96C - 0x80532084
 #include "game/System/RaceInfo.cpp"
 #include "game/System/RaceManager.cpp"
 #include "game/System/RaceMinigameParam.cpp"
@@ -40,6 +45,7 @@
 #include "game/System/SaveManager.cpp"
 
 #include "game/UI/ControlGroup.cpp"
+#include "game/UI/SaveManagerProxy.cpp"
 #include "game/UI/Section.cpp"
 #include "game/UI/SectionManager.cpp"
 #include "game/UI/SystemMessageGroup.cpp"

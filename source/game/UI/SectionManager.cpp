@@ -55,8 +55,8 @@ void SectionManager::DebugBootSetup()
     if (!SelectDebugLicense())
         return;
 
-    m_nextSectionId = 0x1B;
-    m_argsSection = 0x1B;
+    m_nextSectionId = SECTION_ID_INTRO_BATTLE;
+    m_argsSection = SECTION_ID_INTRO_BATTLE;
 
     auto set = System::RaceInfoManager::GetInfoNext();
 
@@ -66,24 +66,32 @@ void SectionManager::DebugBootSetup()
     set->SetLocalPlayerCount(1);
     set->SetGameMode(System::RaceInfo::GAME_MODE_BATTLE);
     set->SetCameraMode(System::RaceInfo::CAMERA_MODE_GAMEPLAY_INTRO);
-    set->GetPlayer(0)->SetCharacter(0x0A); // Yoshi
-    set->GetPlayer(0)->SetVehicle(0x13); // Mach Bike
-    set->GetPlayer(0)->SetType(System::RaceInfoPlayer::PLAYER_MASTER);
+    set->GetPlayer(0)->SetCharacter(System::RaceInfoPlayer::CHARACTER_YOSHI);
+    set->GetPlayer(0)->SetVehicle(
+      System::RaceInfoPlayer::VEHICLE_M_STANDARD_BIKE
+    );
+    set->GetPlayer(0)->SetType(System::RaceInfoPlayer::PLAYER_TYPE_MASTER);
     set->GetPlayer(0)->SetTeam(System::RaceInfoPlayer::TEAM_NONE);
     set->SetEngineClass(System::RaceInfo::ENGINE_CLASS_50);
     set->SetBattleMode(System::RaceInfo::BATTLE_MODE_BALLOON);
 
     for (u32 i = 1; i < 6; i++) {
-        set->GetPlayer(i)->SetCharacter(0x0A); // Yoshi
-        set->GetPlayer(i)->SetVehicle(0x13); // Mach Bike
-        set->GetPlayer(i)->SetType(System::RaceInfoPlayer::PLAYER_CPU);
+        set->GetPlayer(i)->SetCharacter(System::RaceInfoPlayer::CHARACTER_YOSHI
+        );
+        set->GetPlayer(i)->SetVehicle(
+          System::RaceInfoPlayer::VEHICLE_M_STANDARD_BIKE
+        );
+        set->GetPlayer(i)->SetType(System::RaceInfoPlayer::PLAYER_TYPE_CPU);
         set->GetPlayer(i)->SetTeam(System::RaceInfoPlayer::TEAM_NONE);
     }
 
     for (u32 i = 6; i < 12; i++) {
-        set->GetPlayer(i)->SetCharacter(0x0A); // Yoshi
-        set->GetPlayer(i)->SetVehicle(0x13); // Mach Bike
-        set->GetPlayer(i)->SetType(System::RaceInfoPlayer::PLAYER_CPU);
+        set->GetPlayer(i)->SetCharacter(System::RaceInfoPlayer::CHARACTER_YOSHI
+        );
+        set->GetPlayer(i)->SetVehicle(
+          System::RaceInfoPlayer::VEHICLE_M_STANDARD_BIKE
+        );
+        set->GetPlayer(i)->SetType(System::RaceInfoPlayer::PLAYER_TYPE_CPU);
         set->GetPlayer(i)->SetTeam(System::RaceInfoPlayer::TEAM_NONE);
     }
 }
@@ -114,20 +122,23 @@ REPLACE(
 
     m_registeredPadManager.Init();
 
-    if (System::MiiManager::GetError() != 0 && m_errorSection != 0x14) {
-        m_errorSection = 0x15;
+    if (System::MiiManager::GetError() != 0 && //
+        m_errorSection != SECTION_ID_CANNOT_ACCESS_SYSTEM_MEMORY) {
+        m_errorSection = SECTION_ID_CANNOT_ACCESS_MII_DATA;
     }
 
-    m_nextSectionId = m_errorSection == -1 ? 0x3F : m_errorSection;
+    m_nextSectionId = m_errorSection == SECTION_ID_NONE
+                        ? SECTION_ID_MAIN_MENU_FROM_BOOT
+                        : m_errorSection;
 
-    if (m_errorSection == -1) {
+    if (m_errorSection == SECTION_ID_NONE) {
         m_debugMode = true;
         DebugBootSetup();
     } else {
         m_debugMode = false;
     }
 
-    m_nextAnimDir = 0;
+    m_nextFadeDir = Page::FADE_DIRECTION_FORWARD;
     m_initialized = true;
 
     // Some bool in DiscCheckThread

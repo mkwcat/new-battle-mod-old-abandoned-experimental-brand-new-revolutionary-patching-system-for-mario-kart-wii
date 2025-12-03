@@ -20,31 +20,36 @@ struct ItemObjConfig {
     /* 0x0C */ s32 m_0x0C;
     /* 0x10 */ s32 m_0x10;
     /* 0x14 */ u8 m_0x14;
-    /* 0x15 */ u8 m_0x15;
-    /* 0x16 */ u8 m_0x16;
+    /* 0x15 */ bool m_hasBreakAnimation;
+    // ? Triggers weird behavior if it tries to land
+    /* 0x16 */ bool m_allowedToLand;
     /* 0x18 */ PTMF<ItemObj> m_0x18;
     /* 0x24 */ ItemObjConfig0x24 m_0x24;
     /* 0x28 */ u32 m_0x28;
     /* 0x2C */ u8 m_0x2C;
-    /* 0x30 */ f32 m_0x30;
+    /* 0x30 */ f32 m_drawDistance;
     /* 0x34 */ f32 m_0x34;
-    /* 0x38 */ f32 m_0x38;
+    /* 0x38 */ f32 m_modelHeightOffset;
     /* 0x3C */ f32 m_0x3C;
-    /* 0x40 */ f32 m_0x40;
-    /* 0x44 */ f32 m_0x44;
-    /* 0x48 */ f32 m_0x48;
-    /* 0x4C */ f32 m_0x4C;
-    /* 0x50 */ f32 m_0x50;
+    /* 0x40 */ f32 m_throwHorizOffset; // [check]
+    /* 0x44 */ f32 m_visualScale; // Overall scale
+
+    // When throwing an item in the base game, the size changes, in what's sort
+    // of like a fade animation. These values control how the item scales over
+    // time.
+    /* 0x48 */ f32 m_finalScale; // Grows to this size after being thrown
+    /* 0x4C */ f32 m_scaleIncrement; // Scale to add each frame
+    /* 0x50 */ f32 m_0x50; // Seems to be the same as m_scaleIncrement
     /* 0x54 */ f32 m_0x54;
     /* 0x58 */ bool m_canLand;
     /* 0x59 */ bool m_battleScoreOnKartCollide; // Pop a balloon
     /* 0x5A */ bool m_destroyOnKartCollide;
     /* 0x5B */ u8 m_0x5B;
     /* 0x5C */ s32 m_0x5C;
-    /* 0x60 */ u32 m_0x60;
+    /* 0x60 */ Sound::ESoundID m_breakSound;
     /* 0x64 */ Sound::ESoundID m_hitSound;
     /* 0x68 */ Sound::ESoundID m_hitGroundSound;
-    /* 0x6C */ f32 m_0x6C;
+    /* 0x6C */ f32 m_shadowScale;
     /* 0x70 */ bool m_0x70;
 };
 

@@ -1,6 +1,9 @@
 #pragma once
 
+#include "Page.h"
 #include "RegisteredPadManager.h"
+#include "Section.h"
+#include "SectionID.h"
 
 namespace UI
 {
@@ -14,21 +17,27 @@ class SectionManager
 public:
     static SectionManager* s_instance;
 
-    EXTERN_TEXT(0x80634C90, static SectionManager* CreateInstance());
+    EXTERN_TEXT(
+      0x80634C90, //
+      static SectionManager* CreateInstance()
+    );
 
     SectionManager();
     void Init(); // Replaced
 
-    bool SelectDebugLicense(); // Added
-    void DebugBootSetup(); // Added
+    /* --- */
+    bool SelectDebugLicense();
 
-    void* m_currentSection;
-    int m_errorSection;
-    int m_argsSection;
-    int m_nextSectionId;
-    int m_lastSectionId;
-    int m_animDir;
-    int m_nextAnimDir;
+    /* --- */
+    void DebugBootSetup();
+
+    Section* m_currentSection;
+    ESectionID m_errorSection;
+    ESectionID m_argsSection;
+    ESectionID m_nextSectionId;
+    ESectionID m_lastSectionId;
+    Page::EFadeDirection m_fadeDir;
+    Page::EFadeDirection m_nextFadeDir;
     u8 _1C[0x20 - 0x1C];
     bool m_initialized;
     u8 _21[0x23 - 0x21];
